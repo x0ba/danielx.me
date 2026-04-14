@@ -69,3 +69,426 @@ body {
 .link-hover:hover::after {
   width: 100%;
 }
+
+/* ── Prose / Blog Typography ────────────────────────────────── */
+
+.prose {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-secondary);
+}
+
+.prose > * + * {
+  margin-top: 1.5em;
+}
+
+/* Headings */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: var(--color-primary);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.prose h1 {
+  font-size: 2rem;
+  margin-top: 2em;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+  margin-top: 2.25em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--color-edge);
+}
+
+.prose h3 {
+  font-size: 1.2rem;
+  margin-top: 1.75em;
+}
+
+.prose h4 {
+  font-size: 1.05rem;
+  margin-top: 1.5em;
+}
+
+/* Paragraphs */
+.prose p {
+  margin-top: 1.25em;
+}
+
+/* Links */
+.prose a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(198, 122, 74, 0.3);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.prose a:hover {
+  color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent-hover);
+}
+
+/* Bold & Italic */
+.prose strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+/* Lists */
+.prose ul {
+  list-style: none;
+  padding-left: 1.25em;
+}
+
+.prose ul li {
+  position: relative;
+  padding-left: 0.25em;
+}
+
+.prose ul li::before {
+  content: "›";
+  position: absolute;
+  left: -1.1em;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.prose ol {
+  padding-left: 1.5em;
+  list-style: decimal;
+}
+
+.prose ol li::marker {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.prose li {
+  margin-top: 0.5em;
+}
+
+.prose li p {
+  margin-top: 0.25em;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding: 0.75em 1.25em;
+  margin: 1.75em 0;
+  background: rgba(198, 122, 74, 0.04);
+  border-radius: 0 8px 8px 0;
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose blockquote p + p {
+  margin-top: 0.75em;
+}
+
+/* Inline code */
+.prose :not(pre) > code {
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
+  font-size: 0.85em;
+  padding: 0.2em 0.45em;
+  border-radius: 5px;
+  background: var(--color-elevated);
+  border: 1px solid var(--color-edge);
+  color: var(--color-accent-hover);
+  font-weight: 400;
+}
+
+/* Code blocks */
+.prose pre {
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  padding: 1.25em 1.5em;
+  border-radius: 12px;
+  border: 1px solid var(--color-edge);
+  background: var(--color-surface) !important;
+  overflow-x: auto;
+  margin: 1.75em 0;
+  tab-size: 2;
+}
+
+.prose pre code {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+/* Shiki diff lines */
+.prose pre .diff.add {
+  background-color: rgba(46, 160, 67, 0.12);
+}
+
+.prose pre .diff.remove {
+  background-color: rgba(248, 81, 73, 0.12);
+}
+
+.prose pre .highlighted {
+  background-color: rgba(198, 122, 74, 0.1);
+}
+
+.prose pre .has-focus .line:not(.focused) {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.prose pre:hover .has-focus .line:not(.focused) {
+  opacity: 0.7;
+}
+
+/* Horizontal rules */
+.prose hr {
+  border: none;
+  height: 1px;
+  background: var(--color-edge);
+  margin: 2.5em 0;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1.75em 0;
+}
+
+.prose thead th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0.75em 1em;
+  border-bottom: 2px solid var(--color-edge);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prose tbody td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid var(--color-edge);
+  color: var(--color-secondary);
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.prose tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.prose tbody tr:hover {
+  background-color: rgba(198, 122, 74, 0.03);
+}
+
+/* Images & Figures */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--color-edge);
+  margin: 1.75em 0;
+}
+
+.prose figure {
+  margin: 2em 0;
+}
+
+.prose figure img {
+  margin: 0;
+}
+
+.prose figcaption {
+  margin-top: 0.75em;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Task lists */
+.prose input[type="checkbox"] {
+  appearance: none;
+  width: 1em;
+  height: 1em;
+  border: 1.5px solid var(--color-edge-hover);
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-right: 0.5em;
+  position: relative;
+  top: -1px;
+  cursor: pointer;
+}
+
+.prose input[type="checkbox"]:checked {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.prose input[type="checkbox"]:checked::after {
+  content: "✓";
+  display: block;
+  text-align: center;
+  font-size: 0.7em;
+  line-height: 1em;
+  color: white;
+  font-weight: 700;
+}
+
+/* Footnotes */
+.prose .footnotes {
+  margin-top: 3em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--color-edge);
+  font-size: 0.85rem;
+}
+
+.prose sup a {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* Details / Summary (for collapsible sections) */
+.prose details {
+  border: 1px solid var(--color-edge);
+  border-radius: 8px;
+  padding: 1em 1.25em;
+  margin: 1.5em 0;
+  background: var(--color-surface);
+}
+
+.prose details[open] {
+  padding-bottom: 1.25em;
+}
+
+.prose summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--color-primary);
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.prose summary:hover {
+  color: var(--color-accent);
+}
+
+.prose details[open] summary {
+  margin-bottom: 0.75em;
+}
+
+/* ── Callouts / Admonitions ─────────────────────────────────── */
+
+.callout {
+  border-radius: 10px;
+  padding: 1em 1.25em;
+  margin: 1.75em 0;
+  border-left: 3px solid;
+  font-size: 0.95rem;
+}
+
+.callout-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.callout p {
+  margin: 0;
+  color: var(--color-secondary);
+}
+
+.callout p + p {
+  margin-top: 0.5em;
+}
+
+.callout-note {
+  background: rgba(96, 165, 250, 0.06);
+  border-color: #60a5fa;
+}
+
+.callout-note .callout-title {
+  color: #60a5fa;
+}
+
+.callout-tip {
+  background: rgba(52, 211, 153, 0.06);
+  border-color: #34d399;
+}
+
+.callout-tip .callout-title {
+  color: #34d399;
+}
+
+.callout-warning {
+  background: rgba(251, 191, 36, 0.06);
+  border-color: #fbbf24;
+}
+
+.callout-warning .callout-title {
+  color: #fbbf24;
+}
+
+.callout-danger {
+  background: rgba(248, 113, 113, 0.06);
+  border-color: #f87171;
+}
+
+.callout-danger .callout-title {
+  color: #f87171;
+}
+
+.callout-info {
+  background: rgba(198, 122, 74, 0.06);
+  border-color: var(--color-accent);
+}
+
+.callout-info .callout-title {
+  color: var(--color-accent);
+}
+
+/* ── Caption component ──────────────────────────────────────── */
+
+.image-with-caption {
+  margin: 2em 0;
+}
+
+.image-with-caption img {
+  margin: 0;
+  border-radius: 12px;
+  border: 1px solid var(--color-edge);
+  width: 100%;
+}
+
+.image-with-caption .caption {
+  margin-top: 0.75em;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-style: italic;
+}

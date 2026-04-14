@@ -1,0 +1,191 @@
+---
+title: "building a modern blog with astro & mdx"
+description: "a deep dive into setting up a blog with astro content collections, mdx, syntax highlighting, and custom components — the stack behind this very blog."
+pubDate: 2026-04-13
+tags: ["astro", "mdx", "web dev"]
+---
+
+import Callout from '../../components/Callout.astro';
+import Figure from '../../components/Figure.astro';
+
+Writing on the web should feel _good_. Not just for the reader, but for the writer too. That's why I built this blog with **Astro** and **MDX** — a combination that gives me the full power of markdown with the flexibility of components.
+
+## why astro + mdx?
+
+Astro's content collections provide type-safe frontmatter, automatic slug generation, and a file-based content system that just works. MDX extends this by letting me drop interactive components right into my markdown.
+
+Here's what the stack looks like:
+
+| Tool | Purpose |
+|------|---------|
+| Astro | Static site generation |
+| MDX | Markdown with components |
+| Shiki | Syntax highlighting |
+| Tailwind CSS | Utility-first styling |
+
+## content collections
+
+The content collection schema is defined once and gives us full type safety across all posts:
+
+```typescript
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+```
+
+<Callout type="tip" title="Type Safety Matters">
+
+The `z.coerce.date()` helper is incredibly useful — it accepts date strings from your frontmatter YAML and automatically coerces them into proper `Date` objects. No manual parsing needed.
+
+</Callout>
+
+## syntax highlighting
+
+Code blocks use [Shiki](https://shiki.style) with the **Vesper** theme, which pairs beautifully with this site's warm dark palette. Here's a real example:
+
+```typescript
+export async function getStaticPaths() {
+  const posts = await getCollection('blog'); // [!code highlight]
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+```
+
+### diffs
+
+You can annotate lines as additions or removals:
+
+```typescript
+function greet(name: string) {
+  console.log("hello " + name); // [!code --]
+  console.log(`hello, ${name}!`); // [!code ++]
+}
+```
+
+### line highlighting
+
+Draw attention to specific lines with the highlight annotation:
+
+```css
+.prose a {
+  color: var(--color-accent); /* [!code highlight] */
+  text-decoration: none;
+  border-bottom: 1px solid rgba(198, 122, 74, 0.3); /* [!code highlight] */
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+```
+
+## callouts & admonitions
+
+Custom callout components are available for highlighting important information:
+
+<Callout type="note">
+
+This is a **note** callout. Use it for general supplementary information that adds context to the main content.
+
+</Callout>
+
+<Callout type="warning" title="Breaking Change">
+
+If you're upgrading from Astro 4, content collections now use the `glob()` loader and the `src/content.config.ts` file instead of the previous `src/content/config.ts`.
+
+</Callout>
+
+<Callout type="danger">
+
+Never commit API keys or secrets to your repository. Use environment variables and `.env` files (added to `.gitignore`) instead.
+
+</Callout>
+
+## images with captions
+
+The `<Figure>` component wraps images with semantic HTML and optional captions:
+
+```mdx
+<Figure
+  src="/path/to/image.png"
+  alt="descriptive alt text"
+  caption="this caption appears below the image"
+/>
+```
+
+## rich markdown features
+
+### blockquotes
+
+> The best way to predict the future is to invent it.
+>
+> — Alan Kay
+
+### ordered lists
+
+1. Set up your Astro project
+2. Install the MDX integration
+3. Define your content collections
+4. Write your first post
+5. Ship it 🚀
+
+### unordered lists
+
+- Type-safe frontmatter with Zod schemas
+- Automatic syntax highlighting with Shiki
+- Custom MDX components for callouts and figures
+- View Transitions for smooth page navigation
+- RSS feed generation (coming soon)
+
+### nested lists
+
+- **Frontend**
+  - Astro for static generation
+  - Tailwind for styling
+  - View Transitions for navigation
+- **Content**
+  - MDX for rich content
+  - Shiki for code highlighting
+  - Content Collections for type safety
+
+### inline code
+
+Use `getCollection('blog')` to fetch all posts, or `render(post)` to get the `Content` component for rendering.
+
+### task lists
+
+- [x] Set up content collections
+- [x] Configure syntax highlighting
+- [x] Create callout components
+- [x] Create image caption component
+- [ ] Add RSS feed
+- [ ] Add reading time estimate
+
+### details / collapsible sections
+
+<details>
+<summary>How does Shiki work under the hood?</summary>
+
+Shiki uses TextMate grammars (the same ones VS Code uses) to tokenize code, then applies theme colors to each token. Unlike runtime highlighters like Prism, Shiki runs at build time — meaning zero JavaScript is shipped to the client for syntax highlighting.
+
+This approach gives you exact VS Code-quality highlighting with no runtime cost.
+
+</details>
+
+---
+
+## wrapping up
+
+This blog setup gives me everything I need:
+
+- **Markdown** for fast writing
+- **Components** for rich content (callouts, figures)
+- **Syntax highlighting** with diffs, highlighting, and focus
+- **Type safety** for frontmatter
+- **Zero JS** shipped for content rendering
+
+The best part? Adding a new post is just creating a `.mdx` file. No databases, no CMS, no deploys.  Just write and push.
