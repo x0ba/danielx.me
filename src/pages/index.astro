@@ -185,7 +185,7 @@ const education = [
             data-email={email}
             aria-label={`Copy email address ${email}`}
           >
-            copy email
+            email
           </button>
         </div>
       </section>
@@ -195,7 +195,8 @@ const education = [
 
         if (copyEmailButton) {
           let resetLabelTimeout;
-          const defaultLabel = copyEmailButton.textContent?.trim() || "copy email";
+          const defaultLabel =
+            copyEmailButton.textContent?.trim() || "copy email";
 
           copyEmailButton.addEventListener("click", async () => {
             const email = copyEmailButton.getAttribute("data-email");
