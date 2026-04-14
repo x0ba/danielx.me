@@ -1,17 +1,352 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+// ── Customize your info ─────────────────────────────────────
+
+const name = "daniel xu";
+const tagline = "full stack software engineer";
+const about = "La Jolla, CA";
+
+const socialLinks = [
+  { href: "https://github.com/x0ba", label: "github" },
+  { href: "https://x.com/x0ba07", label: "x" },
+  { href: "https://linkedin.com/in/daniel-xu-sd", label: "linkedin" },
+];
+
+const projects = [
+  {
+    name: "RxLog",
+    description:
+      "A fast, free, simple, and open source medication logging platform for those who care about their loved ones.",
+    tech: ["Tanstack Start", "Tailwind CSS", "Convex"],
+    live: "https://rxlog.danielx.link",
+    source: "https://github.com/x0ba/rxlog",
+  },
+  {
+    name: "SSA at UCSD Member Dashboard",
+    description:
+      "A unified dashboard for members of the Symphonic Student Association at UCSD to view links, RSVP to events, and admins to manage events, members, and more.",
+    tech: ["Tanstack Start", "TypeScript", "Convex", "Tailwind CSS"],
+    live: "https://members.ssaucsd.org",
+    source: "https://github.com/ssaucsd/ssaucsd-org",
+  },
+  {
+    name: "CLI Toolkit",
+    description:
+      "A collection of developer CLI tools for scaffolding projects, managing configs, and automating common workflows.",
+    tech: ["TypeScript", "Node.js", "Commander"],
+    live: null,
+    source: "https://github.com/daniel/cli-toolkit",
+  },
+  {
+    name: "Weather Dash",
+    description:
+      "A minimal weather dashboard with location-based forecasts, hourly breakdowns, and clean data visualizations.",
+    tech: ["Next.js", "D3.js", "OpenWeather API"],
+    live: "https://weather-dash.vercel.app",
+    source: "https://github.com/daniel/weather-dash",
+  },
+];
+
+const experience = [
+  {
+    company: "Acme Corp",
+    role: "Software Engineer",
+    period: "2024 — present",
+    description:
+      "Building full-stack web applications and developer tools. Working across the frontend and backend with a focus on performance and developer experience.",
+  },
+  {
+    company: "Startup Inc",
+    role: "Frontend Developer",
+    period: "2022 — 2024",
+    description:
+      "Led the frontend architecture for the core product. Built the component library, implemented the design system, and improved core web vitals by 40%.",
+  },
+  {
+    company: "Freelance",
+    role: "Web Developer",
+    period: "2020 — 2022",
+    description:
+      "Designed and developed websites and web applications for small businesses and startups. Managed projects from concept to deployment.",
+  },
+];
+
+const education = [
+  {
+    school: "University of Technology",
+    degree: "B.S. Computer Science",
+    period: "2018 — 2022",
+    description:
+      "Focused on systems programming, algorithms, and web technologies. Dean's list, senior capstone on real-time collaborative editing.",
+  },
+];
+
+// ── End customization ───────────────────────────────────────
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={`${name} — Portfolio`} description={about}>
+  <div class="relative overflow-hidden">
+    <div
+      class="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2"
+      style="background: radial-gradient(ellipse at 50% 0%, rgba(198, 122, 74, 0.045), transparent 70%);"
+    >
+    </div>
+
+    <div class="relative mx-auto max-w-2xl px-6">
+      <!-- Nav -->
+      <nav
+        class="flex items-center justify-between py-8 opacity-0 animate-reveal"
+      >
+        <span class="text-sm font-medium tracking-tight"
+          >{name.toLowerCase()}</span
+        >
+        <div class="flex gap-5 text-sm">
+          {
+            [
+              { href: "#projects", label: "projects" },
+              { href: "#experience", label: "experience" },
+              { href: "#education", label: "education" },
+            ].map((link) => (
+              <a
+                href={link.href}
+                class="link-hover text-muted transition-colors hover:text-primary"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+
+      <!-- Hero -->
+      <section class="pb-24 pt-16 sm:pt-20">
+        <h1
+          class="text-5xl font-bold tracking-tight opacity-0 animate-reveal sm:text-6xl"
+          style="animation-delay: 0.06s"
+        >
+          {name}
+        </h1>
+        <p
+          class="mt-3 text-lg text-secondary opacity-0 animate-reveal"
+          style="animation-delay: 0.12s"
+        >
+          {tagline}
+        </p>
+        <p
+          class="mt-4 max-w-md text-sm leading-relaxed text-muted opacity-0 animate-reveal"
+          style="animation-delay: 0.18s"
+        >
+          {about}
+        </p>
+        <div
+          class="mt-6 flex items-center gap-5 opacity-0 animate-reveal"
+          style="animation-delay: 0.24s"
+        >
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-lg border border-edge bg-surface/60 px-3.5 py-1.5 text-sm text-secondary transition-all duration-200 hover:border-accent/40 hover:text-accent hover:shadow-[0_0_20px_rgba(198,122,74,0.06)]"
+          >
+            résumé
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </a>
+          <span class="text-edge-hover select-none">·</span>
+          {
+            socialLinks.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-hover text-sm text-muted transition-colors hover:text-accent"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="pb-24">
+        <h2
+          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
+          style="animation-delay: 0.3s"
+        >
+          Projects
+        </h2>
+        <div class="grid gap-4">
+          {
+            projects.map((project, i) => (
+              <div
+                class="group rounded-xl border border-edge bg-surface/50 p-5 opacity-0 animate-reveal transition-all duration-300 hover:-translate-y-0.5 hover:border-edge-hover hover:bg-elevated/50 hover:shadow-[0_8px_30px_rgba(198,122,74,0.04)]"
+                style={`animation-delay: ${0.34 + i * 0.04}s`}
+              >
+                <h3 class="text-base font-medium">{project.name}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-secondary">
+                  {project.description}
+                </p>
+                <div class="mt-3 flex flex-wrap gap-1.5">
+                  {project.tech.map((t) => (
+                    <span class="rounded-full bg-accent-dim px-2.5 py-0.5 text-xs text-accent">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div class="mt-4 flex items-center gap-4">
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-accent"
+                    >
+                      live
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M7 17L17 7" />
+                        <path d="M7 7h10v10" />
+                      </svg>
+                    </a>
+                  )}
+                  <a
+                    href={project.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-accent"
+                  >
+                    source
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section id="experience" class="pb-24">
+        <h2
+          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
+          style="animation-delay: 0.52s"
+        >
+          Experience
+        </h2>
+        <div class="space-y-10">
+          {
+            experience.map((job, i) => (
+              <div
+                class="opacity-0 animate-reveal"
+                style={`animation-delay: ${0.56 + i * 0.04}s`}
+              >
+                <div class="flex flex-col gap-1 sm:flex-row sm:gap-6">
+                  <span class="shrink-0 text-xs text-muted sm:w-36 sm:pt-0.5">
+                    {job.period}
+                  </span>
+                  <div>
+                    <h3 class="text-base font-medium">{job.company}</h3>
+                    <p class="text-sm text-secondary">{job.role}</p>
+                    <p class="mt-2 text-sm leading-relaxed text-muted">
+                      {job.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="pb-24">
+        <h2
+          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
+          style="animation-delay: 0.70s"
+        >
+          Education
+        </h2>
+        <div class="space-y-10">
+          {
+            education.map((edu, i) => (
+              <div
+                class="opacity-0 animate-reveal"
+                style={`animation-delay: ${0.74 + i * 0.04}s`}
+              >
+                <div class="flex flex-col gap-1 sm:flex-row sm:gap-6">
+                  <span class="shrink-0 text-xs text-muted sm:w-36 sm:pt-0.5">
+                    {edu.period}
+                  </span>
+                  <div>
+                    <h3 class="text-base font-medium">{edu.school}</h3>
+                    <p class="text-sm text-secondary">{edu.degree}</p>
+                    {edu.description && (
+                      <p class="mt-2 text-sm leading-relaxed text-muted">
+                        {edu.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer
+        class="border-t border-edge pb-12 pt-8 opacity-0 animate-reveal"
+        style="animation-delay: 0.8s"
+      >
+        <p class="text-xs text-muted">
+          built with{" "}
+          <a
+            href="https://astro.build"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary transition-colors hover:text-accent"
+          >
+            astro
+          </a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</BaseLayout>
