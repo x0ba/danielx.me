@@ -6,6 +6,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const name = "daniel xu";
 const tagline = "full stack software engineer";
 const about = "la jolla, ca";
+const email = "hi@danielx.me";
 
 const socialLinks = [
   { href: "https://github.com/x0ba", label: "github" },
@@ -138,7 +139,7 @@ const education = [
           {about}
         </p>
         <div
-          class="mt-6 flex items-center gap-5 opacity-0 animate-reveal"
+          class="mt-6 flex flex-wrap items-center gap-5 opacity-0 animate-reveal"
           style="animation-delay: 0.24s"
         >
           <a
@@ -177,8 +178,43 @@ const education = [
               </a>
             ))
           }
+          <button
+            type="button"
+            class="link-hover appearance-none border-0 bg-transparent p-0 text-sm text-muted transition-colors hover:cursor-pointer hover:text-accent"
+            data-copy-email
+            data-email={email}
+            aria-label={`Copy email address ${email}`}
+          >
+            copy email
+          </button>
         </div>
       </section>
+
+      <script is:inline>
+        const copyEmailButton = document.querySelector("[data-copy-email]");
+
+        if (copyEmailButton) {
+          let resetLabelTimeout;
+          const defaultLabel = copyEmailButton.textContent?.trim() || "copy email";
+
+          copyEmailButton.addEventListener("click", async () => {
+            const email = copyEmailButton.getAttribute("data-email");
+            if (!email) return;
+
+            try {
+              await navigator.clipboard.writeText(email);
+              copyEmailButton.textContent = "copied";
+            } catch {
+              copyEmailButton.textContent = "copy failed";
+            }
+
+            window.clearTimeout(resetLabelTimeout);
+            resetLabelTimeout = window.setTimeout(() => {
+              copyEmailButton.textContent = defaultLabel;
+            }, 1600);
+          });
+        }
+      </script>
 
       <!-- Projects -->
       <section id="projects" class="pb-24">
