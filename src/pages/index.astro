@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../lib/site";
 
 // ── Customize your info ─────────────────────────────────────
 
@@ -7,6 +8,8 @@ const name = "daniel xu";
 const tagline = "full stack software engineer. math & cs @ ucsd";
 const about = "la jolla, ca";
 const email = "hi@danielx.me";
+const pageTitle = siteConfig.defaultTitle;
+const pageDescription = siteConfig.defaultDescription;
 
 const socialLinks = [
   { href: "https://github.com/x0ba", label: "github" },
@@ -81,10 +84,73 @@ const education = [
   },
 ];
 
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.author.name,
+    url: siteConfig.siteUrl,
+    email: `mailto:${email}`,
+    jobTitle: "Full Stack Software Engineer",
+    description: pageDescription,
+    sameAs: siteConfig.sameAs,
+    knowsAbout: [
+      "TypeScript",
+      "React",
+      "Convex",
+      "Astro",
+      "Full-stack development",
+    ],
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "University of California, San Diego",
+    },
+    homeLocation: {
+      "@type": "Place",
+      name: "La Jolla, California",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.author.name,
+    url: siteConfig.siteUrl,
+    description: pageDescription,
+    inLanguage: "en-US",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Featured projects",
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: project.live ?? project.source,
+      name: project.name,
+      description: project.description,
+    })),
+  },
+];
+
 // ── End customization ───────────────────────────────────────
 ---
 
-<BaseLayout title={`${name} — Portfolio`} description={about}>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage={siteConfig.defaultOgImagePath}
+  ogImageAlt={`${siteConfig.author.name} portfolio preview`}
+  keywords={[
+    "Daniel Xu",
+    "full stack software engineer",
+    "UCSD",
+    "TypeScript",
+    "React",
+    "Convex",
+    "Astro",
+  ]}
+  structuredData={structuredData}
+>
   <div class="relative overflow-hidden">
     <div
       class="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2"

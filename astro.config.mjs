@@ -1,19 +1,21 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
   transformerNotationFocus,
-} from '@shikijs/transformers';
+} from "@shikijs/transformers";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  site: "https://danielx.me",
+  integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
-      theme: 'vesper',
+      theme: "vesper",
       transformers: [
         transformerNotationDiff(),
         transformerNotationHighlight(),

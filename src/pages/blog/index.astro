@@ -1,13 +1,51 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { siteConfig } from "../../lib/site";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const pageTitle = "Blog | Daniel Xu";
+const pageDescription =
+  "Thoughts, notes, and things I've learned about software engineering, product work, and building on the web.";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: "Daniel Xu Blog",
+  description: pageDescription,
+  url: Astro.url.toString(),
+  inLanguage: "en-US",
+  author: {
+    "@type": "Person",
+    name: siteConfig.author.name,
+    url: siteConfig.siteUrl,
+  },
+  blogPost: posts.map((post) => ({
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: post.data.description,
+    url: new URL(`/blog/${post.id}`, siteConfig.siteUrl).toString(),
+    datePublished: post.data.pubDate.toISOString(),
+    dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+    keywords: post.data.tags,
+  })),
+};
 ---
 
-<BaseLayout title="blog — daniel xu" description="thoughts, notes, and things i've learned">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage={siteConfig.defaultOgImagePath}
+  ogImageAlt="Daniel Xu blog preview"
+  keywords={[
+    "Daniel Xu blog",
+    "software engineering blog",
+    "web development notes",
+  ]}
+  structuredData={structuredData}
+>
   <div class="relative overflow-hidden">
     <div
       class="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2"
@@ -20,7 +58,10 @@ const posts = (await getCollection("blog"))
       <nav
         class="flex items-center justify-between py-8 opacity-0 animate-reveal"
       >
-        <a href="/" class="text-sm font-medium tracking-tight transition-colors hover:text-accent">
+        <a
+          href="/"
+          class="text-sm font-medium tracking-tight transition-colors hover:text-accent"
+        >
           daniel xu
         </a>
         <div class="flex gap-5 text-sm">
@@ -30,10 +71,7 @@ const posts = (await getCollection("blog"))
           >
             home
           </a>
-          <a
-            href="/blog"
-            class="link-hover text-primary transition-colors"
-          >
+          <a href="/blog" class="link-hover text-primary transition-colors">
             blog
           </a>
         </div>
@@ -57,14 +95,16 @@ const posts = (await getCollection("blog"))
 
       <!-- Posts List -->
       <section class="pb-24">
-        {posts.length === 0 && (
-          <p
-            class="text-sm text-muted opacity-0 animate-reveal"
-            style="animation-delay: 0.18s"
-          >
-            no posts yet. check back soon.
-          </p>
-        )}
+        {
+          posts.length === 0 && (
+            <p
+              class="text-sm text-muted opacity-0 animate-reveal"
+              style="animation-delay: 0.18s"
+            >
+              no posts yet. check back soon.
+            </p>
+          )
+        }
 
         <div class="grid gap-3">
           {

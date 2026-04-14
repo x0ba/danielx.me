@@ -1,13 +1,50 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import { siteConfig } from "../lib/site";
 
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  pageType?: "website" | "article";
+  noindex?: boolean;
+  keywords?: string[];
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  canonicalPath?: string;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  ogImageAlt,
+  pageType = "website",
+  noindex = false,
+  keywords = [],
+  publishedTime,
+  modifiedTime,
+  canonicalPath,
+  structuredData,
+} = Astro.props;
+
+const site = Astro.site ?? new URL(siteConfig.siteUrl);
+const canonicalURL = canonicalPath ? new URL(canonicalPath, site) : Astro.url;
+const ogImageURL = new URL(ogImage ?? siteConfig.defaultOgImagePath, site);
+const canonicalHref = canonicalURL.toString();
+const ogImageHref = ogImageURL.toString();
+const robotsContent = noindex
+  ? "noindex, nofollow"
+  : "index, follow, max-image-preview:large";
+const keywordsContent = keywords.length > 0 ? keywords.join(", ") : undefined;
+const structuredDataEntries = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
 ---
 
 <!doctype html>
@@ -16,11 +53,60 @@ const { title, description } = Astro.props;
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content={robotsContent} />
     <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.author.name} />
+    {keywordsContent && <meta name="keywords" content={keywordsContent} />}
+    <meta name="theme-color" content="#0b0d12" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalHref} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
+    <meta property="og:url" content={canonicalHref} />
+    <meta property="og:site_name" content={siteConfig.author.name} />
+    <meta property="og:locale" content={siteConfig.locale} />
+    <meta property="og:image" content={ogImageHref} />
+    <meta property="og:image:alt" content={ogImageAlt ?? title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageHref} />
+    <meta name="twitter:image:alt" content={ogImageAlt ?? title} />
+    <meta name="twitter:creator" content={siteConfig.twitterHandle} />
+    <meta name="twitter:site" content={siteConfig.twitterHandle} />
+    <link rel="sitemap" href={new URL("/sitemap-index.xml", site)} />
+    {
+      pageType === "article" && publishedTime && (
+        <meta
+          property="article:published_time"
+          content={publishedTime.toISOString()}
+        />
+      )
+    }
+    {
+      pageType === "article" && modifiedTime && (
+        <meta
+          property="article:modified_time"
+          content={modifiedTime.toISOString()}
+        />
+      )
+    }
+    {
+      pageType === "article" &&
+        keywords.map((keyword) => (
+          <meta property="article:tag" content={keyword} />
+        ))
+    }
+    {
+      structuredDataEntries.map((entry) => (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(entry)}
+        />
+      ))
+    }
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
