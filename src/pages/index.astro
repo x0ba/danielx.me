@@ -5,7 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const name = "daniel xu";
 const tagline = "full stack software engineer";
-const about = "La Jolla, CA";
+const about = "la jolla, ca";
 
 const socialLinks = [
   { href: "https://github.com/x0ba", label: "github" },
@@ -15,15 +15,15 @@ const socialLinks = [
 
 const projects = [
   {
-    name: "RxLog",
+    name: "rxlog",
     description:
-      "A fast, free, simple, and open source medication logging platform for those who care about their loved ones.",
-    tech: ["Tanstack Start", "Tailwind CSS", "Convex"],
+      "a fast, free, simple, and open source medication logging platform for those who care about their loved ones.",
+    tech: ["tanstack start", "tailwind CSS", "convex"],
     live: "https://rxlog.danielx.link",
     source: "https://github.com/x0ba/rxlog",
   },
   {
-    name: "SSA at UCSD Member Dashboard",
+    name: "ssa at ucsd member dashboard",
     description:
       "A unified dashboard for members of the Symphonic Student Association at UCSD to view links, RSVP to events, and admins to manage events, members, and more.",
     tech: ["Tanstack Start", "TypeScript", "Convex", "Tailwind CSS"],
@@ -31,54 +31,52 @@ const projects = [
     source: "https://github.com/ssaucsd/ssaucsd-org",
   },
   {
-    name: "CLI Toolkit",
+    name: "schedulesync",
     description:
-      "A collection of developer CLI tools for scaffolding projects, managing configs, and automating common workflows.",
-    tech: ["TypeScript", "Node.js", "Commander"],
-    live: null,
-    source: "https://github.com/daniel/cli-toolkit",
-  },
-  {
-    name: "Weather Dash",
-    description:
-      "A minimal weather dashboard with location-based forecasts, hourly breakdowns, and clean data visualizations.",
-    tech: ["Next.js", "D3.js", "OpenWeather API"],
-    live: "https://weather-dash.vercel.app",
-    source: "https://github.com/daniel/weather-dash",
+      "a web application that ingests and converts screenshots of course schedules into an iCal file or sync it directly to google calendar.",
+    tech: ["next.js", "trpc", "tailwind css", "clerk"],
+    live: "https://schedulesync.danielx.link",
+    source: "https://github.com/x0ba/schedulesync",
   },
 ];
 
 const experience = [
   {
-    company: "Acme Corp",
-    role: "Software Engineer",
-    period: "2024 — present",
-    description:
-      "Building full-stack web applications and developer tools. Working across the frontend and backend with a focus on performance and developer experience.",
+    company: "polylabs, inc.",
+    role: "software engineer intern",
+    period: "2025 — present",
+    description: "designed and coded upwordly.ai from scratch.",
   },
   {
-    company: "Startup Inc",
-    role: "Frontend Developer",
-    period: "2022 — 2024",
+    company: "ieee ucsd student branch",
+    role: "webmaster",
+    period: "2025 — present",
     description:
-      "Led the frontend architecture for the core product. Built the component library, implemented the design system, and improved core web vitals by 40%.",
+      "program and maintain internal tools and public-facing website for the largest ieee student branch in the country.",
   },
   {
-    company: "Freelance",
-    role: "Web Developer",
-    period: "2020 — 2022",
+    company: "symphonic student association at ucsd",
+    role: "webmaster",
+    period: "2025 — present",
     description:
-      "Designed and developed websites and web applications for small businesses and startups. Managed projects from concept to deployment.",
+      "develop and maintain a digital ecosystem for ssa at ucsd, providing a unified platform for event management, member engagement, and organizational communication.",
+  },
+  {
+    company: "robot force",
+    role: "robotics coach",
+    period: "2023 — 2024",
+    description:
+      "coached a fourth grade vex iq robotics team to the states competition",
   },
 ];
 
 const education = [
   {
-    school: "University of Technology",
-    degree: "B.S. Computer Science",
-    period: "2018 — 2022",
+    school: "University of California, San Diego",
+    degree: "B.S. Mathematics and Computer Science",
+    period: "2025 — 2028",
     description:
-      "Focused on systems programming, algorithms, and web technologies. Dean's list, senior capstone on real-time collaborative editing.",
+      "Activities and Societies: IEEE Student Branch (Webmaster), Symphonic Student Association (Webmaster), CSE Society (Web Developer)",
   },
 ];
 
@@ -144,7 +142,7 @@ const education = [
           style="animation-delay: 0.24s"
         >
           <a
-            href="/resume.pdf"
+            href="/danielxu-resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1.5 rounded-lg border border-edge bg-surface/60 px-3.5 py-1.5 text-sm text-secondary transition-all duration-200 hover:border-accent/40 hover:text-accent hover:shadow-[0_0_20px_rgba(198,122,74,0.06)]"
@@ -336,15 +334,7 @@ const education = [
         style="animation-delay: 0.8s"
       >
         <p class="text-xs text-muted">
-          built with{" "}
-          <a
-            href="https://astro.build"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-secondary transition-colors hover:text-accent"
-          >
-            astro
-          </a>
+          © 2026 Daniel Xu. built with ❤️ in la jolla, ca
         </p>
       </footer>
     </div>
