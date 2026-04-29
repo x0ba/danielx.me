@@ -57,7 +57,35 @@ const structuredDataEntries = structuredData
     <meta name="description" content={description} />
     <meta name="author" content={siteConfig.author.name} />
     {keywordsContent && <meta name="keywords" content={keywordsContent} />}
-    <meta name="theme-color" content="#0b0d12" />
+    <meta name="theme-color" content="#0b0d12" data-theme-color />
+    <script is:inline>
+      (() => {
+        const storageKey = "danielx-theme";
+        const themes = { dark: "#0b0d12", light: "#f6efe4" };
+        const getStoredTheme = () => {
+          try {
+            return localStorage.getItem(storageKey) || "system";
+          } catch {
+            return "system";
+          }
+        };
+        const resolveTheme = (theme) =>
+          theme === "system"
+            ? window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"
+            : theme;
+
+        const selectedTheme = getStoredTheme();
+        const resolvedTheme = resolveTheme(selectedTheme);
+        document.documentElement.dataset.theme = selectedTheme;
+        document.documentElement.dataset.resolvedTheme = resolvedTheme;
+        document.documentElement.style.colorScheme = resolvedTheme;
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute("content", themes[resolvedTheme]);
+      })();
+    </script>
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalHref} />
     <meta property="og:title" content={title} />
@@ -118,5 +146,78 @@ const structuredDataEntries = structuredData
   </head>
   <body class="min-h-screen">
     <slot />
+
+    <div
+      class="theme-toggle opacity-0 animate-reveal"
+      style="animation-delay: 0.9s"
+      role="radiogroup"
+      aria-label="Color theme"
+      data-theme-toggle
+    >
+      <button type="button" role="radio" data-theme-option="system" aria-label="Use system theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+      <button type="button" role="radio" data-theme-option="light" aria-label="Use light theme">
+        <span aria-hidden="true">☼</span>
+      </button>
+      <button type="button" role="radio" data-theme-option="dark" aria-label="Use dark theme">
+        <span aria-hidden="true">☾</span>
+      </button>
+    </div>
+
+    <script is:inline>
+      (() => {
+        const storageKey = "danielx-theme";
+        const validThemes = ["system", "light", "dark"];
+        const themeColors = { dark: "#0b0d12", light: "#f6efe4" };
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        const toggle = document.querySelector("[data-theme-toggle]");
+        if (!toggle) return;
+
+        const getTheme = () => {
+          try {
+            const stored = localStorage.getItem(storageKey);
+            return validThemes.includes(stored) ? stored : "system";
+          } catch {
+            return "system";
+          }
+        };
+
+        const resolved = (theme) =>
+          theme === "system" ? (media.matches ? "dark" : "light") : theme;
+
+        const applyTheme = (theme) => {
+          const resolvedTheme = resolved(theme);
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.dataset.resolvedTheme = resolvedTheme;
+          document.documentElement.style.colorScheme = resolvedTheme;
+          document
+            .querySelector('meta[name="theme-color"]')
+            ?.setAttribute("content", themeColors[resolvedTheme]);
+
+          toggle.querySelectorAll("[data-theme-option]").forEach((button) => {
+            const isActive = button.getAttribute("data-theme-option") === theme;
+            button.setAttribute("aria-checked", String(isActive));
+          });
+        };
+
+        toggle.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-theme-option]");
+          if (!button) return;
+          const theme = button.getAttribute("data-theme-option");
+          if (!validThemes.includes(theme)) return;
+          try {
+            localStorage.setItem(storageKey, theme);
+          } catch {}
+          applyTheme(theme);
+        });
+
+        media.addEventListener("change", () => {
+          if (getTheme() === "system") applyTheme("system");
+        });
+
+        applyTheme(getTheme());
+      })();
+    </script>
   </body>
 </html>
