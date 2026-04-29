@@ -1,17 +1,17 @@
 @import "tailwindcss" source("..");
 
 @theme {
-  --color-void: #060606;
-  --color-surface: #0c0c0c;
-  --color-elevated: #141414;
-  --color-edge: #1c1c1c;
-  --color-edge-hover: #2a2a2a;
-  --color-primary: #ededed;
-  --color-secondary: #999;
-  --color-muted: #555;
-  --color-accent: #c67a4a;
-  --color-accent-hover: #d68b5e;
-  --color-accent-dim: rgba(198, 122, 74, 0.08);
+  --color-void: #100f0f;
+  --color-surface: #1c1b1a;
+  --color-elevated: #282726;
+  --color-edge: #343331;
+  --color-edge-hover: #403e3c;
+  --color-primary: #cecdc3;
+  --color-secondary: #878580;
+  --color-muted: #575653;
+  --color-accent: #da702c;
+  --color-accent-hover: #ec8b49;
+  --color-accent-dim: rgba(218, 112, 44, 0.1);
 
   --font-body: "Outfit", system-ui, -apple-system, sans-serif;
 
@@ -32,38 +32,44 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
-  --color-void: #060606;
-  --color-surface: #0c0c0c;
-  --color-elevated: #141414;
-  --color-edge: #1c1c1c;
-  --color-edge-hover: #2a2a2a;
-  --color-primary: #ededed;
-  --color-secondary: #999;
-  --color-muted: #555;
-  --color-accent: #c67a4a;
-  --color-accent-hover: #d68b5e;
-  --color-accent-dim: rgba(198, 122, 74, 0.08);
-  --grid-line: rgba(255, 255, 255, 0.02);
-  --theme-panel: rgba(12, 12, 12, 0.72);
+  --color-void: #100f0f;
+  --color-surface: #1c1b1a;
+  --color-elevated: #282726;
+  --color-edge: #343331;
+  --color-edge-hover: #403e3c;
+  --color-primary: #cecdc3;
+  --color-secondary: #878580;
+  --color-muted: #575653;
+  --color-accent: #da702c;
+  --color-accent-hover: #ec8b49;
+  --color-accent-dim: rgba(218, 112, 44, 0.1);
+  --color-accent-border: rgba(218, 112, 44, 0.32);
+  --color-accent-soft: rgba(218, 112, 44, 0.055);
+  --color-row-hover: rgba(218, 112, 44, 0.045);
+  --grid-line: rgba(206, 205, 195, 0.035);
+  --theme-panel: rgba(28, 27, 26, 0.78);
   --theme-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
 }
 
 html[data-resolved-theme="light"] {
   color-scheme: light;
-  --color-void: #f6efe4;
-  --color-surface: #fff9ef;
-  --color-elevated: #fffdf8;
-  --color-edge: #e4d3bd;
-  --color-edge-hover: #cdb391;
-  --color-primary: #231a13;
-  --color-secondary: #6e5946;
-  --color-muted: #9b8067;
-  --color-accent: #a95725;
-  --color-accent-hover: #7f3d17;
-  --color-accent-dim: rgba(169, 87, 37, 0.1);
-  --grid-line: rgba(103, 68, 39, 0.055);
-  --theme-panel: rgba(255, 249, 239, 0.78);
-  --theme-shadow: 0 18px 60px rgba(100, 66, 29, 0.16);
+  --color-void: #fffcf0;
+  --color-surface: #f2f0e5;
+  --color-elevated: #fffcf0;
+  --color-edge: #e6e4d9;
+  --color-edge-hover: #dad8ce;
+  --color-primary: #100f0f;
+  --color-secondary: #6f6e69;
+  --color-muted: #b7b5ac;
+  --color-accent: #bc5215;
+  --color-accent-hover: #8b3303;
+  --color-accent-dim: rgba(188, 82, 21, 0.1);
+  --color-accent-border: rgba(188, 82, 21, 0.32);
+  --color-accent-soft: rgba(188, 82, 21, 0.055);
+  --color-row-hover: rgba(188, 82, 21, 0.045);
+  --grid-line: rgba(16, 15, 15, 0.055);
+  --theme-panel: rgba(255, 252, 240, 0.82);
+  --theme-shadow: 0 18px 60px rgba(16, 15, 15, 0.14);
 }
 
 body {
@@ -220,7 +226,7 @@ body {
 .prose a {
   color: var(--color-accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(198, 122, 74, 0.3);
+  border-bottom: 1px solid var(--color-accent-border);
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
@@ -281,7 +287,7 @@ body {
   border-left: 3px solid var(--color-accent);
   padding: 0.75em 1.25em;
   margin: 1.75em 0;
-  background: rgba(198, 122, 74, 0.04);
+  background: var(--color-accent-soft);
   border-radius: 0 8px 8px 0;
   color: var(--color-secondary);
   font-style: italic;
@@ -330,6 +336,12 @@ body {
   color: inherit;
 }
 
+html[data-resolved-theme="dark"] .prose .astro-code,
+html[data-resolved-theme="dark"] .prose .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
 /* Shiki diff lines */
 .prose pre .diff.add {
   background-color: rgba(46, 160, 67, 0.12);
@@ -340,7 +352,7 @@ body {
 }
 
 .prose pre .highlighted {
-  background-color: rgba(198, 122, 74, 0.1);
+  background-color: var(--color-accent-dim);
 }
 
 .prose pre .has-focus .line:not(.focused) {
@@ -394,7 +406,7 @@ body {
 }
 
 .prose tbody tr:hover {
-  background-color: rgba(198, 122, 74, 0.03);
+  background-color: var(--color-row-hover);
 }
 
 /* Images & Figures */

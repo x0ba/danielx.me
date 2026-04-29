@@ -15,7 +15,10 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
-      theme: "vesper",
+      themes: {
+        light: "github-light",
+        dark: "vesper",
+      },
       transformers: [
         transformerNotationDiff(),
         transformerNotationHighlight(),

@@ -57,11 +57,11 @@ const structuredDataEntries = structuredData
     <meta name="description" content={description} />
     <meta name="author" content={siteConfig.author.name} />
     {keywordsContent && <meta name="keywords" content={keywordsContent} />}
-    <meta name="theme-color" content="#0b0d12" data-theme-color />
+    <meta name="theme-color" content="#100f0f" data-theme-color />
     <script is:inline>
       (() => {
         const storageKey = "danielx-theme";
-        const themes = { dark: "#0b0d12", light: "#f6efe4" };
+        const themes = { dark: "#100f0f", light: "#fffcf0" };
         const getStoredTheme = () => {
           try {
             return localStorage.getItem(storageKey) || "system";
@@ -167,12 +167,15 @@ const structuredDataEntries = structuredData
 
     <script is:inline>
       (() => {
+        if (window.__danielxThemeInitialized) {
+          window.__danielxApplyTheme?.();
+          return;
+        }
+        window.__danielxThemeInitialized = true;
         const storageKey = "danielx-theme";
         const validThemes = ["system", "light", "dark"];
-        const themeColors = { dark: "#0b0d12", light: "#f6efe4" };
+        const themeColors = { dark: "#100f0f", light: "#fffcf0" };
         const media = window.matchMedia("(prefers-color-scheme: dark)");
-        const toggle = document.querySelector("[data-theme-toggle]");
-        if (!toggle) return;
 
         const getTheme = () => {
           try {
@@ -195,13 +198,13 @@ const structuredDataEntries = structuredData
             .querySelector('meta[name="theme-color"]')
             ?.setAttribute("content", themeColors[resolvedTheme]);
 
-          toggle.querySelectorAll("[data-theme-option]").forEach((button) => {
+          document.querySelectorAll("[data-theme-option]").forEach((button) => {
             const isActive = button.getAttribute("data-theme-option") === theme;
             button.setAttribute("aria-checked", String(isActive));
           });
         };
 
-        toggle.addEventListener("click", (event) => {
+        document.addEventListener("click", (event) => {
           const button = event.target.closest("[data-theme-option]");
           if (!button) return;
           const theme = button.getAttribute("data-theme-option");
@@ -216,7 +219,9 @@ const structuredDataEntries = structuredData
           if (getTheme() === "system") applyTheme("system");
         });
 
-        applyTheme(getTheme());
+        window.__danielxApplyTheme = () => applyTheme(getTheme());
+        document.addEventListener("astro:page-load", window.__danielxApplyTheme);
+        window.__danielxApplyTheme();
       })();
     </script>
   </body>
