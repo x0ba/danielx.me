@@ -57,11 +57,11 @@ const structuredDataEntries = structuredData
     <meta name="description" content={description} />
     <meta name="author" content={siteConfig.author.name} />
     {keywordsContent && <meta name="keywords" content={keywordsContent} />}
-    <meta name="theme-color" content="#100f0f" data-theme-color />
+    <meta name="theme-color" content="#100F0F" data-theme-color />
     <script is:inline>
       (() => {
         const storageKey = "danielx-theme";
-        const themes = { dark: "#100f0f", light: "#fffcf0" };
+        const themes = { dark: "#100F0F", light: "#FFFCF0" };
         const getStoredTheme = () => {
           try {
             return localStorage.getItem(storageKey) || "system";
@@ -174,7 +174,7 @@ const structuredDataEntries = structuredData
         window.__danielxThemeInitialized = true;
         const storageKey = "danielx-theme";
         const validThemes = ["system", "light", "dark"];
-        const themeColors = { dark: "#100f0f", light: "#fffcf0" };
+        const themeColors = { dark: "#100F0F", light: "#FFFCF0" };
         const media = window.matchMedia("(prefers-color-scheme: dark)");
 
         const getTheme = () => {

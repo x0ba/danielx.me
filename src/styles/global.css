@@ -1,6 +1,37 @@
 @import "tailwindcss" source("..");
 
 @theme {
+  --color-flexoki-black: #100f0f;
+  --color-flexoki-base-950: #1c1b1a;
+  --color-flexoki-base-900: #282726;
+  --color-flexoki-base-850: #343331;
+  --color-flexoki-base-800: #403e3c;
+  --color-flexoki-base-700: #575653;
+  --color-flexoki-base-600: #6f6e69;
+  --color-flexoki-base-500: #878580;
+  --color-flexoki-base-300: #b7b5ac;
+  --color-flexoki-base-200: #cecdc3;
+  --color-flexoki-base-150: #dad8ce;
+  --color-flexoki-base-100: #e6e4d9;
+  --color-flexoki-base-50: #f2f0e5;
+  --color-flexoki-paper: #fffcf0;
+  --color-flexoki-red-400: #d14d41;
+  --color-flexoki-red-600: #af3029;
+  --color-flexoki-orange-400: #da702c;
+  --color-flexoki-orange-600: #bc5215;
+  --color-flexoki-yellow-400: #d0a215;
+  --color-flexoki-yellow-600: #ad8301;
+  --color-flexoki-green-400: #879a39;
+  --color-flexoki-green-600: #66800b;
+  --color-flexoki-cyan-400: #3aa99f;
+  --color-flexoki-cyan-600: #24837b;
+  --color-flexoki-blue-400: #4385be;
+  --color-flexoki-blue-600: #205ea6;
+  --color-flexoki-purple-400: #8b7ec8;
+  --color-flexoki-purple-600: #5e409d;
+  --color-flexoki-magenta-400: #ce5d97;
+  --color-flexoki-magenta-600: #a02f6f;
+
   --color-void: #100f0f;
   --color-surface: #1c1b1a;
   --color-elevated: #282726;
@@ -32,20 +63,25 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
-  --color-void: #100f0f;
-  --color-surface: #1c1b1a;
-  --color-elevated: #282726;
-  --color-edge: #343331;
-  --color-edge-hover: #403e3c;
-  --color-primary: #cecdc3;
-  --color-secondary: #878580;
-  --color-muted: #575653;
-  --color-accent: #da702c;
+  --color-void: var(--color-flexoki-black);
+  --color-surface: var(--color-flexoki-base-950);
+  --color-elevated: var(--color-flexoki-base-900);
+  --color-edge: var(--color-flexoki-base-850);
+  --color-edge-hover: var(--color-flexoki-base-800);
+  --color-primary: var(--color-flexoki-base-200);
+  --color-secondary: var(--color-flexoki-base-500);
+  --color-muted: var(--color-flexoki-base-700);
+  --color-accent: var(--color-flexoki-orange-400);
   --color-accent-hover: #ec8b49;
   --color-accent-dim: rgba(218, 112, 44, 0.1);
   --color-accent-border: rgba(218, 112, 44, 0.32);
   --color-accent-soft: rgba(218, 112, 44, 0.055);
   --color-row-hover: rgba(218, 112, 44, 0.045);
+  --color-danger: var(--color-flexoki-red-400);
+  --color-warning: var(--color-flexoki-yellow-400);
+  --color-success: var(--color-flexoki-green-400);
+  --color-info: var(--color-flexoki-blue-400);
+  --color-link: var(--color-flexoki-cyan-400);
   --grid-line: rgba(206, 205, 195, 0.035);
   --theme-panel: rgba(28, 27, 26, 0.78);
   --theme-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
@@ -53,20 +89,25 @@ html {
 
 html[data-resolved-theme="light"] {
   color-scheme: light;
-  --color-void: #fffcf0;
-  --color-surface: #f2f0e5;
-  --color-elevated: #fffcf0;
-  --color-edge: #e6e4d9;
-  --color-edge-hover: #dad8ce;
-  --color-primary: #100f0f;
-  --color-secondary: #6f6e69;
-  --color-muted: #b7b5ac;
-  --color-accent: #bc5215;
-  --color-accent-hover: #8b3303;
+  --color-void: var(--color-flexoki-paper);
+  --color-surface: var(--color-flexoki-base-50);
+  --color-elevated: var(--color-flexoki-paper);
+  --color-edge: var(--color-flexoki-base-100);
+  --color-edge-hover: var(--color-flexoki-base-150);
+  --color-primary: var(--color-flexoki-black);
+  --color-secondary: var(--color-flexoki-base-600);
+  --color-muted: var(--color-flexoki-base-300);
+  --color-accent: var(--color-flexoki-orange-600);
+  --color-accent-hover: #9d4310;
   --color-accent-dim: rgba(188, 82, 21, 0.1);
   --color-accent-border: rgba(188, 82, 21, 0.32);
   --color-accent-soft: rgba(188, 82, 21, 0.055);
   --color-row-hover: rgba(188, 82, 21, 0.045);
+  --color-danger: var(--color-flexoki-red-600);
+  --color-warning: var(--color-flexoki-yellow-600);
+  --color-success: var(--color-flexoki-green-600);
+  --color-info: var(--color-flexoki-blue-600);
+  --color-link: var(--color-flexoki-cyan-600);
   --grid-line: rgba(16, 15, 15, 0.055);
   --theme-panel: rgba(255, 252, 240, 0.82);
   --theme-shadow: 0 18px 60px rgba(16, 15, 15, 0.14);
@@ -83,7 +124,7 @@ body {
 
 ::selection {
   background-color: var(--color-accent);
-  color: #fff;
+  color: var(--color-flexoki-paper);
 }
 
 .theme-toggle {
@@ -339,11 +380,11 @@ html[data-resolved-theme="dark"] .prose .astro-code span {
 
 /* Shiki diff lines */
 .prose pre .diff.add {
-  background-color: rgba(46, 160, 67, 0.12);
+  background-color: color-mix(in srgb, var(--color-success) 16%, transparent);
 }
 
 .prose pre .diff.remove {
-  background-color: rgba(248, 81, 73, 0.12);
+  background-color: color-mix(in srgb, var(--color-danger) 16%, transparent);
 }
 
 .prose pre .highlighted {
@@ -454,7 +495,7 @@ html[data-resolved-theme="dark"] .prose .astro-code span {
   text-align: center;
   font-size: 0.7em;
   line-height: 1em;
-  color: white;
+  color: var(--color-flexoki-paper);
   font-weight: 700;
 }
 
@@ -531,43 +572,43 @@ html[data-resolved-theme="dark"] .prose .astro-code span {
 }
 
 .callout-note {
-  background: rgba(96, 165, 250, 0.06);
-  border-color: #60a5fa;
+  background: color-mix(in srgb, var(--color-info) 8%, transparent);
+  border-color: var(--color-info);
 }
 
 .callout-note .callout-title {
-  color: #60a5fa;
+  color: var(--color-info);
 }
 
 .callout-tip {
-  background: rgba(52, 211, 153, 0.06);
-  border-color: #34d399;
+  background: color-mix(in srgb, var(--color-success) 8%, transparent);
+  border-color: var(--color-success);
 }
 
 .callout-tip .callout-title {
-  color: #34d399;
+  color: var(--color-success);
 }
 
 .callout-warning {
-  background: rgba(251, 191, 36, 0.06);
-  border-color: #fbbf24;
+  background: color-mix(in srgb, var(--color-warning) 8%, transparent);
+  border-color: var(--color-warning);
 }
 
 .callout-warning .callout-title {
-  color: #fbbf24;
+  color: var(--color-warning);
 }
 
 .callout-danger {
-  background: rgba(248, 113, 113, 0.06);
-  border-color: #f87171;
+  background: color-mix(in srgb, var(--color-danger) 8%, transparent);
+  border-color: var(--color-danger);
 }
 
 .callout-danger .callout-title {
-  color: #f87171;
+  color: var(--color-danger);
 }
 
 .callout-info {
-  background: rgba(198, 122, 74, 0.06);
+  background: var(--color-accent-soft);
   border-color: var(--color-accent);
 }
 
