@@ -48,7 +48,7 @@ const structuredDataEntries = structuredData
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" style="color-scheme: dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -57,35 +57,7 @@ const structuredDataEntries = structuredData
     <meta name="description" content={description} />
     <meta name="author" content={siteConfig.author.name} />
     {keywordsContent && <meta name="keywords" content={keywordsContent} />}
-    <meta name="theme-color" content="#100F0F" data-theme-color />
-    <script is:inline>
-      (() => {
-        const storageKey = "danielx-theme";
-        const themes = { dark: "#100F0F", light: "#FFFCF0" };
-        const getStoredTheme = () => {
-          try {
-            return localStorage.getItem(storageKey) || "system";
-          } catch {
-            return "system";
-          }
-        };
-        const resolveTheme = (theme) =>
-          theme === "system"
-            ? window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light"
-            : theme;
-
-        const selectedTheme = getStoredTheme();
-        const resolvedTheme = resolveTheme(selectedTheme);
-        document.documentElement.dataset.theme = selectedTheme;
-        document.documentElement.dataset.resolvedTheme = resolvedTheme;
-        document.documentElement.style.colorScheme = resolvedTheme;
-        document
-          .querySelector('meta[name="theme-color"]')
-          ?.setAttribute("content", themes[resolvedTheme]);
-      })();
-    </script>
+    <meta name="theme-color" content="#100F0F" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalHref} />
     <meta property="og:title" content={title} />
@@ -147,107 +119,5 @@ const structuredDataEntries = structuredData
   <body class="min-h-screen">
     <slot />
 
-    <div
-      class="theme-toggle opacity-0 animate-reveal"
-      style="animation-delay: 0.9s"
-      role="radiogroup"
-      aria-label="Color theme"
-      data-theme-toggle
-    >
-      <button
-        type="button"
-        role="radio"
-        data-theme-option="system"
-        aria-label="Use system theme"
-      >
-        <span aria-hidden="true">◐</span>
-      </button>
-      <button
-        type="button"
-        role="radio"
-        data-theme-option="light"
-        aria-label="Use light theme"
-      >
-        <span aria-hidden="true">☼</span>
-      </button>
-      <button
-        type="button"
-        role="radio"
-        data-theme-option="dark"
-        aria-label="Use dark theme"
-      >
-        <span aria-hidden="true">☾</span>
-      </button>
-    </div>
-
-    <script is:inline>
-      (() => {
-        if (window.__danielxThemeInitialized) {
-          window.__danielxApplyTheme?.();
-          return;
-        }
-        window.__danielxThemeInitialized = true;
-        const storageKey = "danielx-theme";
-        const validThemes = ["system", "light", "dark"];
-        const themeColors = { dark: "#100F0F", light: "#FFFCF0" };
-        const media = window.matchMedia("(prefers-color-scheme: dark)");
-
-        const getTheme = () => {
-          try {
-            const stored = localStorage.getItem(storageKey);
-            return validThemes.includes(stored) ? stored : "system";
-          } catch {
-            return "system";
-          }
-        };
-
-        const resolved = (theme) =>
-          theme === "system" ? (media.matches ? "dark" : "light") : theme;
-
-        const applyThemeToDocument = (targetDocument, theme) => {
-          const resolvedTheme = resolved(theme);
-          targetDocument.documentElement.dataset.theme = theme;
-          targetDocument.documentElement.dataset.resolvedTheme = resolvedTheme;
-          targetDocument.documentElement.style.colorScheme = resolvedTheme;
-          targetDocument
-            .querySelector('meta[name="theme-color"]')
-            ?.setAttribute("content", themeColors[resolvedTheme]);
-        };
-
-        const applyTheme = (theme) => {
-          applyThemeToDocument(document, theme);
-
-          document.querySelectorAll("[data-theme-option]").forEach((button) => {
-            const isActive = button.getAttribute("data-theme-option") === theme;
-            button.setAttribute("aria-checked", String(isActive));
-          });
-        };
-
-        document.addEventListener("click", (event) => {
-          const button = event.target.closest("[data-theme-option]");
-          if (!button) return;
-          const theme = button.getAttribute("data-theme-option");
-          if (!validThemes.includes(theme)) return;
-          try {
-            localStorage.setItem(storageKey, theme);
-          } catch {}
-          applyTheme(theme);
-        });
-
-        media.addEventListener("change", () => {
-          if (getTheme() === "system") applyTheme("system");
-        });
-
-        window.__danielxApplyTheme = () => applyTheme(getTheme());
-        document.addEventListener("astro:before-swap", (event) => {
-          applyThemeToDocument(event.newDocument, getTheme());
-        });
-        document.addEventListener(
-          "astro:page-load",
-          window.__danielxApplyTheme,
-        );
-        window.__danielxApplyTheme();
-      })();
-    </script>
   </body>
 </html>

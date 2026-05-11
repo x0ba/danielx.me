@@ -177,22 +177,6 @@ const photos = [
     overflow-x: hidden;
   }
 
-  /* Override light mode for this page — always dark */
-  :global(html[data-resolved-theme="light"]) .photos-page {
-    --photo-bg: #0a0908;
-    --photo-surface: #141210;
-    --photo-card: #1a1816;
-    --photo-border: #2a2623;
-    --photo-border-light: #3a3530;
-    --photo-cream: #f5f0e8;
-    --photo-cream-dim: rgba(245, 240, 232, 0.7);
-    --photo-cream-muted: rgba(245, 240, 232, 0.35);
-    --photo-amber: #c8956c;
-    --photo-amber-bright: #e0a87a;
-    background: var(--photo-bg);
-    color: var(--photo-cream);
-  }
-
   /* ── Grain Overlay ──────────────────────────────────────────── */
 
   .grain-overlay {
