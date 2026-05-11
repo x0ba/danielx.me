@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../lib/site";
 
@@ -105,7 +106,7 @@ const photos = [
           >
             <div class="frame-inner">
               <div class="frame-image-wrap">
-                <img
+                <Image
                   src={photo.src}
                   alt={photo.title}
                   width={photo.width}
