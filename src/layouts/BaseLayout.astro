@@ -115,6 +115,11 @@ const structuredDataEntries = structuredData
     />
     <title>{title}</title>
     <ClientRouter />
+    <script>
+      document.addEventListener("astro:after-swap", () => {
+        document.documentElement.dataset.astroNavigated = "true";
+      });
+    </script>
   </head>
   <body class="min-h-screen">
     <slot />

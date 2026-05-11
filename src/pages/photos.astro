@@ -453,6 +453,13 @@ const photos = [
     }
   }
 
+  :global(html[data-astro-navigated]) .photos-header,
+  :global(html[data-astro-navigated]) .photo-frame,
+  :global(html[data-astro-navigated]) .photos-footer {
+    opacity: 1;
+    animation: none;
+  }
+
   /* ── Responsive ─────────────────────────────────────────────── */
 
   @media (max-width: 768px) {
