@@ -1,0 +1,517 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../lib/site";
+
+const pageTitle = "Photos — Daniel Xu";
+const pageDescription =
+  "A curated collection of photographs by Daniel Xu. Street, landscape, and architectural photography shot on film and digital.";
+
+const photos = [
+  {
+    src: "/photos/house.jpg",
+    title: "house on house",
+    location: "la jolla, ca",
+    camera: "iphone 17 pro",
+    year: "2026",
+    category: "street",
+    width: 5780,
+    height: 7470,
+  },
+  {
+    src: "/photos/sungod.jpg",
+    title: "sun god",
+    location: "la jolla, ca",
+    camera: "iphone 17 pro",
+    year: "2026",
+    category: "architecture",
+    width: 3024,
+    height: 4032,
+  },
+  {
+    src: "/photos/field.jpg",
+    title: "field notes",
+    location: "california",
+    camera: "iphone 17 pro",
+    year: "2026",
+    category: "landscape",
+    width: 4014,
+    height: 3011,
+  },
+  {
+    src: "/photos/sky.jpg",
+    title: "sky study",
+    location: "california",
+    camera: "iphone 17 pro",
+    year: "2026",
+    category: "landscape",
+    width: 8064,
+    height: 6048,
+  },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage={siteConfig.defaultOgImagePath}
+  ogImageAlt="Daniel Xu photography portfolio"
+  keywords={[
+    "Daniel Xu",
+    "photography",
+    "film photography",
+    "street photography",
+    "landscape",
+  ]}
+>
+  <div class="photos-page">
+    <!-- Film grain overlay -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- Sprocket holes decoration -->
+    <div class="sprocket-strip sprocket-left" aria-hidden="true">
+      {Array.from({ length: 30 }).map(() => <div class="sprocket-hole" />)}
+    </div>
+
+    <!-- Header -->
+    <header class="photos-header">
+      <a href="/" class="photos-back">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 12H5"></path>
+          <path d="M12 19l-7-7 7-7"></path>
+        </svg>
+        daniel xu
+      </a>
+      <h1 class="photos-title">photos</h1>
+    </header>
+
+    <!-- Gallery -->
+    <main class="photos-gallery">
+      {
+        photos.map((photo, i) => (
+          <article
+            class="photo-frame"
+            data-category={photo.category}
+            style={`animation-delay: ${0.38 + i * 0.08}s`}
+          >
+            <div class="frame-inner">
+              <div class="frame-image-wrap">
+                <img
+                  src={photo.src}
+                  alt={photo.title}
+                  width={photo.width}
+                  height={photo.height}
+                  loading={i < 3 ? "eager" : "lazy"}
+                  class="frame-image"
+                />
+                <div class="frame-number" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+              </div>
+              <div class="frame-caption">
+                <h2 class="frame-title">{photo.title}</h2>
+                <div class="frame-details">
+                  <span class="frame-location">{photo.location}</span>
+                  <span class="frame-camera">{photo.camera}</span>
+                  <span class="frame-year">{photo.year}</span>
+                </div>
+              </div>
+            </div>
+            <div class="frame-tape" aria-hidden="true" />
+          </article>
+        ))
+      }
+    </main>
+
+    <!-- Footer -->
+    <footer class="photos-footer" style="animation-delay: 1.2s">
+      <div class="photos-footer-inner">
+        <p class="photos-footer-text">
+          shot by daniel xu · developed in the darkroom of memory
+        </p>
+        <p class="photos-footer-sub">
+          © {new Date().getFullYear()} · all rights reserved
+        </p>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ── Photography Page — "Darkroom" Aesthetic ──────────────── */
+
+  @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
+
+  .photos-page {
+    --photo-bg: #0a0908;
+    --photo-surface: #141210;
+    --photo-card: #1a1816;
+    --photo-border: #2a2623;
+    --photo-border-light: #3a3530;
+    --photo-cream: #f5f0e8;
+    --photo-cream-dim: rgba(245, 240, 232, 0.7);
+    --photo-cream-muted: rgba(245, 240, 232, 0.35);
+    --photo-amber: #c8956c;
+    --photo-amber-bright: #e0a87a;
+    --photo-amber-dim: rgba(200, 149, 108, 0.12);
+    --photo-amber-glow: rgba(200, 149, 108, 0.06);
+    --photo-red: #8b3a3a;
+    --photo-tape: rgba(245, 240, 232, 0.06);
+    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-mono: "DM Mono", "Courier New", monospace;
+
+    position: relative;
+    min-height: 100vh;
+    background: var(--photo-bg);
+    color: var(--photo-cream);
+    overflow-x: hidden;
+  }
+
+  /* Override light mode for this page — always dark */
+  :global(html[data-resolved-theme="light"]) .photos-page {
+    --photo-bg: #0a0908;
+    --photo-surface: #141210;
+    --photo-card: #1a1816;
+    --photo-border: #2a2623;
+    --photo-border-light: #3a3530;
+    --photo-cream: #f5f0e8;
+    --photo-cream-dim: rgba(245, 240, 232, 0.7);
+    --photo-cream-muted: rgba(245, 240, 232, 0.35);
+    --photo-amber: #c8956c;
+    --photo-amber-bright: #e0a87a;
+    background: var(--photo-bg);
+    color: var(--photo-cream);
+  }
+
+  /* ── Grain Overlay ──────────────────────────────────────────── */
+
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+  }
+
+  /* ── Sprocket Strip ─────────────────────────────────────────── */
+
+  .sprocket-strip {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-top: 40px;
+    z-index: 10;
+    opacity: 0.08;
+  }
+
+  .sprocket-left {
+    left: 8px;
+  }
+
+  .sprocket-hole {
+    width: 10px;
+    height: 14px;
+    border-radius: 2px;
+    border: 1px solid var(--photo-cream);
+    flex-shrink: 0;
+  }
+
+  /* ── Header ──────────────────────────────────────────────────── */
+
+  .photos-header {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.8rem 2.5rem 1.6rem 3rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--photo-border);
+    opacity: 0;
+    animation: photos-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .photos-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--photo-cream-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.3s ease;
+  }
+
+  .photos-back:hover {
+    color: var(--photo-amber);
+  }
+
+  .photos-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--photo-cream);
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+    margin: 0;
+  }
+
+  /* ── Gallery ────────────────────────────────────────────────── */
+
+  .photos-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: 3rem 2.5rem;
+    padding: 0 2.5rem 6rem 3rem;
+    max-width: 1400px;
+  }
+
+  /* ── Photo Frame (Polaroid-like) ────────────────────────────── */
+
+  .photo-frame {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    opacity: 0;
+    animation: photos-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.4s ease;
+  }
+
+  .photo-frame:nth-child(odd) {
+    transform: rotate(-1.2deg);
+  }
+
+  .photo-frame:nth-child(even) {
+    transform: rotate(0.8deg);
+  }
+
+  .photo-frame:nth-child(3n) {
+    transform: rotate(-0.5deg) translateY(12px);
+  }
+
+  .photo-frame:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.02) !important;
+    z-index: 10;
+  }
+
+  .frame-inner {
+    background: var(--photo-cream);
+    padding: 14px 14px 52px 14px;
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      0 12px 40px rgba(0, 0, 0, 0.2),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.4s ease;
+  }
+
+  .photo-frame:hover .frame-inner {
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      0 0 80px var(--photo-amber-dim),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  .frame-image-wrap {
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .frame-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: contrast(1.05) saturate(0.9);
+    transition:
+      filter 0.4s ease,
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .photo-frame:hover .frame-image {
+    filter: contrast(1.1) saturate(1);
+    transform: scale(1.03);
+  }
+
+  .frame-number {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--photo-amber-bright);
+    opacity: 0.7;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.1em;
+  }
+
+  .frame-caption {
+    padding-top: 12px;
+  }
+
+  .frame-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--photo-bg);
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  .frame-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-top: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: rgba(10, 9, 8, 0.4);
+    letter-spacing: 0.04em;
+  }
+
+  /* Tape decoration */
+  .frame-tape {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(1.5deg);
+    width: 60px;
+    height: 18px;
+    background: var(--photo-tape);
+    border: 1px solid rgba(245, 240, 232, 0.04);
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+  }
+
+  .photo-frame:nth-child(even) .frame-tape {
+    transform: translateX(-40%) rotate(-2deg);
+  }
+
+  .photo-frame:nth-child(3n) .frame-tape {
+    left: 30%;
+    transform: rotate(4deg);
+  }
+
+  /* ── Footer ─────────────────────────────────────────────────── */
+
+  .photos-footer {
+    padding: 3rem 2.5rem 4rem 3rem;
+    border-top: 1px solid var(--photo-border);
+    opacity: 0;
+    animation: photos-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .photos-footer-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--photo-cream-muted);
+    margin: 0;
+  }
+
+  .photos-footer-sub {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--photo-cream-muted);
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+  }
+
+  /* ── Animations ─────────────────────────────────────────────── */
+
+  @keyframes photos-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes meta-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  /* ── Responsive ─────────────────────────────────────────────── */
+
+  @media (max-width: 768px) {
+    .photos-header {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .photos-title {
+      position: static;
+      transform: none;
+    }
+
+    .photos-gallery {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .photo-frame:nth-child(odd),
+    .photo-frame:nth-child(even),
+    .photo-frame:nth-child(3n) {
+      transform: rotate(0deg);
+    }
+
+    .photos-footer {
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    .sprocket-strip {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .photo-frame:nth-child(2) {
+      margin-top: 3rem;
+    }
+
+    .photo-frame:nth-child(3) {
+      margin-top: -1rem;
+    }
+
+    .photo-frame:nth-child(5) {
+      margin-top: 2rem;
+    }
+  }
+</style>

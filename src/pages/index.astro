@@ -166,6 +166,7 @@ const structuredData = [
               { href: "#projects", label: "projects" },
               { href: "#experience", label: "experience" },
               { href: "#education", label: "education" },
+              { href: "/photos", label: "photos" },
               { href: "/blog", label: "blog" },
             ].map((link) => (
               <a
@@ -424,6 +425,38 @@ const structuredData = [
             ))
           }
         </div>
+      </section>
+
+      <!-- Featured Photos -->
+      <section id="photos" class="pb-24">
+        <h2
+          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
+          style="animation-delay: 0.78s"
+        >
+          Photos
+        </h2>
+        <a href="/photos" class="featured-photos-link">
+          <div class="featured-photos-grid">
+            <div class="featured-frame featured-frame-1 opacity-0 animate-reveal" style="animation-delay: 0.82s">
+              <div class="featured-frame-inner">
+                <img src="/photos/ocean-sunset.png" alt="Ocean sunset" loading="lazy" />
+              </div>
+            </div>
+            <div class="featured-frame featured-frame-2 opacity-0 animate-reveal" style="animation-delay: 0.86s">
+              <div class="featured-frame-inner">
+                <img src="/photos/night-street.png" alt="Night street" loading="lazy" />
+              </div>
+            </div>
+            <div class="featured-frame featured-frame-3 opacity-0 animate-reveal" style="animation-delay: 0.90s">
+              <div class="featured-frame-inner">
+                <img src="/photos/cherry-blossom.png" alt="Cherry blossom" loading="lazy" />
+              </div>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-muted transition-colors group-hover:text-accent opacity-0 animate-reveal" style="animation-delay: 0.94s">
+            view all photos →
+          </p>
+        </a>
       </section>
 
       <!-- Footer -->
