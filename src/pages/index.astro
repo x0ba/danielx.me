@@ -1,5 +1,8 @@
 ---
 import { Image } from "astro:assets";
+import fieldPhoto from "../assets/photos/field.jpg";
+import housePhoto from "../assets/photos/house.jpg";
+import sungodPhoto from "../assets/photos/sungod.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../lib/site";
 
@@ -441,7 +444,7 @@ const structuredData = [
             >
               <div class="featured-frame-inner">
                 <Image
-                  src="/photos/house.jpg"
+                  src={housePhoto}
                   alt="House on house"
                   width={5780}
                   height={7470}
@@ -455,7 +458,7 @@ const structuredData = [
             >
               <div class="featured-frame-inner">
                 <Image
-                  src="/photos/sungod.jpg"
+                  src={sungodPhoto}
                   alt="Sun god"
                   width={3024}
                   height={4032}
@@ -469,7 +472,7 @@ const structuredData = [
             >
               <div class="featured-frame-inner">
                 <Image
-                  src="/photos/field.jpg"
+                  src={fieldPhoto}
                   alt="Field notes"
                   width={4014}
                   height={3011}
