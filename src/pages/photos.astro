@@ -1,5 +1,9 @@
 ---
 import { Image } from "astro:assets";
+import fieldPhoto from "../assets/photos/field.jpg";
+import housePhoto from "../assets/photos/house.jpg";
+import skyPhoto from "../assets/photos/sky.jpg";
+import sungodPhoto from "../assets/photos/sungod.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../lib/site";
 
@@ -9,7 +13,7 @@ const pageDescription =
 
 const photos = [
   {
-    src: "/photos/house.jpg",
+    src: housePhoto,
     title: "house on house",
     location: "la jolla, ca",
     camera: "iphone 17 pro",
@@ -19,7 +23,7 @@ const photos = [
     height: 7470,
   },
   {
-    src: "/photos/sungod.jpg",
+    src: sungodPhoto,
     title: "sun god",
     location: "la jolla, ca",
     camera: "iphone 17 pro",
@@ -29,7 +33,7 @@ const photos = [
     height: 4032,
   },
   {
-    src: "/photos/field.jpg",
+    src: fieldPhoto,
     title: "field notes",
     location: "california",
     camera: "iphone 17 pro",
@@ -39,7 +43,7 @@ const photos = [
     height: 3011,
   },
   {
-    src: "/photos/sky.jpg",
+    src: skyPhoto,
     title: "sky study",
     location: "california",
     camera: "iphone 17 pro",
