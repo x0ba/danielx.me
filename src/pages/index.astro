@@ -7,7 +7,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import { siteConfig } from "../lib/site";
 
-const name = "daniel xu";
 const tagline = "full stack software engineer. math & cs @ ucsd";
 const about = "la jolla, ca";
 const email = "hi@danielx.me";
@@ -82,8 +81,11 @@ const education = [
     school: "university of california, san diego",
     degree: "b.s. mathematics and computer science",
     period: "2025 — 2028",
-    description:
-      "activities and societies: ieee student branch (webmaster -> vc operations), symphonic student association (webmaster), cse society (web developer)",
+    activities: [
+      "ieee student branch (webmaster → vc operations)",
+      "symphonic student association (webmaster)",
+      "cse society (web developer)",
+    ],
   },
 ];
 
@@ -289,12 +291,14 @@ const structuredData = [
                   </a>
                 </div>
               </div>
-              <div class="proj-body">
-                <p class="proj-desc">{p.description}</p>
-                <div class="proj-tech">
-                  {p.tech.map((t) => (
-                    <span>{t}</span>
-                  ))}
+              <div class="proj-expand">
+                <div class="proj-body">
+                  <p class="proj-desc">{p.description}</p>
+                  <div class="proj-tech">
+                    {p.tech.map((t) => (
+                      <span>{t}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -309,10 +313,10 @@ const structuredData = [
       <div class="timeline">
         {
           experience.map((j) => (
-            <div class="tl-item">
+            <div class="tl-item" tabindex="0">
               <span class="tl-period">{j.period}</span>
               <div class="tl-content">
-                <h3 class="tl-company">{j.company}</h3>
+                <h3 class="tl-org">{j.company}</h3>
                 <p class="tl-role">{j.role}</p>
                 <p class="tl-desc">{j.description}</p>
               </div>
@@ -328,12 +332,18 @@ const structuredData = [
       <div class="timeline">
         {
           education.map((e) => (
-            <div class="tl-item">
+            <div class="tl-item" tabindex="0">
               <span class="tl-period">{e.period}</span>
               <div class="tl-content">
-                <h3 class="tl-company">{e.school}</h3>
+                <h3 class="tl-org">{e.school}</h3>
                 <p class="tl-role">{e.degree}</p>
-                {e.description && <p class="tl-desc">{e.description}</p>}
+                {e.activities && (
+                  <div class="tl-activities">
+                    {e.activities.map((a: string) => (
+                      <span class="tl-activity">{a}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))
@@ -402,7 +412,7 @@ const structuredData = [
       180deg,
       var(--color-accent-hover),
       var(--color-accent),
-      #c03000
+      color-mix(in srgb, var(--color-accent) 70%, #000)
     );
     z-index: 100;
     box-shadow:
@@ -442,6 +452,10 @@ const structuredData = [
   .nav-logo:hover {
     color: var(--color-accent);
   }
+  .nav-logo:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
   .dot {
     display: inline-block;
     width: 5px;
@@ -462,11 +476,15 @@ const structuredData = [
     color: var(--color-muted);
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     transition: color 0.2s;
   }
   .nav-links a:hover {
     color: var(--color-accent);
+  }
+  .nav-links a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
   }
 
   .hero-center {
@@ -493,27 +511,27 @@ const structuredData = [
     color: var(--color-primary);
   }
   .hero-line-2 {
-    margin-left: 12vw;
+    margin-left: clamp(2rem, 12vw, 10rem);
     color: var(--color-accent);
   }
 
   .hero-info {
-    margin-top: 2rem;
-    margin-left: 0.5rem;
+    margin-top: 1.5rem;
+    margin-left: 0.25rem;
     animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
   }
   .hero-role {
-    font-size: 0.95rem;
+    font-size: clamp(0.875rem, 0.85rem + 0.2vw, 1rem);
     color: var(--color-secondary);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.65;
   }
   .hero-loc {
     font-size: 0.75rem;
     color: var(--color-muted);
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    margin: 0.5rem 0 0;
+    margin: 0.4rem 0 0;
   }
 
   .hero-bottom {
@@ -528,37 +546,41 @@ const structuredData = [
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1.3rem;
+    border-radius: 2px;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #fff;
+    color: var(--color-void);
     background: linear-gradient(
       180deg,
       var(--color-accent-hover) 0%,
       var(--color-accent) 50%,
-      #d63400 100%
+      color-mix(in srgb, var(--color-accent) 80%, #000) 100%
     );
     text-decoration: none;
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.25);
-    border-bottom: 2px solid #a02800;
+    border-bottom: 2px solid color-mix(in srgb, var(--color-accent) 45%, #000);
     box-shadow:
-      0 2px 0 #8b2200,
+      0 2px 0 color-mix(in srgb, var(--color-accent) 35%, #000),
       0 4px 8px rgba(0, 0, 0, 0.35),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      background 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
   }
   .cta:hover {
     background: linear-gradient(
       180deg,
-      #ff6a3d 0%,
+      color-mix(in srgb, var(--color-accent-hover) 85%, #fff) 0%,
       var(--color-accent-hover) 50%,
       var(--color-accent) 100%
     );
     box-shadow:
-      0 3px 0 #8b2200,
+      0 3px 0 color-mix(in srgb, var(--color-accent) 35%, #000),
       0 6px 14px rgba(0, 0, 0, 0.4),
       0 0 30px color-mix(in srgb, var(--color-accent) 25%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -567,10 +589,13 @@ const structuredData = [
   .cta:active {
     transform: translateY(2px);
     box-shadow:
-      0 0 0 #8b2200,
+      0 0 0 color-mix(in srgb, var(--color-accent) 35%, #000),
       0 1px 4px rgba(0, 0, 0, 0.3),
       inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-bottom-width: 1px;
+  }
+  .cta:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
   }
   .hero-social {
     display: flex;
@@ -581,8 +606,11 @@ const structuredData = [
   .hero-social a,
   .hero-social button {
     font-size: 0.75rem;
+    font-weight: 500;
     color: var(--color-muted);
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
     transition: color 0.2s;
     font-family: inherit;
     background: none;
@@ -593,6 +621,11 @@ const structuredData = [
   .hero-social a:hover,
   .hero-social button:hover {
     color: var(--color-accent);
+  }
+  .hero-social a:focus-visible,
+  .hero-social button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
   }
 
   .scroll-hint {
@@ -611,6 +644,40 @@ const structuredData = [
     }
     50% {
       transform: translateX(-50%) translateY(6px);
+    }
+  }
+
+  /* ── Reduced Motion ────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .nav,
+    .hero-name,
+    .hero-info,
+    .hero-bottom {
+      animation: none;
+    }
+    .scroll-hint {
+      animation: none;
+      opacity: 0.25;
+    }
+    .cta,
+    .proj,
+    .proj-expand,
+    .proj-body,
+    .hero-social a,
+    .hero-social button,
+    .nav-logo,
+    .nav-links a,
+    .tl-item,
+    .tl-period,
+    .tl-org,
+    .tl-role {
+      transition: none;
+    }
+    .proj-expand {
+      grid-template-rows: 1fr;
+    }
+    .proj-body {
+      opacity: 1;
     }
   }
 
@@ -649,20 +716,20 @@ const structuredData = [
     border-bottom: 1px solid var(--color-edge);
     padding: 1.25rem 0.75rem;
     margin: 0 -0.75rem;
+    border-radius: 2px;
     transition:
-      background 0.3s,
-      box-shadow 0.3s;
+      background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
   }
-  .proj:hover {
+  .proj:hover,
+  .proj:focus-within {
     background: linear-gradient(
       135deg,
       var(--color-accent-dim),
       transparent 60%
     );
-    box-shadow:
-      inset 2px 0 0 var(--color-accent),
-      0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .proj-header {
@@ -689,7 +756,8 @@ const structuredData = [
     transition: color 0.2s;
     min-width: 0;
   }
-  .proj:hover .proj-name {
+  .proj:hover .proj-name,
+  .proj:focus-within .proj-name {
     color: var(--color-accent);
   }
 
@@ -718,36 +786,46 @@ const structuredData = [
   .proj-link:hover {
     color: var(--color-accent);
   }
+  .proj-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  .proj-expand {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .proj:hover .proj-expand,
+  .proj:focus-within .proj-expand {
+    grid-template-rows: 1fr;
+  }
 
   .proj-body {
-    max-height: 0;
     overflow: hidden;
-    opacity: 0;
     padding-left: 3.5rem;
-    transition:
-      max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.4s,
-      padding 0.4s;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .proj:hover .proj-body {
-    max-height: 200px;
+  .proj:hover .proj-body,
+  .proj:focus-within .proj-body {
     opacity: 1;
-    padding-top: 0.75rem;
   }
   .proj-desc {
     font-size: 0.85rem;
     color: var(--color-secondary);
     line-height: 1.6;
-    margin: 0;
+    margin: 0.75rem 0 0;
   }
   .proj-tech {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.75rem;
+    padding-bottom: 0.25rem;
   }
   .proj-tech span {
-    font-size: 0.58rem;
+    font-size: 0.6rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -777,6 +855,10 @@ const structuredData = [
   .proj-tech span::after {
     right: -6px;
   }
+  .proj-tech span:first-child::before,
+  .proj-tech span:last-child::after {
+    display: none;
+  }
 
   /* ── Timeline ──────────────────── */
   .timeline {
@@ -788,11 +870,30 @@ const structuredData = [
     display: grid;
     grid-template-columns: 160px 1fr;
     gap: 2rem;
-    padding: 1.5rem 0;
+    padding: 1.5rem 0.75rem;
+    margin: 0 -0.75rem;
     border-bottom: 1px solid var(--color-edge);
+    border-radius: 2px;
+    transition:
+      background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
   }
   .tl-item:last-child {
     border-bottom: none;
+  }
+  .tl-item:hover,
+  .tl-item:focus-visible {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent-dim),
+      transparent 60%
+    );
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  .tl-item:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
   }
 
   .tl-period {
@@ -801,27 +902,68 @@ const structuredData = [
     color: var(--color-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    padding-top: 0.2rem;
+    padding-top: 0.3rem;
+    position: relative;
+    transition: color 0.2s;
   }
-  .tl-company {
+  .tl-item:hover .tl-period,
+  .tl-item:focus-visible .tl-period {
+    color: var(--color-secondary);
+  }
+
+  .tl-org {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 1.1rem;
     font-weight: 400;
     color: var(--color-primary);
     margin: 0;
+    transition: color 0.2s;
   }
+  .tl-item:hover .tl-org,
+  .tl-item:focus-visible .tl-org {
+    color: var(--color-accent);
+  }
+
   .tl-role {
     font-size: 0.8rem;
     color: var(--color-accent);
     font-weight: 500;
-    margin: 0.15rem 0 0;
+    margin: 0.2rem 0 0;
+    opacity: 0.8;
+    transition: opacity 0.2s;
   }
+  .tl-item:hover .tl-role,
+  .tl-item:focus-visible .tl-role {
+    opacity: 1;
+  }
+
   .tl-desc {
     font-size: 0.8rem;
     color: var(--color-secondary);
     line-height: 1.6;
     margin: 0.5rem 0 0;
+  }
+
+  .tl-activities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+    padding-bottom: 0.15rem;
+  }
+  .tl-activity {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    padding: 0.2rem 0.6rem;
+    background: var(--color-accent-dim);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 1px 2px rgba(0, 0, 0, 0.15);
   }
 
   /* ── Photos Section ────────────── */
@@ -894,12 +1036,19 @@ const structuredData = [
     .proj-rule {
       display: none;
     }
+    .proj-expand {
+      grid-template-rows: 1fr;
+    }
     .proj-body {
-      max-height: none;
       overflow: visible;
       opacity: 1;
       padding-left: 0;
-      padding-top: 0.7rem;
+    }
+    .proj-desc {
+      margin-top: 0.7rem;
+    }
+    .proj-tech span {
+      font-size: 0.65rem;
     }
     .proj-idx {
       display: none;
@@ -910,8 +1059,12 @@ const structuredData = [
     }
     .tl-item {
       grid-template-columns: 1fr;
-      gap: 0.35rem;
+      gap: 0.25rem;
       padding: 1.25rem 0;
+      margin: 0;
+    }
+    .tl-period {
+      padding-left: 0;
     }
     .scroll-hint {
       display: none;
