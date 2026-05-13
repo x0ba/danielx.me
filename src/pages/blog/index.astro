@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ThemeSwitcher from "../../components/ThemeSwitcher.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import { getCollection } from "astro:content";
 import { siteConfig } from "../../lib/site";
 
@@ -51,15 +51,7 @@ const structuredData = {
 
   <!-- Hero: full viewport, matching homepage structure -->
   <section class="blog-hero">
-    <nav class="nav">
-      <a href="/" class="nav-logo">DX<span class="dot"></span></a>
-      <div class="nav-links">
-        <a href="/">home</a>
-        <a href="/photos">photos</a>
-        <a href="/blog" class="nav-link--active">blog</a>
-        <ThemeSwitcher />
-      </div>
-    </nav>
+    <PageHeader currentPath="/blog" />
 
     <div class="hero-center">
       <h1 class="hero-name">
@@ -186,56 +178,7 @@ const structuredData = {
     overflow: hidden;
   }
 
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .nav-logo {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-primary);
-    text-decoration: none;
-    letter-spacing: -0.03em;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s;
-  }
-  .nav-logo:hover {
-    color: var(--color-accent);
-  }
-  .dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    background: var(--color-accent);
-    border-radius: 50%;
-    margin-left: 1px;
-    margin-bottom: -1px;
-  }
-  .nav-links {
-    display: flex;
-    gap: clamp(0.9rem, 3vw, 2rem);
-    align-items: center;
-  }
-  .nav-links a {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--color-muted);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover {
-    color: var(--color-accent);
-  }
-  .nav-link--active {
-    color: var(--color-primary) !important;
-  }
+
 
   .hero-center {
     flex: 1;
@@ -534,17 +477,5 @@ const structuredData = {
     }
   }
 
-  @media (max-width: 430px) {
-    .nav {
-      align-items: flex-start;
-    }
-    .nav-links {
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    .nav-links a {
-      font-size: 0.68rem;
-    }
-  }
+
 </style>

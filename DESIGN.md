@@ -231,8 +231,8 @@ Depth is hybrid: most page structure is flat and ruled, while selected objects b
 
 ### Navigation
 
-- **Style:** Tiny uppercase links in muted graphite, paired with the `DX` mark and orange dot. Active and hover states turn orange or warm ink, not underlined by default.
-- **Mobile Treatment:** Wrap links without hiding primary destinations. Contact, résumé, photos, and blog must remain discoverable.
+- **Style:** A machined instrument-panel strip. Brushed gradient background, embossed depth, and decorative screw fasteners. The logo acts as a stamped maker's mark. Links are engraved-style labels that receive an illuminated accent underline and inset state when active.
+- **Mobile Treatment:** The strip becomes more compact, wrapping links if necessary but prioritizing the physical control panel metaphor. Contact, résumé, photos, and blog must remain discoverable.
 
 ### Theme Dial
 

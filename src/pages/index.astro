@@ -4,7 +4,7 @@ import fieldPhoto from "../assets/photos/field.jpg";
 import housePhoto from "../assets/photos/house.jpg";
 import sungodPhoto from "../assets/photos/sungod.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+import PageHeader from "../components/PageHeader.astro";
 import { siteConfig } from "../lib/site";
 
 const tagline = "full stack software engineer. math & cs @ ucsd";
@@ -156,14 +156,7 @@ const structuredData = [
 
   <!-- Hero: full viewport -->
   <section class="hero">
-    <nav class="nav">
-      <a href="/" class="nav-logo">DX<span class="dot"></span></a>
-      <div class="nav-links">
-        <a href="/photos">photos</a>
-        <a href="/blog">blog</a>
-        <ThemeSwitcher />
-      </div>
-    </nav>
+    <PageHeader currentPath="/" />
 
     <div class="hero-center">
       <h1 class="hero-name">
@@ -437,61 +430,7 @@ const structuredData = [
     overflow: hidden;
   }
 
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .nav-logo {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-primary);
-    text-decoration: none;
-    letter-spacing: -0.03em;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s;
-  }
-  .nav-logo:hover {
-    color: var(--color-accent);
-  }
-  .nav-logo:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
-  }
-  .dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    background: var(--color-accent);
-    border-radius: 50%;
-    margin-left: 1px;
-    margin-bottom: -1px;
-  }
-  .nav-links {
-    display: flex;
-    gap: clamp(0.9rem, 3vw, 2rem);
-    align-items: center;
-  }
-  .nav-links a {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--color-muted);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover {
-    color: var(--color-accent);
-  }
-  .nav-links a:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
-  }
+
 
   .hero-center {
     flex: 1;
@@ -654,7 +593,6 @@ const structuredData = [
 
   /* ── Reduced Motion ────────────── */
   @media (prefers-reduced-motion: reduce) {
-    .nav,
     .hero-name,
     .hero-info,
     .hero-bottom {
@@ -670,8 +608,6 @@ const structuredData = [
     .proj-body,
     .hero-social a,
     .hero-social button,
-    .nav-logo,
-    .nav-links a,
     .tl-item,
     .tl-period,
     .tl-org,
@@ -1079,17 +1015,6 @@ const structuredData = [
   }
 
   @media (max-width: 430px) {
-    .nav {
-      align-items: flex-start;
-    }
-    .nav-links {
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    .nav-links a {
-      font-size: 0.68rem;
-    }
     .hero-role {
       max-width: 20rem;
     }
