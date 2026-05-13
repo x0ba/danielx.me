@@ -141,7 +141,7 @@ canvas {
 
 ::selection {
   background-color: var(--color-accent);
-  color: #fff;
+  color: var(--color-void);
 }
 
 /* ── Link Hover Underline ──────────────────────────────────── */
@@ -173,6 +173,7 @@ canvas {
   color: var(--color-secondary);
   max-width: 720px;
   overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 
 .prose > * + * {
@@ -200,6 +201,7 @@ canvas {
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 .prose h1 {
@@ -211,7 +213,7 @@ canvas {
   font-size: clamp(1.55rem, 1.35rem + 1vw, 1.8rem);
   margin-top: 2.5em;
   padding-bottom: 0.5em;
-  border-bottom: 2px solid var(--color-edge);
+  border-bottom: 1px solid var(--color-edge);
 }
 
 .prose h3 {
@@ -267,11 +269,15 @@ canvas {
 }
 
 .prose ul li::before {
-  content: "—";
+  content: "";
   position: absolute;
-  left: -1.4em;
-  color: var(--color-accent);
-  font-weight: 700;
+  left: -1.05em;
+  top: 0.78em;
+  width: 0.38em;
+  height: 0.38em;
+  background: var(--color-accent);
+  border-radius: 1px;
+  box-shadow: 0 0 0 2px var(--color-accent-dim);
 }
 
 .prose ol {
@@ -295,7 +301,7 @@ canvas {
 /* Blockquotes — sticky note / paper slip */
 .prose blockquote {
   border-left: none;
-  padding: 1.25em 1.5em 1.25em 1.75em;
+  padding: 1.35em 1.5em 1.3em;
   margin: 2em 0;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent),
@@ -313,27 +319,26 @@ canvas {
 .prose blockquote::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(
-    180deg,
-    var(--color-accent),
-    color-mix(in srgb, var(--color-accent) 60%, #000)
-  );
-  border-radius: 2px 0 0 2px;
+  top: 0.7em;
+  right: 0.75em;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow:
+    0 0 0 3px var(--color-accent-dim),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .prose blockquote::after {
   content: "\201C";
   position: absolute;
-  top: -8px;
-  left: 12px;
-  font-size: 2.5rem;
+  top: -0.35em;
+  left: 0.32em;
+  font-size: 3.25rem;
   font-family: var(--font-display);
   color: var(--color-accent);
-  opacity: 0.3;
+  opacity: 0.22;
   line-height: 1;
 }
 
@@ -398,6 +403,8 @@ html[data-theme="light"] .prose :not(pre) > code {
   background: var(--color-surface) !important;
   overflow-x: auto;
   margin: 1.75em 0;
+  scrollbar-color: var(--color-edge-hover) transparent;
+  scrollbar-width: thin;
   tab-size: 2;
   position: relative;
   box-shadow:
@@ -444,18 +451,20 @@ html[data-theme="light"] .prose pre::before {
   border: none;
   background: transparent;
   color: inherit;
+  min-width: max-content;
 }
 
-.prose .astro-code,
-.prose .astro-code span {
+html[data-theme="dark"] .prose .astro-code,
+html[data-theme="dark"] .prose .astro-code span,
+html:not([data-theme]) .prose .astro-code,
+html:not([data-theme]) .prose .astro-code span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
 }
 
 html[data-theme="light"] .prose .astro-code,
 html[data-theme="light"] .prose .astro-code span {
-  color: var(--shiki-light) !important;
-  background-color: var(--shiki-light-bg) !important;
+  background-color: transparent !important;
 }
 
 /* Shiki diff lines */
@@ -483,8 +492,13 @@ html[data-theme="light"] .prose .astro-code span {
 /* Horizontal rules */
 .prose hr {
   border: none;
-  height: 2px;
-  background: var(--color-edge);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-edge-hover),
+    transparent
+  );
   margin: 2.5em 0;
 }
 
@@ -580,6 +594,7 @@ html[data-theme="light"] .prose tbody tr:hover {
   text-align: center;
   font-size: 0.85rem;
   color: var(--color-muted);
+  text-wrap: balance;
 }
 
 /* Task lists */
@@ -607,7 +622,7 @@ html[data-theme="light"] .prose tbody tr:hover {
   text-align: center;
   font-size: 0.7em;
   line-height: 1em;
-  color: #fff;
+  color: var(--color-void);
   font-weight: 700;
 }
 
@@ -631,6 +646,9 @@ html[data-theme="light"] .prose tbody tr:hover {
   padding: 1em 1.25em;
   margin: 1.5em 0;
   background: var(--color-surface);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.16),
+    0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .prose details[open] {
@@ -660,7 +678,7 @@ html[data-theme="light"] .prose tbody tr:hover {
   border-radius: 4px;
   padding: 1.1em 1.25em;
   margin: 1.75em 0;
-  border-left: 3px solid;
+  border: 1px solid;
   font-size: 0.95rem;
   position: relative;
   box-shadow:
