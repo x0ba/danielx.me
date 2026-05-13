@@ -130,6 +130,10 @@ const structuredDataEntries = structuredData
       })();
     </script>
     <script>
+      document.addEventListener("astro:before-swap", () => {
+        document.documentElement.dataset.astroNavigated = "true";
+      });
+
       document.addEventListener("astro:after-swap", () => {
         document.documentElement.dataset.astroNavigated = "true";
         // Re-apply theme after swap
