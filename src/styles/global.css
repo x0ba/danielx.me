@@ -197,7 +197,6 @@ canvas {
 .prose h4 {
   color: var(--color-primary);
   font-family: var(--font-display);
-  font-style: italic;
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -581,7 +580,6 @@ html[data-theme="light"] .prose tbody tr:hover {
   text-align: center;
   font-size: 0.85rem;
   color: var(--color-muted);
-  font-style: italic;
 }
 
 /* Task lists */
@@ -760,7 +758,6 @@ html[data-theme="light"] .callout {
   text-align: center;
   font-size: 0.85rem;
   color: var(--color-muted);
-  font-style: italic;
 }
 
 /* ── Featured Photos (Homepage) ─────────────────────────────── */
@@ -779,6 +776,12 @@ html[data-theme="light"] .callout {
   color: var(--color-accent) !important;
 }
 
+.featured-photos-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 8px;
+  border-radius: 2px;
+}
+
 .featured-photos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -787,6 +790,7 @@ html[data-theme="light"] .callout {
 }
 
 .featured-frame {
+  position: relative;
   transition:
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.5s ease;
@@ -802,6 +806,55 @@ html[data-theme="light"] .callout {
 
 .featured-frame-3 {
   transform: rotate(-1deg) translateY(-4px);
+}
+
+/* Tape decoration */
+.featured-tape {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1.5deg);
+  width: 48px;
+  height: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(245, 240, 232, 0.1),
+    rgba(245, 240, 232, 0.04)
+  );
+  border: 1px solid rgba(245, 240, 232, 0.05);
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.featured-frame-2 .featured-tape {
+  transform: translateX(-40%) rotate(-2deg);
+}
+
+.featured-frame-3 .featured-tape {
+  left: 35%;
+  transform: rotate(3deg);
+}
+
+html[data-theme="light"] .featured-tape {
+  background: linear-gradient(
+    180deg,
+    rgba(180, 170, 150, 0.2),
+    rgba(180, 170, 150, 0.08)
+  );
+  border-color: rgba(180, 170, 150, 0.12);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Photo title */
+.featured-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: #1a1815;
+  margin-top: 6px;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
 }
 
 .featured-frame-inner {
@@ -898,5 +951,16 @@ html[data-theme="light"] .featured-photos-link:hover .featured-frame-inner {
 
   .featured-frame-inner {
     padding: 8px 8px 28px 8px;
+  }
+
+  .featured-tape {
+    width: 36px;
+    height: 12px;
+    top: -4px;
+  }
+
+  .featured-title {
+    font-size: 0.75rem;
+    margin-top: 4px;
   }
 }

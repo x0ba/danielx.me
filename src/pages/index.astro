@@ -357,6 +357,7 @@ const structuredData = [
       <a href="/photos" class="featured-photos-link">
         <div class="featured-photos-grid">
           <div class="featured-frame featured-frame-1">
+            <div class="featured-tape" aria-hidden="true"></div>
             <div class="featured-frame-inner">
               <Image
                 src={housePhoto}
@@ -365,9 +366,11 @@ const structuredData = [
                 height={7470}
                 loading="lazy"
               />
+              <span class="featured-title">house on house</span>
             </div>
           </div>
           <div class="featured-frame featured-frame-2">
+            <div class="featured-tape" aria-hidden="true"></div>
             <div class="featured-frame-inner">
               <Image
                 src={sungodPhoto}
@@ -376,9 +379,11 @@ const structuredData = [
                 height={4032}
                 loading="lazy"
               />
+              <span class="featured-title">sun god</span>
             </div>
           </div>
           <div class="featured-frame featured-frame-3">
+            <div class="featured-tape" aria-hidden="true"></div>
             <div class="featured-frame-inner">
               <Image
                 src={fieldPhoto}
@@ -387,6 +392,7 @@ const structuredData = [
                 height={3011}
                 loading="lazy"
               />
+              <span class="featured-title">field notes</span>
             </div>
           </div>
         </div>
@@ -504,7 +510,6 @@ const structuredData = [
   .hero-line {
     display: block;
     font-family: var(--font-display);
-    font-style: italic;
     font-weight: 400;
     font-size: clamp(4.5rem, 16vw, 14rem);
     letter-spacing: -0.03em;
@@ -670,7 +675,10 @@ const structuredData = [
     .tl-item,
     .tl-period,
     .tl-org,
-    .tl-role {
+    .tl-role,
+    .featured-frame,
+    .featured-frame-inner,
+    .featured-frame-inner img {
       transition: none;
     }
     .proj-expand {
@@ -678,6 +686,9 @@ const structuredData = [
     }
     .proj-body {
       opacity: 1;
+    }
+    .featured-frame {
+      transform: none !important;
     }
   }
 
@@ -695,7 +706,6 @@ const structuredData = [
   }
   .sec-label {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: 2.5rem;
     font-weight: 400;
     color: var(--color-primary);
@@ -740,7 +750,6 @@ const structuredData = [
   }
   .proj-idx {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: 1.5rem;
     color: var(--color-accent);
     min-width: 2.5rem;
@@ -748,7 +757,6 @@ const structuredData = [
   }
   .proj-name {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: 1.35rem;
     font-weight: 400;
     color: var(--color-primary);
@@ -913,7 +921,6 @@ const structuredData = [
 
   .tl-org {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: 1.1rem;
     font-weight: 400;
     color: var(--color-primary);

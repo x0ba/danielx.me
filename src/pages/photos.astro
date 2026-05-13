@@ -95,6 +95,12 @@ const photos = [
       </nav>
     </header>
 
+    <!-- Page heading -->
+    <div class="photos-title-block">
+      <h1 class="photos-page-title">Photos</h1>
+      <p class="photos-count">{photos.length} frames</p>
+    </div>
+
     <!-- Gallery -->
     <main class="photos-gallery">
       {
@@ -148,7 +154,7 @@ const photos = [
 <style>
   /* ── Photography Page — "Darkroom" Aesthetic ──────────────── */
 
-  @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
 
   .photos-page {
     --photo-bg: #0a0908;
@@ -165,7 +171,7 @@ const photos = [
     --photo-amber-glow: rgba(200, 149, 108, 0.06);
     --photo-red: #8b3a3a;
     --photo-tape: rgba(245, 240, 232, 0.06);
-    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
     --font-mono: "DM Mono", "Courier New", monospace;
 
     position: relative;
@@ -333,8 +339,46 @@ const photos = [
     color: var(--color-accent);
   }
 
+  .nav-links a:focus-visible,
+  .nav-logo:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
   .nav-link--active {
     color: var(--photo-cream) !important;
+  }
+
+  /* ── Page Title ──────────────────────────────────────────────── */
+
+  .photos-title-block {
+    padding: 0 clamp(1rem, 4vw, 3rem);
+    max-width: 1400px;
+    margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+    position: relative;
+    z-index: 20;
+    opacity: 0;
+    animation: photos-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+
+  .photos-page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    color: var(--photo-cream);
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .photos-count {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--photo-amber);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0.75rem 0 0;
+    opacity: 0.7;
   }
 
   /* ── Gallery ────────────────────────────────────────────────── */
@@ -463,7 +507,6 @@ const photos = [
 
   .frame-title {
     font-family: var(--font-display);
-    font-style: italic;
     font-weight: 400;
     font-size: 1.1rem;
     color: var(--photo-bg);
@@ -504,7 +547,6 @@ const photos = [
       rgba(245, 240, 232, 0.06)
     );
     border: 1px solid rgba(245, 240, 232, 0.06);
-    backdrop-filter: blur(3px);
     pointer-events: none;
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.15),
@@ -543,7 +585,6 @@ const photos = [
 
   .photos-footer-text {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: 0.9rem;
     color: var(--photo-cream-muted);
     margin: 0;
@@ -571,21 +612,36 @@ const photos = [
     }
   }
 
-  @keyframes meta-pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.3;
-    }
-  }
-
   :global(html[data-astro-navigated]) .photos-header,
+  :global(html[data-astro-navigated]) .photos-title-block,
   :global(html[data-astro-navigated]) .photo-frame,
   :global(html[data-astro-navigated]) .photos-footer {
     opacity: 1;
     animation: none;
+  }
+
+  /* ── Reduced Motion ──────────────────────────────────────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    .photos-header,
+    .photos-title-block,
+    .photo-frame,
+    .photos-footer {
+      animation: none;
+      opacity: 1;
+    }
+    .photo-frame,
+    .frame-inner,
+    .frame-image,
+    .nav-logo,
+    .nav-links a {
+      transition: none;
+    }
+    .photo-frame:nth-child(odd),
+    .photo-frame:nth-child(even),
+    .photo-frame:nth-child(3n) {
+      transform: none;
+    }
   }
 
   /* ── Responsive ─────────────────────────────────────────────── */

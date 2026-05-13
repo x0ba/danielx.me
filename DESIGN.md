@@ -115,12 +115,12 @@ components:
 
 This system should feel like a personal archive assembled by someone who writes code, takes photographs, and cares about the surface of the work. It uses darkroom atmosphere, paper edges, mechanical controls, inset code screens, stamped metadata, and deliberate friction to make the interface feel handled rather than generated.
 
-The site is a brand surface, not a product shell. It should carry tension: oversized italic display type against tiny uppercase labels, quiet black surfaces against rare hot orange, flat editorial lists against physical skeuomorphic details. The work must remain easy to scan, but it should never collapse into a generic developer portfolio, startup SaaS landing page, gamer or cyberpunk aesthetic, template-like project card grid, or overly sanitized personal brand.
+The site is a brand surface, not a product shell. It should carry tension: oversized display type against tiny uppercase labels, quiet black surfaces against rare hot orange, flat editorial lists against physical skeuomorphic details. The work must remain easy to scan, but it should never collapse into a generic developer portfolio, startup SaaS landing page, gamer or cyberpunk aesthetic, template-like project card grid, or overly sanitized personal brand.
 
 **Key Characteristics:**
 
 - Skeuomorphic surfaces: dials, typewriter keys, sticky notes, terminal screens, taped photo frames.
-- Editorial hierarchy: huge italic display type, compact metadata, ruled lists, and deliberate asymmetry.
+- Editorial hierarchy: huge display type, compact metadata, ruled lists, and deliberate asymmetry.
 - Restrained signal color: orange is rare, hot, and purposeful.
 - Material contrast: dark voids, warm paper, ash text, amber darkroom accents.
 - Discoverable eccentricity: navigation and contact stay obvious while details reward exploration.
@@ -167,20 +167,20 @@ The palette is darkroom black, warm paper, ash text, and a single urgent orange 
 **Body Font:** Satoshi (with system UI fallback)  
 **Label/Mono Font:** JetBrains Mono / Fira Code / SF Mono for code and photo metadata; DM Mono appears on the photography page.
 
-**Character:** The pairing is literary but technical: an italic serif carries identity and section rhythm, while a compact sans handles wayfinding. Mono appears only when the interface wants to feel archival, mechanical, coded, or camera-like.
+**Character:** The pairing is literary but technical: an upright serif carries identity and section rhythm, while a compact sans handles wayfinding. Mono appears only when the interface wants to feel archival, mechanical, coded, or camera-like.
 
 ### Hierarchy
 
 - **Display** (400, clamp(4.5rem, 16vw, 14rem), 0.85): Hero-scale identity only. It can dominate the viewport and carry the brand.
-- **Headline** (400 italic, 2.5rem, 1.15): Section labels and editorial page headings.
-- **Title** (400 italic, 1.35rem, 1.2): Project names, timeline organizations, card titles, and compact editorial labels.
+- **Headline** (400, 2.5rem, 1.15): Section labels and editorial page headings.
+- **Title** (400, 1.35rem, 1.2): Project names, timeline organizations, card titles, and compact editorial labels.
 - **Body** (400, clamp(1rem, 0.95rem + 0.25vw, 1.0625rem), 1.85): Long-form prose, capped around 720px so reading stays deliberate.
 - **Label** (500-700, 0.58rem-0.75rem, 0.08em-0.14em, uppercase): Navigation, metadata, project links, chip text, and interface markings.
 - **Mono** (400, 0.58rem-0.875rem, 1.7): Code, photo metadata, terminal screens, and machine-like annotations.
 
 ### Named Rules
 
-**The Serif Owns Identity Rule.** Use the serif for identity, section rhythm, and expressive labels. Do not replace it with generic sans hero typography.
+**The Serif Owns Identity Rule.** Use the serif for identity, section rhythm, and expressive labels. The upright cut carries authority; italic is reserved for semantic emphasis within body text only.
 
 **The Metadata Must Whisper Rule.** Labels are small, uppercase, and tracked. They should feel like stamps, not buttons trying to be loud.
 
