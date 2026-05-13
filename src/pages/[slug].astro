@@ -1,0 +1,41 @@
+---
+import quickLinks from "../data/quick-links.json";
+
+type QuickLink = {
+  url: string;
+  title?: string;
+};
+
+const links = quickLinks as Record<string, QuickLink>;
+
+export function getStaticPaths() {
+  return Object.entries(links).map(([slug, link]) => ({
+    params: { slug },
+    props: { link, slug },
+  }));
+}
+
+const { link, slug } = Astro.props as { link: QuickLink; slug: string };
+const destination = new URL(link.url);
+const title = link.title ?? `${slug} → ${destination.hostname}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0;url=${link.url}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={link.url} />
+    <title>{title}</title>
+    <script is:inline define:vars={{ destination: link.url }}>
+      window.location.replace(destination);
+    </script>
+  </head>
+  <body>
+    <main>
+      <p>Redirecting to <a href={link.url}>{link.url}</a>…</p>
+    </main>
+  </body>
+</html>
