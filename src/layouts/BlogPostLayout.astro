@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import { absoluteUrl, siteConfig } from "../lib/site";
 
 interface Props {
@@ -72,160 +73,232 @@ const articleStructuredData = {
   modifiedTime={updatedDate ?? pubDate}
   structuredData={articleStructuredData}
 >
-  <div class="relative overflow-hidden">
-    <div class="relative mx-auto max-w-2xl px-6">
-      <!-- Nav -->
-      <nav
-        class="flex items-center justify-between py-8 opacity-0 animate-reveal"
+  <div class="top-bar" aria-hidden="true"></div>
+
+  <div class="post-wrapper">
+    <nav class="post-nav" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) both">
+      <a href="/" class="nav-logo">DX<span class="nav-dot"></span></a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">home</a>
+        <a href="/blog" class="nav-link nav-link--active">blog</a>
+        <ThemeSwitcher />
+      </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="post-header">
+      <a
+        href="/blog"
+        class="post-back"
+        style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s both"
       >
-        <a
-          href="/"
-          class="text-sm font-medium tracking-tight transition-colors hover:text-accent"
-        >
-          daniel xu
-        </a>
-        <div class="flex gap-5 text-sm">
-          <a
-            href="/"
-            class="link-hover text-muted transition-colors hover:text-primary"
-          >
-            home
-          </a>
-          <a href="/blog" class="link-hover text-primary transition-colors">
-            blog
-          </a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+        all posts
+      </a>
+
+      <h1 class="post-title" style="animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both">
+        {title}
+      </h1>
+
+      <p class="post-desc" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s both">
+        {description}
+      </p>
+
+      <div class="post-meta" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s both">
+        <time datetime={pubDate.toISOString()}>
+          {formattedDate}
+        </time>
+        {updatedDate && (
+          <>
+            <span class="post-meta-sep">·</span>
+            <span class="post-meta-updated">updated {formattedUpdatedDate}</span>
+          </>
+        )}
+      </div>
+
+      {tags.length > 0 && (
+        <div class="post-tags" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both">
+          {tags.map((tag) => (
+            <span class="post-tag">{tag}</span>
+          ))}
         </div>
-      </nav>
+      )}
+    </header>
 
-      <!-- Article Header -->
-      <header class="pb-10 pt-12 sm:pt-16">
-        <a
-          href="/blog"
-          class="group inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent opacity-0 animate-reveal"
-          style="animation-delay: 0.04s"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="transition-transform group-hover:-translate-x-0.5"
-          >
-            <path d="M19 12H5"></path>
-            <path d="M12 19l-7-7 7-7"></path>
-          </svg>
-          all posts
-        </a>
+    {cover && (
+      <div class="post-cover" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.28s both">
+        <img src={cover.src} alt={coverAlt || title} width={cover.width} height={cover.height} />
+      </div>
+    )}
 
-        <h1
-          class="mt-6 text-3xl font-bold tracking-tight opacity-0 animate-reveal sm:text-4xl"
-          style="animation-delay: 0.08s"
-        >
-          {title}
-        </h1>
+    <!-- Article Body -->
+    <article class="prose" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both">
+      <slot />
+    </article>
 
-        <p
-          class="mt-3 text-base text-secondary leading-relaxed opacity-0 animate-reveal"
-          style="animation-delay: 0.12s"
-        >
-          {description}
-        </p>
-
-        <div
-          class="mt-5 flex flex-wrap items-center gap-3 text-sm opacity-0 animate-reveal"
-          style="animation-delay: 0.16s"
-        >
-          <time datetime={pubDate.toISOString()} class="text-muted">
-            {formattedDate}
-          </time>
-          {
-            updatedDate && (
-              <>
-                <span class="text-edge-hover">·</span>
-                <span class="text-muted italic">
-                  updated {formattedUpdatedDate}
-                </span>
-              </>
-            )
-          }
-        </div>
-
-        {
-          tags.length > 0 && (
-            <div
-              class="mt-4 flex flex-wrap gap-1.5 opacity-0 animate-reveal"
-              style="animation-delay: 0.2s"
-            >
-              {tags.map((tag) => (
-                <span class="rounded-full bg-accent-dim px-2.5 py-0.5 text-xs text-accent">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )
-        }
-      </header>
-
-      {
-        cover && (
-          <div
-            class="mb-12 overflow-hidden rounded-xl border border-edge opacity-0 animate-reveal"
-            style="animation-delay: 0.24s"
-          >
-            <img
-              src={cover.src}
-              alt={coverAlt || title}
-              width={cover.width}
-              height={cover.height}
-              class="w-full"
-            />
-          </div>
-        )
-      }
-
-      <!-- Article Body -->
-      <article
-        class="prose opacity-0 animate-reveal"
-        style="animation-delay: 0.28s"
-      >
-        <slot />
-      </article>
-
-      <!-- Footer -->
-      <footer
-        class="border-t border-edge pb-12 pt-8 mt-16 opacity-0 animate-reveal"
-        style="animation-delay: 0.32s"
-      >
-        <a
-          href="/blog"
-          class="group inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="transition-transform group-hover:-translate-x-0.5"
-          >
-            <path d="M19 12H5"></path>
-            <path d="M12 19l-7-7 7-7"></path>
-          </svg>
-          back to all posts
-        </a>
-        <p class="mt-8 text-xs text-muted">
-          © 2026 Daniel Xu. built with ❤️ in la jolla, ca
-        </p>
-      </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="post-footer" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s both">
+      <a href="/blog" class="post-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+        back to all posts
+      </a>
+      <p class="post-footer-copy">© 2026 Daniel Xu</p>
+    </footer>
   </div>
 </BaseLayout>
+
+<style>
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--color-accent); z-index: 100;
+  }
+
+  .post-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .post-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem 0 2rem;
+  }
+
+  .nav-logo {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .nav-logo:hover { color: var(--color-accent); }
+
+  .nav-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    margin-left: 2px;
+    margin-bottom: -2px;
+  }
+
+  .nav-links { display: flex; gap: 2rem; }
+
+  .nav-link {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: color 0.2s;
+  }
+  .nav-link:hover, .nav-link--active { color: var(--color-primary); }
+
+  .post-header {
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--color-edge);
+  }
+
+  .post-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .post-back:hover { color: var(--color-accent); }
+  .post-back:hover svg { transform: translateX(-3px); }
+  .post-back svg { transition: transform 0.2s; }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(2.2rem, 7vw, 3.25rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 1.5rem 0 0;
+  }
+
+  .post-desc {
+    font-size: 1rem;
+    color: var(--color-secondary);
+    line-height: 1.65;
+    margin-top: 0.75rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .post-meta-sep { color: var(--color-edge-hover); }
+  .post-meta-updated { font-style: italic; text-transform: none; letter-spacing: 0; }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .post-tag {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--color-accent-dim);
+    background: var(--color-accent-dim);
+  }
+
+  .post-cover {
+    margin: 2rem 0;
+    border: 1px solid var(--color-edge);
+    overflow: hidden;
+  }
+  .post-cover img {
+    display: block;
+    width: 100%;
+  }
+
+  .post-footer {
+    border-top: 1px solid var(--color-edge);
+    padding: 2.5rem 0 4rem;
+    margin-top: 4rem;
+  }
+
+  .post-footer-copy {
+    margin-top: 2rem;
+    font-size: 0.7rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 640px) {
+    .post-wrapper { padding: 0 1.25rem; }
+  }
+</style>

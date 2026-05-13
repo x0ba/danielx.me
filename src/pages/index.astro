@@ -4,9 +4,8 @@ import fieldPhoto from "../assets/photos/field.jpg";
 import housePhoto from "../assets/photos/house.jpg";
 import sungodPhoto from "../assets/photos/sungod.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import { siteConfig } from "../lib/site";
-
-// ── Customize your info ─────────────────────────────────────
 
 const name = "daniel xu";
 const tagline = "full stack software engineer. math & cs @ ucsd";
@@ -24,24 +23,21 @@ const socialLinks = [
 const projects = [
   {
     name: "rxlog",
-    description:
-      "a fast, free, simple, and open source medication logging platform for those who care about their loved ones.",
+    description: "a fast, free, simple, and open source medication logging platform for those who care about their loved ones.",
     tech: ["tanstack start", "tailwind css", "convex"],
     live: "https://rxlog.danielx.link",
     source: "https://github.com/x0ba/rxlog",
   },
   {
     name: "ssa at ucsd member dashboard",
-    description:
-      "A unified dashboard for members of the Symphonic Student Association at UCSD to view links, RSVP to events, and admins to manage events, members, and more.",
+    description: "A unified dashboard for members of the Symphonic Student Association at UCSD to view links, RSVP to events, and admins to manage events, members, and more.",
     tech: ["tanstack start", "typescript", "convex", "tailwind css"],
     live: "https://members.ssaucsd.org",
     source: "https://github.com/ssaucsd/ssaucsd-org",
   },
   {
     name: "schedulesync",
-    description:
-      "a web application that ingests and converts screenshots of course schedules into an iCal file or sync it directly to google calendar.",
+    description: "a web application that ingests and converts screenshots of course schedules into an iCal file or sync it directly to google calendar.",
     tech: ["next.js", "trpc", "tailwind css", "clerk"],
     live: "https://schedulesync.tech",
     source: "https://github.com/x0ba/schedulesync",
@@ -49,456 +45,433 @@ const projects = [
 ];
 
 const experience = [
-  {
-    company: "polylabs, inc.",
-    role: "software engineer intern",
-    period: "2025 — present",
-    description: "designed and coded upwordly.ai from scratch.",
-  },
-  {
-    company: "ieee ucsd student branch",
-    role: "webmaster",
-    period: "2025 — present",
-    description:
-      "program and maintain internal tools and public-facing website for one of the largest ieee student branches in the country.",
-  },
-  {
-    company: "symphonic student association at ucsd",
-    role: "webmaster",
-    period: "2025 — present",
-    description:
-      "develop and maintain a digital ecosystem for ssa at ucsd, providing a unified platform for event management, member engagement, and organizational communication.",
-  },
-  {
-    company: "robot force",
-    role: "robotics coach",
-    period: "2023 — 2024",
-    description:
-      "coached a fourth grade vex iq robotics team to the states competition",
-  },
+  { company: "polylabs, inc.", role: "software engineer intern", period: "2025 — present", description: "designed and coded upwordly.ai from scratch." },
+  { company: "ieee ucsd student branch", role: "webmaster", period: "2025 — present", description: "program and maintain internal tools and public-facing website for one of the largest ieee student branches in the country." },
+  { company: "symphonic student association at ucsd", role: "webmaster", period: "2025 — present", description: "develop and maintain a digital ecosystem for ssa at ucsd, providing a unified platform for event management, member engagement, and organizational communication." },
+  { company: "robot force", role: "robotics coach", period: "2023 — 2024", description: "coached a fourth grade vex iq robotics team to the states competition" },
 ];
 
 const education = [
-  {
-    school: "university of california, san diego",
-    degree: "b.s. mathematics and computer science",
-    period: "2025 — 2028",
-    description:
-      "activities and societies: ieee student branch (webmaster -> vc operations), symphonic student association (webmaster), cse society (web developer)",
-  },
+  { school: "university of california, san diego", degree: "b.s. mathematics and computer science", period: "2025 — 2028", description: "activities and societies: ieee student branch (webmaster -> vc operations), symphonic student association (webmaster), cse society (web developer)" },
 ];
 
 const structuredData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.author.name,
-    url: siteConfig.siteUrl,
-    email: `mailto:${email}`,
-    jobTitle: "Full Stack Software Engineer",
-    description: pageDescription,
-    sameAs: siteConfig.sameAs,
-    knowsAbout: [
-      "TypeScript",
-      "React",
-      "Convex",
-      "Astro",
-      "Full-stack development",
-    ],
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "University of California, San Diego",
-    },
-    homeLocation: {
-      "@type": "Place",
-      name: "La Jolla, California",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: siteConfig.author.name,
-    url: siteConfig.siteUrl,
-    description: pageDescription,
-    inLanguage: "en-US",
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Featured projects",
-    itemListElement: projects.map((project, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: project.live ?? project.source,
-      name: project.name,
-      description: project.description,
-    })),
-  },
+  { "@context": "https://schema.org", "@type": "Person", name: siteConfig.author.name, url: siteConfig.siteUrl, email: `mailto:${email}`, jobTitle: "Full Stack Software Engineer", description: pageDescription, sameAs: siteConfig.sameAs, knowsAbout: ["TypeScript","React","Convex","Astro","Full-stack development"], alumniOf: { "@type": "CollegeOrUniversity", name: "University of California, San Diego" }, homeLocation: { "@type": "Place", name: "La Jolla, California" } },
+  { "@context": "https://schema.org", "@type": "WebSite", name: siteConfig.author.name, url: siteConfig.siteUrl, description: pageDescription, inLanguage: "en-US" },
+  { "@context": "https://schema.org", "@type": "ItemList", name: "Featured projects", itemListElement: projects.map((project, index) => ({ "@type": "ListItem", position: index + 1, url: project.live ?? project.source, name: project.name, description: project.description })) },
 ];
-
-// ── End customization ───────────────────────────────────────
 ---
 
-<BaseLayout
-  title={pageTitle}
-  description={pageDescription}
-  ogImage={siteConfig.defaultOgImagePath}
-  ogImageAlt={`${siteConfig.author.name} portfolio preview`}
-  keywords={[
-    "Daniel Xu",
-    "full stack software engineer",
-    "UCSD",
-    "TypeScript",
-    "React",
-    "Convex",
-    "Astro",
-  ]}
-  structuredData={structuredData}
->
-  <div class="relative overflow-hidden">
-    <div class="relative mx-auto max-w-2xl px-6">
-      <!-- Nav -->
-      <nav
-        class="flex items-center justify-between py-8 opacity-0 animate-reveal"
-      >
-        <span class="text-sm font-medium tracking-tight"
-          >{name.toLowerCase()}</span
-        >
-        <div class="flex gap-5 text-sm">
-          {
-            [
-              { href: "/photos", label: "photos" },
-              { href: "/blog", label: "blog" },
-            ].map((link) => (
-              <a
-                href={link.href}
-                class="link-hover text-muted transition-colors hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))
-          }
-        </div>
-      </nav>
+<BaseLayout title={pageTitle} description={pageDescription} ogImage={siteConfig.defaultOgImagePath} ogImageAlt={`${siteConfig.author.name} portfolio preview`} keywords={["Daniel Xu","full stack software engineer","UCSD","TypeScript","React","Convex","Astro"]} structuredData={structuredData}>
 
-      <!-- Hero -->
-      <section class="pb-24 pt-16 sm:pt-20">
-        <h1
-          class="text-5xl font-bold tracking-tight opacity-0 animate-reveal sm:text-6xl"
-          style="animation-delay: 0.06s"
-        >
-          {name}
-        </h1>
-        <p
-          class="mt-3 text-lg text-secondary opacity-0 animate-reveal"
-          style="animation-delay: 0.12s"
-        >
-          {tagline}
-        </p>
-        <p
-          class="mt-4 max-w-md text-sm leading-relaxed text-muted opacity-0 animate-reveal"
-          style="animation-delay: 0.18s"
-        >
-          {about}
-        </p>
-        <div
-          class="mt-6 flex flex-wrap items-center gap-5 opacity-0 animate-reveal"
-          style="animation-delay: 0.24s"
-        >
-          <a
-            href="/danielxu-resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 rounded-lg border border-edge bg-surface/60 px-3.5 py-1.5 text-sm text-secondary transition-all duration-200 hover:border-accent/40 hover:text-accent hover:shadow-[0_0_20px_var(--color-accent-dim)]"
-          >
-            résumé
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-          </a>
-          <span class="text-edge-hover select-none">·</span>
-          {
-            socialLinks.map((link) => (
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="link-hover text-sm text-muted transition-colors hover:text-accent"
-              >
-                {link.label}
-              </a>
-            ))
-          }
-          <button
-            type="button"
-            class="link-hover appearance-none border-0 bg-transparent p-0 text-sm text-muted transition-colors hover:cursor-pointer hover:text-accent"
-            data-copy-email
-            data-email={email}
-            aria-label={`Copy email address ${email}`}
-          >
-            email
-          </button>
-        </div>
-      </section>
+  <!-- Accent top bar -->
+  <div class="top-bar" aria-hidden="true"></div>
 
-      <script is:inline>
-        const copyEmailButton = document.querySelector("[data-copy-email]");
+  <!-- Hero: full viewport -->
+  <section class="hero">
+    <nav class="nav">
+      <a href="/" class="nav-logo">DX<span class="dot"></span></a>
+      <div class="nav-links">
+        <a href="/photos">photos</a>
+        <a href="/blog">blog</a>
+        <ThemeSwitcher />
+      </div>
+    </nav>
 
-        if (copyEmailButton) {
-          let resetLabelTimeout;
-          const defaultLabel =
-            copyEmailButton.textContent?.trim() || "copy email";
+    <div class="hero-center">
+      <h1 class="hero-name">
+        <span class="hero-line hero-line-1">daniel</span>
+        <span class="hero-line hero-line-2">xu</span>
+      </h1>
+      <div class="hero-info">
+        <p class="hero-role">{tagline}</p>
+        <p class="hero-loc">{about}</p>
+      </div>
+    </div>
 
-          copyEmailButton.addEventListener("click", async () => {
-            const email = copyEmailButton.getAttribute("data-email");
-            if (!email) return;
+    <div class="hero-bottom">
+      <a href="/danielxu-resume.pdf" target="_blank" rel="noopener noreferrer" class="cta">
+        résumé
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <div class="hero-social">
+        {socialLinks.map((l) => <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>)}
+        <button type="button" data-copy-email data-email={email} aria-label={`Copy email address ${email}`}>email</button>
+      </div>
+    </div>
 
-            try {
-              await navigator.clipboard.writeText(email);
-              copyEmailButton.textContent = "copied";
-            } catch {
-              copyEmailButton.textContent = "copy failed";
-            }
+    <div class="scroll-hint" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </div>
+  </section>
 
-            window.clearTimeout(resetLabelTimeout);
-            resetLabelTimeout = window.setTimeout(() => {
-              copyEmailButton.textContent = defaultLabel;
-            }, 1600);
-          });
-        }
-      </script>
+  <script is:inline>
+    const btn = document.querySelector("[data-copy-email]");
+    if (btn) {
+      let t;
+      const d = btn.textContent?.trim() || "email";
+      btn.addEventListener("click", async () => {
+        const e = btn.getAttribute("data-email");
+        if (!e) return;
+        try { await navigator.clipboard.writeText(e); btn.textContent = "copied"; } catch { btn.textContent = "failed"; }
+        clearTimeout(t);
+        t = setTimeout(() => { btn.textContent = d; }, 1600);
+      });
+    }
+  </script>
 
-      <!-- Projects -->
-      <section id="projects" class="pb-24">
-        <h2
-          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
-          style="animation-delay: 0.3s"
-        >
-          Projects
-        </h2>
-        <div class="grid gap-4">
-          {
-            projects.map((project, i) => (
-              <div
-                class="group rounded-xl border border-edge bg-surface/50 p-5 opacity-0 animate-reveal transition-all duration-300 hover:-translate-y-0.5 hover:border-edge-hover hover:bg-elevated/50 hover:shadow-[0_8px_30px_var(--color-accent-dim)]"
-                style={`animation-delay: ${0.34 + i * 0.04}s`}
-              >
-                <h3 class="text-base font-medium">{project.name}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-secondary">
-                  {project.description}
-                </p>
-                <div class="mt-3 flex flex-wrap gap-1.5">
-                  {project.tech.map((t) => (
-                    <span class="rounded-full bg-accent-dim px-2.5 py-0.5 text-xs text-accent">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div class="mt-4 flex items-center gap-4">
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-accent"
-                    >
-                      live
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M7 17L17 7" />
-                        <path d="M7 7h10v10" />
-                      </svg>
-                    </a>
-                  )}
-                  <a
-                    href={project.source}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-accent"
-                  >
-                    source
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M7 17L17 7" />
-                      <path d="M7 7h10v10" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </section>
+  <!-- Content -->
+  <div class="content">
 
-      <!-- Experience -->
-      <section id="experience" class="pb-24">
-        <h2
-          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
-          style="animation-delay: 0.52s"
-        >
-          Experience
-        </h2>
-        <div class="space-y-10">
-          {
-            experience.map((job, i) => (
-              <div
-                class="opacity-0 animate-reveal"
-                style={`animation-delay: ${0.56 + i * 0.04}s`}
-              >
-                <div class="flex flex-col gap-1 sm:flex-row sm:gap-6">
-                  <span class="shrink-0 text-xs text-muted sm:w-36 sm:pt-0.5">
-                    {job.period}
-                  </span>
-                  <div>
-                    <h3 class="text-base font-medium">{job.company}</h3>
-                    <p class="text-sm text-secondary">{job.role}</p>
-                    <p class="mt-2 text-sm leading-relaxed text-muted">
-                      {job.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-
-      <!-- Education -->
-      <section id="education" class="pb-24">
-        <h2
-          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
-          style="animation-delay: 0.70s"
-        >
-          Education
-        </h2>
-        <div class="space-y-10">
-          {
-            education.map((edu, i) => (
-              <div
-                class="opacity-0 animate-reveal"
-                style={`animation-delay: ${0.74 + i * 0.04}s`}
-              >
-                <div class="flex flex-col gap-1 sm:flex-row sm:gap-6">
-                  <span class="shrink-0 text-xs text-muted sm:w-36 sm:pt-0.5">
-                    {edu.period}
-                  </span>
-                  <div>
-                    <h3 class="text-base font-medium">{edu.school}</h3>
-                    <p class="text-sm text-secondary">{edu.degree}</p>
-                    {edu.description && (
-                      <p class="mt-2 text-sm leading-relaxed text-muted">
-                        {edu.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-
-      <!-- Featured Photos -->
-      <section id="photos" class="pb-24">
-        <h2
-          class="mb-8 text-xs font-medium uppercase tracking-[0.2em] text-accent opacity-0 animate-reveal"
-          style="animation-delay: 0.78s"
-        >
-          Photos
-        </h2>
-        <a href="/photos" class="featured-photos-link">
-          <div class="featured-photos-grid">
-            <div
-              class="featured-frame featured-frame-1 opacity-0 animate-reveal"
-              style="animation-delay: 0.82s"
-            >
-              <div class="featured-frame-inner">
-                <Image
-                  src={housePhoto}
-                  alt="House on house"
-                  width={5780}
-                  height={7470}
-                  loading="lazy"
-                />
+    <!-- Projects -->
+    <section id="projects" class="sec">
+      <h2 class="sec-label">Projects</h2>
+      <div class="project-list">
+        {projects.map((p, i) => (
+          <div class="proj">
+            <div class="proj-header">
+              <span class="proj-idx">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="proj-name">{p.name}</h3>
+              <span class="proj-rule"></span>
+              <div class="proj-actions">
+                {p.live && <a href={p.live} target="_blank" rel="noopener noreferrer" class="proj-link">live ↗</a>}
+                <a href={p.source} target="_blank" rel="noopener noreferrer" class="proj-link">source ↗</a>
               </div>
             </div>
-            <div
-              class="featured-frame featured-frame-2 opacity-0 animate-reveal"
-              style="animation-delay: 0.86s"
-            >
-              <div class="featured-frame-inner">
-                <Image
-                  src={sungodPhoto}
-                  alt="Sun god"
-                  width={3024}
-                  height={4032}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-            <div
-              class="featured-frame featured-frame-3 opacity-0 animate-reveal"
-              style="animation-delay: 0.90s"
-            >
-              <div class="featured-frame-inner">
-                <Image
-                  src={fieldPhoto}
-                  alt="Field notes"
-                  width={4014}
-                  height={3011}
-                  loading="lazy"
-                />
+            <div class="proj-body">
+              <p class="proj-desc">{p.description}</p>
+              <div class="proj-tech">
+                {p.tech.map((t) => <span>{t}</span>)}
               </div>
             </div>
           </div>
-          <p
-            class="mt-4 text-sm text-muted transition-colors group-hover:text-accent opacity-0 animate-reveal"
-            style="animation-delay: 0.94s"
-          >
-            view all photos →
-          </p>
-        </a>
-      </section>
+        ))}
+      </div>
+    </section>
 
-      <!-- Footer -->
-      <footer
-        class="border-t border-edge pb-12 pt-8 opacity-0 animate-reveal"
-        style="animation-delay: 0.8s"
-      >
-        <p class="text-xs text-muted">
-          © 2026 Daniel Xu. built with ❤️ in la jolla, ca
-        </p>
-      </footer>
-    </div>
+    <!-- Experience -->
+    <section id="experience" class="sec">
+      <h2 class="sec-label">Experience</h2>
+      <div class="timeline">
+        {experience.map((j) => (
+          <div class="tl-item">
+            <span class="tl-period">{j.period}</span>
+            <div class="tl-content">
+              <h3 class="tl-company">{j.company}</h3>
+              <p class="tl-role">{j.role}</p>
+              <p class="tl-desc">{j.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="sec">
+      <h2 class="sec-label">Education</h2>
+      <div class="timeline">
+        {education.map((e) => (
+          <div class="tl-item">
+            <span class="tl-period">{e.period}</span>
+            <div class="tl-content">
+              <h3 class="tl-company">{e.school}</h3>
+              <p class="tl-role">{e.degree}</p>
+              {e.description && <p class="tl-desc">{e.description}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Photos -->
+    <section id="photos" class="sec">
+      <h2 class="sec-label">Photos</h2>
+      <a href="/photos" class="featured-photos-link">
+        <div class="featured-photos-grid">
+          <div class="featured-frame featured-frame-1"><div class="featured-frame-inner"><Image src={housePhoto} alt="House on house" width={5780} height={7470} loading="lazy" /></div></div>
+          <div class="featured-frame featured-frame-2"><div class="featured-frame-inner"><Image src={sungodPhoto} alt="Sun god" width={3024} height={4032} loading="lazy" /></div></div>
+          <div class="featured-frame featured-frame-3"><div class="featured-frame-inner"><Image src={fieldPhoto} alt="Field notes" width={4014} height={3011} loading="lazy" /></div></div>
+        </div>
+        <p class="photos-cta">view all photos →</p>
+      </a>
+    </section>
+
+    <footer class="foot">
+      <p>© 2026 Daniel Xu</p>
+    </footer>
   </div>
+
 </BaseLayout>
+
+<style>
+  /* ── Top Bar ───────────────────── */
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--color-accent); z-index: 100;
+  }
+
+  /* ── Hero ───────────────────────── */
+  .hero {
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column;
+    padding: 3rem 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    animation: fadeSlideUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .nav-logo {
+    font-family: var(--font-body); font-weight: 700; font-size: 1rem;
+    color: var(--color-primary); text-decoration: none;
+    letter-spacing: -0.03em; display: flex; align-items: center;
+    transition: color 0.2s;
+  }
+  .nav-logo:hover { color: var(--color-accent); }
+  .dot {
+    display: inline-block; width: 5px; height: 5px;
+    background: var(--color-accent); border-radius: 50%;
+    margin-left: 1px; margin-bottom: -1px;
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.75rem; font-weight: 500; color: var(--color-muted);
+    text-decoration: none; text-transform: uppercase;
+    letter-spacing: 0.14em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--color-accent); }
+
+  .hero-center {
+    flex: 1; display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 2rem 0;
+  }
+
+  .hero-name {
+    margin: 0; line-height: 0.85;
+    animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+  }
+  .hero-line {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(5rem, 16vw, 14rem);
+    letter-spacing: -0.03em;
+    color: var(--color-primary);
+  }
+  .hero-line-2 {
+    margin-left: 12vw;
+    color: var(--color-accent);
+  }
+
+  .hero-info {
+    margin-top: 2rem; margin-left: 0.5rem;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both;
+  }
+  .hero-role {
+    font-size: 0.95rem; color: var(--color-secondary);
+    margin: 0; line-height: 1.6;
+  }
+  .hero-loc {
+    font-size: 0.75rem; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    margin: 0.5rem 0 0;
+  }
+
+  .hero-bottom {
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s both;
+  }
+  .cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff; background: var(--color-accent);
+    text-decoration: none; border: none;
+    transition: all 0.25s;
+  }
+  .cta:hover {
+    background: var(--color-accent-hover);
+    box-shadow: 0 0 40px color-mix(in srgb, var(--color-accent) 30%, transparent);
+    transform: translateY(-1px);
+  }
+  .hero-social {
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .hero-social a, .hero-social button {
+    font-size: 0.75rem; color: var(--color-muted);
+    text-decoration: none; transition: color 0.2s;
+    font-family: inherit; background: none; border: none;
+    padding: 0; cursor: pointer;
+  }
+  .hero-social a:hover, .hero-social button:hover { color: var(--color-accent); }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-muted); opacity: 0.4;
+    animation: bobDown 2s ease-in-out infinite;
+  }
+  @keyframes bobDown {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── Content ───────────────────── */
+  .content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  /* ── Sections ──────────────────── */
+  .sec {
+    padding: 5rem 0 4rem;
+    border-top: 1px solid var(--color-edge);
+  }
+  .sec-label {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin: 0 0 2.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Projects ──────────────────── */
+  .project-list { display: grid; gap: 0; }
+
+  .proj {
+    border-bottom: 1px solid var(--color-edge);
+    padding: 1.25rem 0;
+    transition: background 0.3s;
+  }
+  .proj:hover {
+    background: linear-gradient(90deg, var(--color-accent-dim), transparent 70%);
+  }
+
+  .proj-header {
+    display: flex; align-items: baseline; gap: 1rem;
+  }
+  .proj-idx {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.5rem; color: var(--color-accent);
+    min-width: 2.5rem;
+    opacity: 0.6;
+  }
+  .proj-name {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.35rem; font-weight: 400;
+    color: var(--color-primary); margin: 0;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .proj:hover .proj-name { color: var(--color-accent); }
+
+  .proj-rule {
+    flex: 1; height: 1px;
+    background: var(--color-edge);
+    min-width: 2rem;
+  }
+  .proj-actions {
+    display: flex; gap: 1rem; flex-shrink: 0;
+  }
+  .proj-link {
+    font-size: 0.7rem; font-weight: 500;
+    color: var(--color-muted); text-decoration: none;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    transition: color 0.2s; white-space: nowrap;
+  }
+  .proj-link:hover { color: var(--color-accent); }
+
+  .proj-body {
+    max-height: 0; overflow: hidden; opacity: 0;
+    padding-left: 3.5rem;
+    transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s, padding 0.4s;
+  }
+  .proj:hover .proj-body {
+    max-height: 200px; opacity: 1;
+    padding-top: 0.75rem;
+  }
+  .proj-desc {
+    font-size: 0.85rem; color: var(--color-secondary);
+    line-height: 1.6; margin: 0;
+  }
+  .proj-tech {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .proj-tech span {
+    font-size: 0.6rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--color-accent);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--color-accent-dim);
+  }
+
+  /* ── Timeline ──────────────────── */
+  .timeline { display: grid; gap: 0; }
+
+  .tl-item {
+    display: grid; grid-template-columns: 160px 1fr;
+    gap: 2rem; padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-edge);
+  }
+  .tl-item:last-child { border-bottom: none; }
+
+  .tl-period {
+    font-size: 0.7rem; font-weight: 500; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding-top: 0.2rem;
+  }
+  .tl-company {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--color-primary); margin: 0;
+  }
+  .tl-role {
+    font-size: 0.8rem; color: var(--color-accent);
+    font-weight: 500; margin: 0.15rem 0 0;
+  }
+  .tl-desc {
+    font-size: 0.8rem; color: var(--color-secondary);
+    line-height: 1.6; margin: 0.5rem 0 0;
+  }
+
+  /* ── Photos Section ────────────── */
+  .photos-cta {
+    margin-top: 1.25rem;
+    font-size: 0.75rem; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-weight: 500; transition: color 0.2s;
+  }
+
+  /* ── Footer ────────────────────── */
+  .foot {
+    padding: 3rem 0 4rem;
+    border-top: 1px solid var(--color-edge);
+    font-size: 0.65rem; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
+  }
+
+  /* ── Mobile ────────────────────── */
+  @media (max-width: 768px) {
+    .hero { padding: 2rem 1.5rem 1.5rem; }
+    .hero-line { font-size: clamp(3.5rem, 18vw, 8rem); }
+    .hero-line-2 { margin-left: 6vw; }
+    .content { padding: 0 1.5rem; }
+    .sec { padding: 3rem 0 2.5rem; }
+    .sec-label { font-size: 2rem; }
+    .proj-header { flex-wrap: wrap; }
+    .proj-rule { display: none; }
+    .proj-body { padding-left: 0; }
+    .proj-idx { display: none; }
+    .tl-item { grid-template-columns: 1fr; gap: 0.25rem; }
+    .proj-actions { width: 100%; }
+  }
+</style>

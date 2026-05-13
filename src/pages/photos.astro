@@ -5,6 +5,7 @@ import housePhoto from "../assets/photos/house.jpg";
 import skyPhoto from "../assets/photos/sky.jpg";
 import sungodPhoto from "../assets/photos/sungod.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import { siteConfig } from "../lib/site";
 
 const pageTitle = "Photos — Daniel Xu";
@@ -80,23 +81,10 @@ const photos = [
     <!-- Header -->
     <header class="photos-header">
       <a href="/" class="photos-back">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M19 12H5"></path>
-          <path d="M12 19l-7-7 7-7"></path>
-        </svg>
-        daniel xu
+        <span class="photos-logo">DX<span class="photos-logo-dot"></span></span>
       </a>
       <h1 class="photos-title">photos</h1>
+      <ThemeSwitcher />
     </header>
 
     <!-- Gallery -->
@@ -179,6 +167,25 @@ const photos = [
     overflow-x: hidden;
   }
 
+  /* ── Photos page light mode ──────────────────────────────── */
+
+  :global(html[data-theme="light"]) .photos-page {
+    --photo-bg: #f5f0e8;
+    --photo-surface: #ebe6dc;
+    --photo-card: #e0dbd2;
+    --photo-border: #cfc9be;
+    --photo-border-light: #bfb9ae;
+    --photo-cream: #1a1815;
+    --photo-cream-dim: rgba(26, 24, 21, 0.65);
+    --photo-cream-muted: rgba(26, 24, 21, 0.35);
+    --photo-amber: #8b5e3c;
+    --photo-amber-bright: #a0694a;
+    --photo-amber-dim: rgba(139, 94, 60, 0.1);
+    --photo-amber-glow: rgba(139, 94, 60, 0.05);
+    --photo-red: #c04040;
+    --photo-tape: rgba(26, 24, 21, 0.05);
+  }
+
   /* ── Grain Overlay ──────────────────────────────────────────── */
 
   .grain-overlay {
@@ -190,6 +197,11 @@ const photos = [
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     mix-blend-mode: overlay;
+  }
+
+  :global(html[data-theme="light"]) .grain-overlay {
+    opacity: 0.025;
+    mix-blend-mode: multiply;
   }
 
   /* ── Sprocket Strip ─────────────────────────────────────────── */
@@ -206,6 +218,14 @@ const photos = [
     padding-top: 40px;
     z-index: 10;
     opacity: 0.08;
+  }
+
+  :global(html[data-theme="light"]) .sprocket-strip {
+    opacity: 0.06;
+  }
+
+  :global(html[data-theme="light"]) .sprocket-hole {
+    border-color: var(--photo-cream);
   }
 
   .sprocket-left {
@@ -239,16 +259,30 @@ const photos = [
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--photo-cream-muted);
     text-decoration: none;
-    letter-spacing: 0.04em;
     transition: color 0.3s ease;
   }
 
-  .photos-back:hover {
-    color: var(--photo-amber);
+  .photos-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--photo-cream);
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .photos-back:hover .photos-logo { color: var(--photo-amber); }
+
+  .photos-logo-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--photo-amber);
+    border-radius: 50%;
+    margin-left: 2px;
+    margin-bottom: -2px;
   }
 
   .photos-title {
@@ -316,6 +350,22 @@ const photos = [
     transition: box-shadow 0.4s ease;
   }
 
+  :global(html[data-theme="light"]) .frame-inner {
+    background: #f5f0e8;
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.1),
+      0 12px 40px rgba(0, 0, 0, 0.08),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+  }
+
+  :global(html[data-theme="light"]) .photo-frame:hover .frame-inner {
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.15),
+      0 20px 60px rgba(0, 0, 0, 0.1),
+      0 0 80px rgba(139, 94, 60, 0.06),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+  }
+
   .photo-frame:hover .frame-inner {
     box-shadow:
       0 4px 16px rgba(0, 0, 0, 0.4),
@@ -328,6 +378,10 @@ const photos = [
     position: relative;
     overflow: hidden;
     background: #1a1a1a;
+  }
+
+  :global(html[data-theme="light"]) .frame-image-wrap {
+    background: #e8e4de;
   }
 
   .frame-image {
@@ -372,6 +426,10 @@ const photos = [
     letter-spacing: 0.01em;
   }
 
+  :global(html[data-theme="light"]) .frame-title {
+    color: #0a0908;
+  }
+
   .frame-details {
     display: flex;
     flex-wrap: wrap;
@@ -381,6 +439,10 @@ const photos = [
     font-size: 0.58rem;
     color: rgba(10, 9, 8, 0.4);
     letter-spacing: 0.04em;
+  }
+
+  :global(html[data-theme="light"]) .frame-details {
+    color: rgba(10, 9, 8, 0.5);
   }
 
   /* Tape decoration */
