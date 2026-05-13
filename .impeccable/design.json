@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-12T00:00:00-07:00",
+  "title": "Design System: Daniel Xu Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "dark-void": {
+        "role": "neutral",
+        "displayName": "Dark Void",
+        "canonical": "#050505",
+        "tonalRamp": [
+          "#050505",
+          "#0a0a0a",
+          "#111111",
+          "#1a1a1a",
+          "#252525",
+          "#4a4a48",
+          "#8a8886",
+          "#e8e6e3"
+        ]
+      },
+      "signal-orange": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "#ff3d00",
+        "tonalRamp": [
+          "#3a0b00",
+          "#6b1600",
+          "#9d2500",
+          "#c03000",
+          "#ff3d00",
+          "#ff5722",
+          "#ff8a63",
+          "#ffd5c6"
+        ]
+      },
+      "light-paper": {
+        "role": "neutral",
+        "displayName": "Light Paper",
+        "canonical": "#f8f5f0",
+        "tonalRamp": [
+          "#1a1815",
+          "#5a574f",
+          "#9a9690",
+          "#c5bfb6",
+          "#d5d0c8",
+          "#e8e4de",
+          "#f0ece6",
+          "#f8f5f0"
+        ]
+      },
+      "photo-amber": {
+        "role": "secondary",
+        "displayName": "Darkroom Amber",
+        "canonical": "#c8956c",
+        "tonalRamp": [
+          "#24140b",
+          "#472918",
+          "#704226",
+          "#8b5e3c",
+          "#c8956c",
+          "#e0a87a",
+          "#f1c7a5",
+          "#f8e6d6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero identity and only the most expressive brand moments."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section labels and editorial headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable prose, project descriptions, and long-form content."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation, metadata, small links, and stamped interface markings."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Code, photo metadata, terminal screens, and mechanical annotations."
+      }
+    },
+    "shadows": [
+      {
+        "name": "signal-bar-glow",
+        "value": "0 1px 4px rgba(255, 61, 0, 0.3), 0 0 12px rgba(255, 61, 0, 0.15)",
+        "purpose": "The fixed top accent bar only."
+      },
+      {
+        "name": "button-press-stack",
+        "value": "0 2px 0 #8b2200, 0 4px 8px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+        "purpose": "Primary résumé CTA and any future physical button."
+      },
+      {
+        "name": "paper-slip",
+        "value": "2px 3px 8px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04)",
+        "purpose": "Blockquotes, notes, and small physical content surfaces."
+      },
+      {
+        "name": "inset-terminal",
+        "value": "inset 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(255, 255, 255, 0.04)",
+        "purpose": "Code blocks and sunken technical panels."
+      }
+    ],
+    "motion": [
+      {
+        "name": "reveal-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Page and component entrances."
+      },
+      {
+        "name": "mechanical-click",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Pressed button and dial feedback."
+      },
+      {
+        "name": "rotary-dial",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "purpose": "Theme dial rotation."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "768px"
+      },
+      {
+        "name": "small-mobile",
+        "value": "430px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Resume Button",
+      "kind": "button",
+      "refersTo": "button-resume",
+      "description": "Primary physical CTA with a pressed orange stack.",
+      "html": "<button class=\"ds-btn-resume\">résumé <svg class=\"ds-btn-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"></path><polyline points=\"7 10 12 15 17 10\"></polyline><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"></line></svg></button>",
+      "css": ".ds-btn-resume { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.3rem; font-family: Satoshi, system-ui, -apple-system, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #f8f5f0; background: linear-gradient(180deg, #ff5722 0%, #ff3d00 50%, #d63400 100%); border: none; border-top: 1px solid rgba(255, 255, 255, 0.25); border-bottom: 2px solid #a02800; border-radius: 2px; box-shadow: 0 2px 0 #8b2200, 0 4px 8px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15); cursor: pointer; transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1), background 0.15s; } .ds-btn-resume:hover { transform: translateY(-1px); background: linear-gradient(180deg, #ff6a3d 0%, #ff5722 50%, #ff3d00 100%); box-shadow: 0 3px 0 #8b2200, 0 6px 14px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 61, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2); } .ds-btn-resume:active { transform: translateY(2px); box-shadow: 0 0 0 #8b2200, 0 1px 4px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.2); border-bottom-width: 1px; } .ds-btn-resume:focus-visible { outline: 2px solid #ff3d00; outline-offset: 4px; } .ds-btn-icon { width: 12px; height: 12px; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Tiny uppercase graphite navigation that turns into orange signal on hover.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-logo\" href=\"#\">DX<span class=\"ds-dot\"></span></a><div class=\"ds-nav-links\"><a href=\"#\">photos</a><a href=\"#\">blog</a><a href=\"#\">email</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-family: Satoshi, system-ui, -apple-system, sans-serif; } .ds-nav-logo { display: flex; align-items: center; color: #e8e6e3; text-decoration: none; font-weight: 700; font-size: 1rem; letter-spacing: -0.03em; } .ds-dot { width: 5px; height: 5px; background: #ff3d00; border-radius: 999px; margin-left: 1px; margin-bottom: -1px; } .ds-nav-links { display: flex; gap: 1.5rem; align-items: center; } .ds-nav-links a { color: #4a4a48; text-decoration: none; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em; transition: color 0.2s; } .ds-nav a:hover { color: #ff3d00; } .ds-nav a:focus-visible { outline: 2px solid #ff3d00; outline-offset: 4px; }"
+    },
+    {
+      "name": "Tech Chip",
+      "kind": "chip",
+      "refersTo": "chip-tech",
+      "description": "Stamped project metadata with side pin marks.",
+      "html": "<span class=\"ds-chip\">typescript</span>",
+      "css": ".ds-chip { display: inline-block; position: relative; padding: 0.2rem 0.65rem; font-family: Satoshi, system-ui, -apple-system, sans-serif; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #ff3d00; background: rgba(255, 61, 0, 0.1); border: 1px solid rgba(255, 61, 0, 0.2); border-radius: 2px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.15); } .ds-chip::before, .ds-chip::after { content: ''; position: absolute; top: 50%; width: 3px; height: 3px; border-radius: 999px; background: rgba(255, 61, 0, 0.3); transform: translateY(-50%); } .ds-chip::before { left: -6px; } .ds-chip::after { right: -6px; }"
+    },
+    {
+      "name": "Project Row",
+      "kind": "card",
+      "refersTo": "project-row",
+      "description": "Editorial portfolio row with rule line and hover-revealed detail.",
+      "html": "<article class=\"ds-project\"><div class=\"ds-project-head\"><span class=\"ds-project-index\">01</span><h3>rxlog</h3><span class=\"ds-project-rule\"></span><a href=\"#\">live ↗</a><a href=\"#\">source ↗</a></div><p class=\"ds-project-desc\">A fast, free, simple, and open source medication logging platform.</p></article>",
+      "css": ".ds-project { padding: 1.25rem 0.75rem; border-bottom: 1px solid #1a1a1a; color: #e8e6e3; font-family: Satoshi, system-ui, -apple-system, sans-serif; transition: background 0.3s, box-shadow 0.3s; } .ds-project:hover { background: linear-gradient(135deg, rgba(255, 61, 0, 0.1), transparent 60%); box-shadow: inset 2px 0 0 #ff3d00, 0 1px 3px rgba(0, 0, 0, 0.1); } .ds-project-head { display: flex; align-items: baseline; gap: 1rem; } .ds-project-index { min-width: 2.5rem; color: #ff3d00; opacity: 0.6; font-family: Instrument Serif, Georgia, serif; font-style: italic; font-size: 1.5rem; } .ds-project h3 { margin: 0; font-family: Instrument Serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.35rem; color: #e8e6e3; } .ds-project:hover h3 { color: #ff3d00; } .ds-project-rule { flex: 1; height: 1px; min-width: 2rem; background: #1a1a1a; } .ds-project a { color: #4a4a48; text-decoration: none; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; } .ds-project a:hover { color: #ff3d00; } .ds-project-desc { margin: 0.75rem 0 0 3.5rem; color: #8a8886; font-size: 0.85rem; line-height: 1.6; }"
+    },
+    {
+      "name": "Inline Code Key",
+      "kind": "custom",
+      "refersTo": "prose-code",
+      "description": "Embossed typewriter-key treatment for inline code.",
+      "html": "<p class=\"ds-copy\">Run <code class=\"ds-code\">bun astro check</code> before shipping.</p>",
+      "css": ".ds-copy { color: #8a8886; font-family: Satoshi, system-ui, -apple-system, sans-serif; font-size: 1rem; line-height: 1.7; } .ds-code { font-family: JetBrains Mono, Fira Code, SF Mono, monospace; font-size: 0.85em; padding: 0.2em 0.5em; border-radius: 3px; background: #111111; border: 1px solid #1a1a1a; border-bottom: 2px solid #252525; color: #ff5722; font-weight: 400; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04); transition: transform 0.15s, box-shadow 0.15s, border-bottom-width 0.15s; } .ds-code:hover { transform: translateY(1px); border-bottom-width: 1px; box-shadow: none; }"
+    },
+    {
+      "name": "Photo Frame",
+      "kind": "card",
+      "refersTo": "photo-frame",
+      "description": "Taped photographic paper object with mono metadata.",
+      "html": "<article class=\"ds-photo\"><div class=\"ds-tape\"></div><div class=\"ds-photo-inner\"><div class=\"ds-photo-img\"><span>image</span><span class=\"ds-photo-num\">01</span></div><h3>house on house</h3><p>la jolla, ca · iphone 17 pro · 2026</p></div></article>",
+      "css": ".ds-photo { position: relative; width: 260px; transform: rotate(-1.2deg); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); } .ds-photo:hover { transform: rotate(0deg) translateY(-8px) scale(1.02); } .ds-photo-inner { background: linear-gradient(178deg, #f9f4ec, #ece7df 80%, #e5e0d7); padding: 14px 14px 56px; border: 1px solid rgba(0, 0, 0, 0.06); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -1px 0 rgba(0, 0, 0, 0.08); } .ds-photo-img { position: relative; display: grid; place-items: center; height: 180px; background: #1a1a1a; color: rgba(245, 240, 232, 0.35); font-family: DM Mono, SF Mono, monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; } .ds-photo-num { position: absolute; right: 10px; bottom: 8px; color: #e0a87a; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); } .ds-photo h3 { margin: 12px 0 0; color: #0a0908; font-family: Playfair Display, Georgia, serif; font-style: italic; font-size: 1.1rem; font-weight: 400; } .ds-photo p { margin: 0.35rem 0 0; color: rgba(10, 9, 8, 0.4); font-family: DM Mono, SF Mono, monospace; font-size: 0.58rem; letter-spacing: 0.04em; } .ds-tape { position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(1.5deg); width: 64px; height: 20px; background: linear-gradient(180deg, rgba(245, 240, 232, 0.12), rgba(245, 240, 232, 0.06)); border: 1px solid rgba(245, 240, 232, 0.06); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Developed Contact Sheet",
+    "overview": "This system should feel like a personal archive assembled by someone who writes code, takes photographs, and cares about the surface of the work. It uses darkroom atmosphere, paper edges, mechanical controls, inset code screens, stamped metadata, and deliberate friction to make the interface feel handled rather than generated.\n\nThe site is a brand surface, not a product shell. It should carry tension: oversized italic display type against tiny uppercase labels, quiet black surfaces against rare hot orange, flat editorial lists against physical skeuomorphic details. The work must remain easy to scan, but it should never collapse into a generic developer portfolio, startup SaaS landing page, gamer or cyberpunk aesthetic, template-like project card grid, or overly sanitized personal brand.",
+    "keyCharacteristics": [
+      "Skeuomorphic surfaces: dials, typewriter keys, sticky notes, terminal screens, taped photo frames.",
+      "Editorial hierarchy: huge italic display type, compact metadata, ruled lists, and deliberate asymmetry.",
+      "Restrained signal color: orange is rare, hot, and purposeful.",
+      "Material contrast: dark voids, warm paper, ash text, amber darkroom accents.",
+      "Discoverable eccentricity: navigation and contact stay obvious while details reward exploration."
+    ],
+    "rules": [
+      {
+        "name": "The Orange Is a Signal Rule",
+        "body": "Orange marks action, identity, and state. Do not let it become a general decoration color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Neutral Rule",
+        "body": "Black and white are never pure. Keep neutrals warm, dusty, and photographic.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif Owns Identity Rule",
+        "body": "Use the serif for identity, section rhythm, and expressive labels. Do not replace it with generic sans hero typography.",
+        "section": "typography"
+      },
+      {
+        "name": "The Metadata Must Whisper Rule",
+        "body": "Labels are small, uppercase, and tracked. They should feel like stamps, not buttons trying to be loud.",
+        "section": "typography"
+      },
+      {
+        "name": "The Material Has a Job Rule",
+        "body": "A shadow must say what the object is doing: pressed, inset, taped, lifted, or glowing. Decorative blur is forbidden.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do make interface choices prove creative programming ability through behavior, material, and detail.",
+      "Do keep orange rare and purposeful: identity, active state, action, focus, or meaningful emphasis.",
+      "Do use warm blacks, paper creams, ash text, amber photo tones, and physical shadows.",
+      "Do preserve discoverability for résumé, email, social profiles, projects, writing, and photos.",
+      "Do let sections have distinct moods when the underlying object changes: portfolio rows, prose pages, and photo frames can each behave differently.",
+      "Do support keyboard navigation, reduced motion, readable contrast, responsive layouts, and non-color-only meaning."
+    ],
+    "donts": [
+      "Don't make this feel like a generic developer portfolio.",
+      "Don't make this feel like a startup SaaS landing page.",
+      "Don't make this feel gamer or cyberpunk.",
+      "Don't use template-like project card grids or identical icon-card layouts.",
+      "Don't sanitize away the quirky, skeuomorphic, archival, or artistic character.",
+      "Don't use decorative glassmorphism, gradient text, generic purple/blue tech gradients, or border-side accent stripes.",
+      "Don't add physical effects unless they correspond to a recognizable material behavior."
+    ]
+  }
+}
