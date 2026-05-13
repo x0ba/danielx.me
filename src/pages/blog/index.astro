@@ -126,14 +126,16 @@ const structuredData = {
                 </time>
               </div>
               <div class="post-item-body">
-                <p class="post-item-desc">{post.data.description}</p>
-                {post.data.tags.length > 0 && (
-                  <div class="post-item-tags">
-                    {post.data.tags.map((tag) => (
-                      <span class="post-tag">{tag}</span>
-                    ))}
-                  </div>
-                )}
+                <div class="post-item-body-inner">
+                  <p class="post-item-desc">{post.data.description}</p>
+                  {post.data.tags.length > 0 && (
+                    <div class="post-item-tags">
+                      {post.data.tags.map((tag) => (
+                        <span class="post-tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </a>
           ))
@@ -159,7 +161,7 @@ const structuredData = {
       180deg,
       var(--color-accent-hover),
       var(--color-accent),
-      #c03000
+      color-mix(in srgb, var(--color-accent) 70%, var(--color-void))
     );
     z-index: 100;
     box-shadow:
@@ -176,10 +178,70 @@ const structuredData = {
     padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 4vw, 3rem) 2rem;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(
+        circle at 78% 18%,
+        color-mix(in srgb, var(--color-accent) 11%, transparent),
+        transparent 28rem
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-elevated) 34%, transparent),
+        transparent 38%
+      );
   }
 
+  .blog-hero::before {
+    content: "";
+    position: absolute;
+    inset: clamp(5rem, 12vw, 9rem) clamp(1rem, 4vw, 3rem) clamp(4rem, 8vw, 7rem);
+    z-index: -1;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        180deg,
+        transparent 0 3.2rem,
+        color-mix(in srgb, var(--color-edge) 58%, transparent) 3.2rem
+          calc(3.2rem + 1px)
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-accent) 22%, transparent),
+        transparent 6.5rem
+      );
+    border-top: 1px solid
+      color-mix(in srgb, var(--color-edge-hover) 82%, transparent);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-edge) 82%, transparent);
+    opacity: 0.44;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      black 10%,
+      black 82%,
+      transparent
+    );
+  }
 
-
+  .blog-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        color-mix(in srgb, var(--color-void) 78%, transparent) 72%
+      ),
+      radial-gradient(
+        ellipse at center,
+        transparent 42%,
+        color-mix(in srgb, var(--color-void) 72%, transparent)
+      );
+  }
   .hero-center {
     flex: 1;
     display: flex;
@@ -187,6 +249,7 @@ const structuredData = {
     justify-content: center;
     align-items: flex-start;
     padding: 2rem 0;
+    position: relative;
   }
 
   .hero-name {
@@ -203,27 +266,32 @@ const structuredData = {
     color: var(--color-primary);
   }
   .hero-line-2 {
-    margin-left: 12vw;
+    margin-left: clamp(2rem, 12vw, 10rem);
     color: var(--color-accent);
+    text-shadow:
+      0 1px 0 color-mix(in srgb, var(--color-accent-hover) 28%, transparent),
+      0 0 28px color-mix(in srgb, var(--color-accent) 16%, transparent);
   }
 
   .hero-info {
-    margin-top: 2rem;
-    margin-left: 0.5rem;
+    margin-top: clamp(1.35rem, 3vw, 2rem);
+    margin-left: 0.25rem;
     animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+    max-width: min(34rem, 100%);
   }
   .hero-role {
-    font-size: 0.95rem;
+    font-size: clamp(0.9rem, 0.86rem + 0.22vw, 1rem);
     color: var(--color-secondary);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.65;
+    text-wrap: pretty;
   }
   .hero-loc {
     font-size: 0.75rem;
     color: var(--color-muted);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin: 0.5rem 0 0;
+    letter-spacing: 0.14em;
+    margin: 0.45rem 0 0;
   }
 
   .scroll-hint {
@@ -233,7 +301,7 @@ const structuredData = {
     transform: translateX(-50%);
     color: var(--color-muted);
     opacity: 0.4;
-    animation: bobDown 2s ease-in-out infinite;
+    animation: bobDown 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
   @keyframes bobDown {
     0%,
@@ -254,7 +322,7 @@ const structuredData = {
 
   /* ── Sections ──────────────────── */
   .sec {
-    padding: 5rem 0 4rem;
+    padding: clamp(4rem, 7vw, 5.75rem) 0 4rem;
     border-top: 1px solid var(--color-edge);
   }
   .sec-label {
@@ -262,7 +330,7 @@ const structuredData = {
     font-size: 2.5rem;
     font-weight: 400;
     color: var(--color-primary);
-    margin: 0 0 2.5rem;
+    margin: 0 0 clamp(2rem, 4vw, 2.75rem);
     letter-spacing: -0.02em;
     text-shadow:
       0 1px 0 rgba(255, 255, 255, 0.03),
@@ -274,12 +342,15 @@ const structuredData = {
     font-size: 0.875rem;
     color: var(--color-muted);
     padding: 2rem 0;
+    border-bottom: 1px solid var(--color-edge);
+    text-wrap: pretty;
   }
 
   /* ── Post List (matches homepage project cards) ─── */
   .post-list {
     display: grid;
     gap: 0;
+    border-top: 1px solid color-mix(in srgb, var(--color-edge) 72%, transparent);
   }
 
   .post-item {
@@ -287,28 +358,44 @@ const structuredData = {
     text-decoration: none;
     color: inherit;
     border-bottom: 1px solid var(--color-edge);
-    padding: 1.25rem 0.75rem;
-    margin: 0 -0.75rem;
+    border-radius: 2px;
+    padding: 1.3rem 0.85rem;
+    margin: 0 -0.85rem;
     transition:
-      background 0.3s,
-      box-shadow 0.3s;
+      background 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
+    outline: none;
   }
-  .post-item:hover {
+  .post-item:hover,
+  .post-item:focus-visible {
     background: linear-gradient(
       135deg,
       var(--color-accent-dim),
       transparent 60%
     );
+    border-bottom-color: color-mix(
+      in srgb,
+      var(--color-accent) 24%,
+      var(--color-edge)
+    );
     box-shadow:
-      inset 2px 0 0 var(--color-accent),
-      0 1px 3px rgba(0, 0, 0, 0.1);
+      0 1px 0 color-mix(in srgb, var(--color-edge-hover) 65%, transparent),
+      0 6px 18px rgba(0, 0, 0, 0.13),
+      inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    transform: translateY(-1px);
+  }
+  .post-item:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 
   .post-item-header {
     display: flex;
     align-items: baseline;
-    gap: 1rem;
+    gap: clamp(0.75rem, 2vw, 1rem);
     min-width: 0;
   }
   .post-item-idx {
@@ -317,27 +404,43 @@ const structuredData = {
     color: var(--color-accent);
     min-width: 2.5rem;
     opacity: 0.6;
+    line-height: 1;
+    transition:
+      opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .post-item-title {
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: clamp(1.35rem, 1.12rem + 0.65vw, 1.72rem);
     font-weight: 400;
     color: var(--color-primary);
     margin: 0;
-    transition: color 0.2s;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
   }
-  .post-item:hover .post-item-title {
+  .post-item:hover .post-item-idx,
+  .post-item:focus-visible .post-item-idx {
+    opacity: 0.95;
+    transform: translateY(-1px);
+  }
+  .post-item:hover .post-item-title,
+  .post-item:focus-visible .post-item-title {
     color: var(--color-accent);
   }
 
   .post-item-rule {
     flex: 1;
     height: 1px;
-    background: var(--color-edge);
+    background: linear-gradient(
+      90deg,
+      var(--color-edge),
+      color-mix(in srgb, var(--color-edge) 45%, transparent)
+    );
     min-width: 2rem;
   }
   .post-item-date {
@@ -348,34 +451,48 @@ const structuredData = {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     flex-shrink: 0;
+    transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .post-item:hover .post-item-date,
+  .post-item:focus-visible .post-item-date {
+    color: var(--color-secondary);
   }
 
   .post-item-body {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
     overflow: hidden;
     opacity: 0;
     padding-left: 3.5rem;
     transition:
-      max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.4s,
-      padding 0.4s;
+      grid-template-rows 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      padding-top 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .post-item:hover .post-item-body {
-    max-height: 200px;
+  .post-item:hover .post-item-body,
+  .post-item:focus-visible .post-item-body {
+    grid-template-rows: 1fr;
     opacity: 1;
-    padding-top: 0.75rem;
+    padding-top: 0.8rem;
+  }
+  .post-item-body-inner {
+    min-height: 0;
+    overflow: hidden;
   }
   .post-item-desc {
-    font-size: 0.85rem;
+    font-size: clamp(0.85rem, 0.82rem + 0.12vw, 0.92rem);
     color: var(--color-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
+    max-width: 62ch;
+    text-wrap: pretty;
   }
   .post-item-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.5rem 0.65rem;
     margin-top: 0.75rem;
+    padding-bottom: 0.12rem;
   }
   .post-tag {
     font-size: 0.58rem;
@@ -407,6 +524,35 @@ const structuredData = {
   }
   .post-tag::after {
     right: -6px;
+  }
+  .post-tag:first-child::before,
+  .post-tag:last-child::after {
+    display: none;
+  }
+
+  /* ── Reduced Motion ────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-name,
+    .hero-info,
+    .blog-empty,
+    .post-item {
+      animation: none !important;
+    }
+    .scroll-hint {
+      animation: none;
+      opacity: 0.25;
+    }
+    .post-item,
+    .post-item-idx,
+    .post-item-title,
+    .post-item-date,
+    .post-item-body {
+      transition: none;
+    }
+    .post-item:hover,
+    .post-item:focus-visible {
+      transform: none;
+    }
   }
 
   /* ── Footer ────────────────────── */
@@ -458,7 +604,8 @@ const structuredData = {
       display: none;
     }
     .post-item-body {
-      max-height: none;
+      display: block;
+      grid-template-rows: none;
       overflow: visible;
       opacity: 1;
       padding-left: 0;
@@ -472,10 +619,12 @@ const structuredData = {
       white-space: normal;
       overflow-wrap: anywhere;
     }
+    .post-item:hover,
+    .post-item:focus-visible {
+      transform: none;
+    }
     .scroll-hint {
       display: none;
     }
   }
-
-
 </style>
