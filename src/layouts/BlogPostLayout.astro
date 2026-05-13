@@ -93,64 +93,128 @@ const articleStructuredData = {
         class="post-back"
         style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s both"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg
+        >
         all posts
       </a>
 
-      <h1 class="article-title" style="animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both">
+      <h1
+        class="article-title"
+        style="animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both"
+      >
         {title}
       </h1>
 
-      <p class="article-desc" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s both">
+      <p
+        class="article-desc"
+        style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s both"
+      >
         {description}
       </p>
 
-      <div class="article-meta" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s both">
+      <div
+        class="article-meta"
+        style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s both"
+      >
         <time datetime={pubDate.toISOString()}>
           {formattedDate}
         </time>
-        {updatedDate && (
-          <>
-            <span class="meta-sep">·</span>
-            <span class="meta-updated">updated {formattedUpdatedDate}</span>
-          </>
-        )}
+        {
+          updatedDate && (
+            <>
+              <span class="meta-sep">·</span>
+              <span class="meta-updated">updated {formattedUpdatedDate}</span>
+            </>
+          )
+        }
       </div>
 
-      {tags.length > 0 && (
-        <div class="article-tags" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both">
-          {tags.map((tag) => (
-            <span class="article-tag">{tag}</span>
-          ))}
-        </div>
-      )}
+      {
+        tags.length > 0 && (
+          <div
+            class="article-tags"
+            style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both"
+          >
+            {tags.map((tag) => (
+              <span class="article-tag">{tag}</span>
+            ))}
+          </div>
+        )
+      }
     </div>
 
     <div class="scroll-hint" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg
+      >
     </div>
   </section>
 
   <!-- Content -->
   <div class="content">
-
-    {cover && (
-      <div class="article-cover" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.28s both">
-        <img src={cover.src} alt={coverAlt || title} width={cover.width} height={cover.height} />
-      </div>
-    )}
+    {
+      cover && (
+        <div
+          class="article-cover"
+          style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.28s both"
+        >
+          <img
+            src={cover.src}
+            alt={coverAlt || title}
+            width={cover.width}
+            height={cover.height}
+          />
+        </div>
+      )
+    }
 
     <!-- Article Body -->
     <section id="article" class="sec">
-      <article class="prose" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both">
+      <article
+        class="prose"
+        style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both"
+      >
         <slot />
       </article>
     </section>
 
     <!-- Footer -->
-    <footer class="foot" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s both">
+    <footer
+      class="foot"
+      style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s both"
+    >
       <a href="/blog" class="post-back">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg
+        >
         back to all posts
       </a>
       <p class="foot-copy">© 2026 Daniel Xu</p>
@@ -161,50 +225,91 @@ const articleStructuredData = {
 <style>
   /* ── Top Bar ───────────────────── */
   .top-bar {
-    position: fixed; top: 0; left: 0; right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 3px;
-    background: linear-gradient(180deg, var(--color-accent-hover), var(--color-accent), #c03000);
+    background: linear-gradient(
+      180deg,
+      var(--color-accent-hover),
+      var(--color-accent),
+      #c03000
+    );
     z-index: 100;
-    box-shadow: 0 1px 4px rgba(255, 61, 0, 0.3), 0 0 12px rgba(255, 61, 0, 0.15);
+    box-shadow:
+      0 1px 4px rgba(255, 61, 0, 0.3),
+      0 0 12px rgba(255, 61, 0, 0.15);
   }
 
   /* ── Hero (matching homepage hero structure) ─── */
   .article-hero {
-    min-height: 100vh; min-height: 100dvh;
-    display: flex; flex-direction: column;
-    padding: 3rem 3rem 2rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 4vw, 3rem) 2rem;
     position: relative;
     overflow: hidden;
   }
 
   .nav {
-    display: flex; align-items: center; justify-content: space-between;
-    animation: fadeSlideUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   .nav-logo {
-    font-family: var(--font-body); font-weight: 700; font-size: 1rem;
-    color: var(--color-primary); text-decoration: none;
-    letter-spacing: -0.03em; display: flex; align-items: center;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
     transition: color 0.2s;
   }
-  .nav-logo:hover { color: var(--color-accent); }
+  .nav-logo:hover {
+    color: var(--color-accent);
+  }
   .dot {
-    display: inline-block; width: 5px; height: 5px;
-    background: var(--color-accent); border-radius: 50%;
-    margin-left: 1px; margin-bottom: -1px;
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    margin-left: 1px;
+    margin-bottom: -1px;
   }
-  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links {
+    display: flex;
+    gap: clamp(0.9rem, 3vw, 2rem);
+    align-items: center;
+  }
   .nav-links a {
-    font-size: 0.75rem; font-weight: 500; color: var(--color-muted);
-    text-decoration: none; text-transform: uppercase;
-    letter-spacing: 0.14em; transition: color 0.2s;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--color-accent); }
-  .nav-link--active { color: var(--color-primary) !important; }
+  .nav-links a:hover {
+    color: var(--color-accent);
+  }
+  .nav-link--active {
+    color: var(--color-primary) !important;
+  }
 
   .hero-center {
-    flex: 1; display: flex; flex-direction: column;
-    justify-content: center; align-items: flex-start;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     padding: 2rem 0;
     max-width: 1000px;
   }
@@ -222,9 +327,15 @@ const articleStructuredData = {
     transition: color 0.2s;
     margin-bottom: 1.5rem;
   }
-  .post-back:hover { color: var(--color-accent); }
-  .post-back:hover svg { transform: translateX(-3px); }
-  .post-back svg { transition: transform 0.2s; }
+  .post-back:hover {
+    color: var(--color-accent);
+  }
+  .post-back:hover svg {
+    transform: translateX(-3px);
+  }
+  .post-back svg {
+    transition: transform 0.2s;
+  }
 
   .article-title {
     font-family: var(--font-display);
@@ -236,8 +347,8 @@ const articleStructuredData = {
     margin: 0;
     color: var(--color-primary);
     text-shadow:
-      0 1px 0 rgba(255,255,255,0.03),
-      0 -1px 0 rgba(0,0,0,0.4);
+      0 1px 0 rgba(255, 255, 255, 0.03),
+      0 -1px 0 rgba(0, 0, 0, 0.4);
   }
 
   .article-desc {
@@ -251,6 +362,7 @@ const articleStructuredData = {
   .article-meta {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 1.5rem;
     font-size: 0.75rem;
@@ -259,8 +371,14 @@ const articleStructuredData = {
     letter-spacing: 0.08em;
   }
 
-  .meta-sep { color: var(--color-edge-hover); }
-  .meta-updated { font-style: italic; text-transform: none; letter-spacing: 0; }
+  .meta-sep {
+    color: var(--color-edge-hover);
+  }
+  .meta-updated {
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+  }
 
   .article-tags {
     display: flex;
@@ -279,38 +397,52 @@ const articleStructuredData = {
     border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
     background: var(--color-accent-dim);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.04),
-      0 1px 2px rgba(0,0,0,0.15);
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 1px 2px rgba(0, 0, 0, 0.15);
     position: relative;
   }
   .article-tag::before,
   .article-tag::after {
-    content: '';
+    content: "";
     position: absolute;
-    top: 50%; width: 3px; height: 3px;
+    top: 50%;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
     background: color-mix(in srgb, var(--color-accent) 30%, transparent);
     transform: translateY(-50%);
   }
-  .article-tag::before { left: -6px; }
-  .article-tag::after { right: -6px; }
+  .article-tag::before {
+    left: -6px;
+  }
+  .article-tag::after {
+    right: -6px;
+  }
 
   .scroll-hint {
-    position: absolute; bottom: 2rem; left: 50%;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
     transform: translateX(-50%);
-    color: var(--color-muted); opacity: 0.4;
+    color: var(--color-muted);
+    opacity: 0.4;
     animation: bobDown 2s ease-in-out infinite;
   }
   @keyframes bobDown {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(6px);
+    }
   }
 
   /* ── Content ───────────────────── */
   .content {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 3rem;
+    padding: 0 clamp(1rem, 4vw, 3rem);
   }
 
   /* ── Article Cover ─────────────── */
@@ -350,9 +482,50 @@ const articleStructuredData = {
 
   /* ── Mobile ────────────────────── */
   @media (max-width: 768px) {
-    .article-hero { padding: 2rem 1.5rem 1.5rem; }
-    .article-title { font-size: clamp(2.2rem, 10vw, 4rem); }
-    .content { padding: 0 1.5rem; }
-    .sec { padding: 3rem 0 2.5rem; }
+    .article-hero {
+      min-height: 640px;
+      min-height: 100svh;
+    }
+    .hero-center {
+      justify-content: center;
+      padding: 2.5rem 0 1.5rem;
+    }
+    .article-title {
+      font-size: clamp(2.3rem, 13vw, 4rem);
+      line-height: 1;
+      overflow-wrap: anywhere;
+    }
+    .article-desc {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .sec {
+      padding: 3rem 0 2.5rem;
+    }
+    .scroll-hint {
+      display: none;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .nav {
+      align-items: flex-start;
+    }
+    .nav-links {
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      font-size: 0.68rem;
+    }
+    .article-meta {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .meta-sep {
+      display: none;
+    }
   }
 </style>
