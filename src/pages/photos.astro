@@ -341,21 +341,29 @@ const photos = [
   }
 
   .frame-inner {
-    background: var(--photo-cream);
-    padding: 14px 14px 52px 14px;
+    background:
+      linear-gradient(178deg, #f9f4ec, #ece7df 80%, #e5e0d7);
+    padding: 14px 14px 56px 14px;
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.3),
-      0 12px 40px rgba(0, 0, 0, 0.2),
-      inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+      0 1px 1px rgba(0, 0, 0, 0.15),
+      0 3px 8px rgba(0, 0, 0, 0.2),
+      0 12px 40px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     transition: box-shadow 0.4s ease;
   }
 
   :global(html[data-theme="light"]) .frame-inner {
-    background: #f5f0e8;
+    background:
+      linear-gradient(178deg, #faf7f2, #f0ebe3 80%, #e8e3da);
+    border-color: rgba(0, 0, 0, 0.05);
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.1),
-      0 12px 40px rgba(0, 0, 0, 0.08),
-      inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+      0 1px 1px rgba(0, 0, 0, 0.06),
+      0 3px 8px rgba(0, 0, 0, 0.06),
+      0 12px 40px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.04);
   }
 
   :global(html[data-theme="light"]) .photo-frame:hover .frame-inner {
@@ -445,18 +453,39 @@ const photos = [
     color: rgba(10, 9, 8, 0.5);
   }
 
-  /* Tape decoration */
+  /* Tape decoration — realistic masking tape */
   .frame-tape {
     position: absolute;
     top: -8px;
     left: 50%;
     transform: translateX(-50%) rotate(1.5deg);
-    width: 60px;
-    height: 18px;
-    background: var(--photo-tape);
-    border: 1px solid rgba(245, 240, 232, 0.04);
-    backdrop-filter: blur(2px);
+    width: 64px;
+    height: 20px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(245, 240, 232, 0.12),
+        rgba(245, 240, 232, 0.06)
+      );
+    border: 1px solid rgba(245, 240, 232, 0.06);
+    backdrop-filter: blur(3px);
     pointer-events: none;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  :global(html[data-theme="light"]) .frame-tape {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(200, 190, 170, 0.25),
+        rgba(200, 190, 170, 0.12)
+      );
+    border-color: rgba(200, 190, 170, 0.15);
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.3);
   }
 
   .photo-frame:nth-child(even) .frame-tape {

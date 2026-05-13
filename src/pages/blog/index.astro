@@ -49,258 +49,326 @@ const structuredData = {
 >
   <div class="top-bar" aria-hidden="true"></div>
 
-  <div class="blog-wrapper">
-    <nav class="blog-nav" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) both">
-      <a href="/" class="nav-logo">DX<span class="nav-dot"></span></a>
+  <!-- Hero: full viewport, matching homepage structure -->
+  <section class="blog-hero">
+    <nav class="nav">
+      <a href="/" class="nav-logo">DX<span class="dot"></span></a>
       <div class="nav-links">
-        <a href="/" class="nav-link">home</a>
-        <a href="/blog" class="nav-link nav-link--active">blog</a>
+        <a href="/">home</a>
+        <a href="/photos">photos</a>
+        <a href="/blog" class="nav-link--active">blog</a>
         <ThemeSwitcher />
       </div>
     </nav>
 
-    <section class="blog-header">
-      <h1 class="blog-heading" style="animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both">blog</h1>
-      <p class="blog-sub" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s both">
-        thoughts, notes, and things i've learned
-      </p>
-    </section>
+    <div class="hero-center">
+      <h1 class="hero-name">
+        <span class="hero-line hero-line-1">the</span>
+        <span class="hero-line hero-line-2">blog</span>
+      </h1>
+      <div class="hero-info">
+        <p class="hero-role">thoughts, notes, and things i've learned</p>
+        <p class="hero-loc">{posts.length} {posts.length === 1 ? 'post' : 'posts'} published</p>
+      </div>
+    </div>
 
-    <!-- Posts -->
-    <section class="blog-posts">
+    <div class="scroll-hint" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Posts Section -->
+    <section id="posts" class="sec">
+      <h2 class="sec-label">Posts</h2>
+
       {posts.length === 0 && (
         <p class="blog-empty" style="animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both">
           no posts yet. check back soon.
         </p>
       )}
 
-      {posts.map((post, i) => (
-        <a
-          href={`/blog/${post.id}`}
-          class="post-row"
-          style={`animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) ${0.25 + i * 0.05}s both`}
-        >
-          <div class="post-row-main">
-            <h2 class="post-row-title">{post.data.title}</h2>
-            <p class="post-row-desc">{post.data.description}</p>
-            {post.data.tags.length > 0 && (
-              <div class="post-row-tags">
-                {post.data.tags.map((tag) => (
-                  <span class="post-tag">{tag}</span>
-                ))}
-              </div>
-            )}
-          </div>
-          <time datetime={post.data.pubDate.toISOString()} class="post-row-date">
-            {post.data.pubDate.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </time>
-        </a>
-      ))}
+      <div class="post-list">
+        {posts.map((post, i) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="post-item"
+            style={`animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) ${0.2 + i * 0.06}s both`}
+          >
+            <div class="post-item-header">
+              <span class="post-item-idx">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="post-item-title">{post.data.title}</h3>
+              <span class="post-item-rule"></span>
+              <time datetime={post.data.pubDate.toISOString()} class="post-item-date">
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+            <div class="post-item-body">
+              <p class="post-item-desc">{post.data.description}</p>
+              {post.data.tags.length > 0 && (
+                <div class="post-item-tags">
+                  {post.data.tags.map((tag) => (
+                    <span class="post-tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="blog-footer" style={`animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) ${0.3 + posts.length * 0.05}s both`}>
+    <footer class="foot">
       <p>© 2026 Daniel Xu</p>
     </footer>
   </div>
+
 </BaseLayout>
 
 <style>
+  /* ── Top Bar ───────────────────── */
   .top-bar {
     position: fixed; top: 0; left: 0; right: 0;
-    height: 3px; background: var(--color-accent); z-index: 100;
-  }
-  .site-grid-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-    background-size: 80px 80px;
+    height: 3px;
+    background: linear-gradient(180deg, var(--color-accent-hover), var(--color-accent), #c03000);
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(255, 61, 0, 0.3), 0 0 12px rgba(255, 61, 0, 0.15);
   }
 
-  .blog-wrapper {
+  /* ── Hero ───────────────────────── */
+  .blog-hero {
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column;
+    padding: 3rem 3rem 2rem;
     position: relative;
-    z-index: 1;
-    max-width: 800px;
+    overflow: hidden;
+  }
+
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    animation: fadeSlideUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .nav-logo {
+    font-family: var(--font-body); font-weight: 700; font-size: 1rem;
+    color: var(--color-primary); text-decoration: none;
+    letter-spacing: -0.03em; display: flex; align-items: center;
+    transition: color 0.2s;
+  }
+  .nav-logo:hover { color: var(--color-accent); }
+  .dot {
+    display: inline-block; width: 5px; height: 5px;
+    background: var(--color-accent); border-radius: 50%;
+    margin-left: 1px; margin-bottom: -1px;
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.75rem; font-weight: 500; color: var(--color-muted);
+    text-decoration: none; text-transform: uppercase;
+    letter-spacing: 0.14em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--color-accent); }
+  .nav-link--active { color: var(--color-primary) !important; }
+
+  .hero-center {
+    flex: 1; display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 2rem 0;
+  }
+
+  .hero-name {
+    margin: 0; line-height: 0.85;
+    animation: fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+  }
+  .hero-line {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(5rem, 16vw, 14rem);
+    letter-spacing: -0.03em;
+    color: var(--color-primary);
+  }
+  .hero-line-2 {
+    margin-left: 12vw;
+    color: var(--color-accent);
+  }
+
+  .hero-info {
+    margin-top: 2rem; margin-left: 0.5rem;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both;
+  }
+  .hero-role {
+    font-size: 0.95rem; color: var(--color-secondary);
+    margin: 0; line-height: 1.6;
+  }
+  .hero-loc {
+    font-size: 0.75rem; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    margin: 0.5rem 0 0;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-muted); opacity: 0.4;
+    animation: bobDown 2s ease-in-out infinite;
+  }
+  @keyframes bobDown {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── Content ───────────────────── */
+  .content {
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 3rem;
   }
 
-  .blog-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2.5rem 0 2rem;
+  /* ── Sections ──────────────────── */
+  .sec {
+    padding: 5rem 0 4rem;
+    border-top: 1px solid var(--color-edge);
   }
-
-  .nav-logo {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-primary);
-    text-decoration: none;
-    letter-spacing: -0.03em;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s;
-  }
-  .nav-logo:hover { color: var(--color-accent); }
-
-  .nav-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--color-accent);
-    border-radius: 50%;
-    margin-left: 2px;
-    margin-bottom: -2px;
-  }
-
-  .nav-links { display: flex; gap: 2rem; }
-
-  .nav-link {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--color-muted);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    transition: color 0.2s;
-  }
-  .nav-link:hover, .nav-link--active { color: var(--color-primary); }
-
-  .blog-header {
-    padding: 5rem 0 3rem;
-    border-bottom: 1px solid var(--color-edge);
-  }
-
-  .blog-heading {
+  .sec-label {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(3.5rem, 12vw, 6rem);
+    font-size: 2.5rem;
     font-weight: 400;
-    letter-spacing: -0.03em;
-    line-height: 0.9;
-    margin: 0;
+    color: var(--color-primary);
+    margin: 0 0 2.5rem;
+    letter-spacing: -0.02em;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,0.03),
+      0 -1px 0 rgba(0,0,0,0.4);
   }
 
-  .blog-sub {
-    font-size: 0.95rem;
-    color: var(--color-secondary);
-    margin-top: 1rem;
-  }
-
-  .blog-posts {
-    padding: 1rem 0;
-  }
-
+  /* ── Blog Empty ─────────────────── */
   .blog-empty {
     font-size: 0.875rem;
     color: var(--color-muted);
     padding: 2rem 0;
   }
 
-  .post-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 1.75rem 1rem;
-    margin: 0 -1rem;
+  /* ── Post List (matches homepage project cards) ─── */
+  .post-list { display: grid; gap: 0; }
+
+  .post-item {
+    display: block;
     text-decoration: none;
     color: inherit;
     border-bottom: 1px solid var(--color-edge);
-    transition: background 0.2s;
+    padding: 1.25rem 0.75rem;
+    margin: 0 -0.75rem;
+    transition: background 0.3s, box-shadow 0.3s;
     position: relative;
   }
-  .post-row::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    background: var(--color-accent);
-    transition: width 0.3s cubic-bezier(0.77, 0, 0.175, 1);
-  }
-  .post-row:hover {
-    background: var(--color-accent-dim);
-  }
-  .post-row:hover::before {
-    width: 3px;
+  .post-item:hover {
+    background: linear-gradient(135deg, var(--color-accent-dim), transparent 60%);
+    box-shadow:
+      inset 2px 0 0 var(--color-accent),
+      0 1px 3px rgba(0,0,0,0.1);
   }
 
-  .post-row-main { min-width: 0; flex: 1; }
-
-  .post-row-title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.15rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--color-primary);
-    margin: 0;
+  .post-item-header {
+    display: flex; align-items: baseline; gap: 1rem;
+  }
+  .post-item-idx {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.5rem; color: var(--color-accent);
+    min-width: 2.5rem;
+    opacity: 0.6;
+  }
+  .post-item-title {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.35rem; font-weight: 400;
+    color: var(--color-primary); margin: 0;
     transition: color 0.2s;
-  }
-  .post-row:hover .post-row-title { color: var(--color-accent); }
-
-  .post-row-desc {
-    font-size: 0.85rem;
-    color: var(--color-secondary);
-    line-height: 1.6;
-    margin-top: 0.35rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .post-row-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.75rem;
-  }
-
-  .post-tag {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-    padding: 0.2rem 0.5rem;
-    border: 1px solid var(--color-accent-dim);
-    background: var(--color-accent-dim);
-  }
-
-  .post-row-date {
-    font-size: 0.7rem;
-    color: var(--color-muted);
     white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding-top: 0.15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .post-item:hover .post-item-title { color: var(--color-accent); }
+
+  .post-item-rule {
+    flex: 1; height: 1px;
+    background: var(--color-edge);
+    min-width: 2rem;
+  }
+  .post-item-date {
+    font-size: 0.7rem; font-weight: 500;
+    color: var(--color-muted); white-space: nowrap;
+    text-transform: uppercase; letter-spacing: 0.06em;
     flex-shrink: 0;
   }
 
-  .blog-footer {
+  .post-item-body {
+    max-height: 0; overflow: hidden; opacity: 0;
+    padding-left: 3.5rem;
+    transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s, padding 0.4s;
+  }
+  .post-item:hover .post-item-body {
+    max-height: 200px; opacity: 1;
+    padding-top: 0.75rem;
+  }
+  .post-item-desc {
+    font-size: 0.85rem; color: var(--color-secondary);
+    line-height: 1.6; margin: 0;
+  }
+  .post-item-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .post-tag {
+    font-size: 0.58rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--color-accent);
+    padding: 0.2rem 0.65rem;
+    background: var(--color-accent-dim);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 1px 2px rgba(0,0,0,0.15);
+    position: relative;
+  }
+  .post-tag::before,
+  .post-tag::after {
+    content: '';
+    position: absolute;
+    top: 50%; width: 3px; height: 3px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    transform: translateY(-50%);
+  }
+  .post-tag::before { left: -6px; }
+  .post-tag::after { right: -6px; }
+
+  /* ── Footer ────────────────────── */
+  .foot {
     padding: 3rem 0 4rem;
-    font-size: 0.7rem;
-    color: var(--color-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    border-top: 1px solid var(--color-edge);
+    font-size: 0.65rem; color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
   }
 
-  @media (max-width: 640px) {
-    .blog-wrapper { padding: 0 1.25rem; }
-    .blog-header { padding: 3rem 0 2rem; }
-    .post-row { flex-direction: column; gap: 0.5rem; }
+  /* ── Mobile ────────────────────── */
+  @media (max-width: 768px) {
+    .blog-hero { padding: 2rem 1.5rem 1.5rem; }
+    .hero-line { font-size: clamp(3.5rem, 18vw, 8rem); }
+    .hero-line-2 { margin-left: 6vw; }
+    .content { padding: 0 1.5rem; }
+    .sec { padding: 3rem 0 2.5rem; }
+    .sec-label { font-size: 2rem; }
+    .post-item-header { flex-wrap: wrap; }
+    .post-item-rule { display: none; }
+    .post-item-body { padding-left: 0; }
+    .post-item-idx { display: none; }
+    .post-item-title { white-space: normal; }
   }
 </style>

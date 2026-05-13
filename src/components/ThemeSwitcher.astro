@@ -88,7 +88,24 @@
     position: absolute;
     inset: 5px;
     border-radius: 50%;
-    background: var(--color-elevated, #111111);
+    background:
+      radial-gradient(circle at 35% 35%, rgba(255,255,255,0.08), transparent 60%),
+      conic-gradient(
+        from 0deg,
+        var(--color-elevated, #111111) 0deg,
+        color-mix(in srgb, var(--color-elevated, #111111) 80%, white) 30deg,
+        var(--color-elevated, #111111) 60deg,
+        color-mix(in srgb, var(--color-elevated, #111111) 80%, white) 90deg,
+        var(--color-elevated, #111111) 120deg,
+        color-mix(in srgb, var(--color-elevated, #111111) 80%, white) 150deg,
+        var(--color-elevated, #111111) 180deg,
+        color-mix(in srgb, var(--color-elevated, #111111) 80%, white) 210deg,
+        var(--color-elevated, #111111) 240deg,
+        color-mix(in srgb, var(--color-elevated, #111111) 80%, white) 270deg,
+        var(--color-elevated, #111111) 300deg,
+        color-mix(in srgb, var(--color-elevated, #111111) 80%, white) 330deg,
+        var(--color-elevated, #111111) 360deg
+      );
     border: 1.5px solid var(--color-edge-hover, #252525);
     display: flex;
     align-items: center;
@@ -99,8 +116,10 @@
       border-color 0.4s ease,
       box-shadow 0.4s ease;
     box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      0 2px 4px rgba(0, 0, 0, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3);
   }
 
   /* Dark mode: knob points up (0deg) */
@@ -112,11 +131,21 @@
   /* Light mode: knob rotates 180deg */
   :global(html[data-theme="light"]) .dial-knob {
     transform: rotate(180deg);
-    background: #e8e4de;
+    background:
+      radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5), transparent 60%),
+      conic-gradient(
+        from 0deg,
+        #e8e4de 0deg, #d5d0c8 30deg, #e8e4de 60deg, #d5d0c8 90deg,
+        #e8e4de 120deg, #d5d0c8 150deg, #e8e4de 180deg, #d5d0c8 210deg,
+        #e8e4de 240deg, #d5d0c8 270deg, #e8e4de 300deg, #d5d0c8 330deg,
+        #e8e4de 360deg
+      );
     border-color: #c5bfb6;
     box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      0 2px 4px rgba(0, 0, 0, 0.12),
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
   }
 
   .dial-indicator {
