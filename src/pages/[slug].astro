@@ -6,9 +6,9 @@ type QuickLink = {
   title?: string;
 };
 
-const links = quickLinks as Record<string, QuickLink>;
-
 export function getStaticPaths() {
+  const links = quickLinks as Record<string, QuickLink>;
+
   return Object.entries(links).map(([slug, link]) => ({
     params: { slug },
     props: { link, slug },
