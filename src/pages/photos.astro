@@ -4,8 +4,10 @@ import fieldPhoto from "../assets/photos/field.jpg";
 import housePhoto from "../assets/photos/house.jpg";
 import skyPhoto from "../assets/photos/sky.jpg";
 import sungodPhoto from "../assets/photos/sungod.jpg";
+import vicesAndVirtuesPhoto from "../assets/photos/vices_and_virtues.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
+
 import { siteConfig } from "../lib/site";
 
 const pageTitle = "Photos — Daniel Xu";
@@ -53,6 +55,16 @@ const photos = [
     width: 8064,
     height: 6048,
   },
+  {
+    src: vicesAndVirtuesPhoto,
+    title: "vices and virtues",
+    location: "la jolla, ca",
+    camera: "iphone 17 pro",
+    year: "2026",
+    category: "street",
+    width: 4032,
+    height: 3024,
+  },
 ];
 ---
 
@@ -89,14 +101,14 @@ const photos = [
     <div class="photos-title-block">
       <h1 class="photos-page-title">Photos</h1>
       <p class="photos-blurb">
-        I've been mainly shooting on my iPhone 17 Pro lately. Here are some of the photos
-        I've taken. More on
+        I've been mainly shooting on my iPhone 17 Pro lately. Here are some of
+        the photos I've taken. More on
         <a
           href="https://www.instagram.com/shooo.jpeg"
           target="_blank"
           rel="noreferrer"
-          class="photos-blurb-link"
-        >Instagram</a>.
+          class="photos-blurb-link">Instagram</a
+        >.
       </p>
     </div>
 
@@ -282,8 +294,6 @@ const photos = [
     opacity: 0;
     animation: photos-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-
-
 
   /* ── Page Title ──────────────────────────────────────────────── */
 
