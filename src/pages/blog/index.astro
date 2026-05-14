@@ -157,7 +157,7 @@ const structuredData = {
   /* ── Hero ───────────────────────── */
   .blog-hero {
     display: grid;
-    gap: clamp(1.8rem, 4.5vw, 4rem);
+    gap: clamp(1.4rem, 3vw, 2.5rem);
     padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 4vw, 3rem)
       clamp(2.75rem, 6vw, 4.75rem);
     position: relative;
@@ -166,9 +166,11 @@ const structuredData = {
 
   .hero-center {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(15rem, 22rem);
+    grid-template-columns: minmax(0, max-content) minmax(13rem, 20rem);
     align-items: end;
-    gap: clamp(1.25rem, 4vw, 4rem);
+    justify-content: start;
+    gap: clamp(1rem, 2.6vw, 2.35rem);
+    width: min(100%, 72rem);
     padding-top: clamp(0.25rem, 2.5vw, 1.75rem);
   }
 
@@ -181,19 +183,21 @@ const structuredData = {
     display: block;
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: clamp(4rem, 13vw, 10rem);
+    font-size: clamp(4rem, 12.5vw, 10rem);
     letter-spacing: -0.03em;
     color: var(--color-primary);
   }
   .hero-line-2 {
-    margin-left: clamp(1.25rem, 8vw, 6.5rem);
+    margin-left: clamp(1rem, 7vw, 5.5rem);
     color: var(--color-accent);
   }
 
   .hero-info {
-    margin: 0 0 0.45rem;
+    align-self: end;
+    margin: 0 0 clamp(0.4rem, 1vw, 0.8rem);
     padding: 0.9rem 0 0.1rem;
     border-top: 1px solid var(--color-edge);
+    max-width: 19rem;
     animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
   }
   .hero-role {
@@ -210,7 +214,6 @@ const structuredData = {
     letter-spacing: 0.14em;
     margin: 0.45rem 0 0;
   }
-
 
   /* ── Content ───────────────────── */
   .content {
@@ -461,7 +464,8 @@ const structuredData = {
     .hero-center {
       grid-template-columns: 1fr;
       align-items: start;
-      gap: 1.25rem;
+      gap: 1rem;
+      width: 100%;
       padding-top: 0.75rem;
     }
     .hero-line {

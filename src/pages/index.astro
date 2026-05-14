@@ -211,7 +211,6 @@ const structuredData = [
         >
       </div>
     </div>
-
   </section>
 
   <script is:inline>
@@ -397,7 +396,7 @@ const structuredData = [
       180deg,
       var(--color-accent-hover),
       var(--color-accent),
-      color-mix(in srgb, var(--color-accent) 70%, #000)
+      color-mix(in srgb, var(--color-accent) 70%, var(--color-void))
     );
     z-index: 100;
     box-shadow:
@@ -408,7 +407,7 @@ const structuredData = [
   /* ── Hero ───────────────────────── */
   .hero {
     display: grid;
-    gap: clamp(2rem, 5vw, 4.5rem);
+    gap: clamp(1.4rem, 3vw, 2.5rem);
     padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 4vw, 3rem)
       clamp(3rem, 7vw, 5.5rem);
     position: relative;
@@ -417,9 +416,11 @@ const structuredData = [
 
   .hero-center {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    grid-template-columns: minmax(0, max-content) minmax(13rem, 20rem);
     align-items: end;
-    gap: clamp(1.25rem, 4vw, 4rem);
+    justify-content: start;
+    gap: clamp(1rem, 2.6vw, 2.35rem);
+    width: min(100%, 72rem);
     padding-top: clamp(0.5rem, 3vw, 2rem);
   }
 
@@ -432,19 +433,21 @@ const structuredData = [
     display: block;
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: clamp(4rem, 13vw, 10rem);
+    font-size: clamp(4rem, 12.5vw, 10rem);
     letter-spacing: -0.03em;
     color: var(--color-primary);
   }
   .hero-line-2 {
-    margin-left: clamp(1.25rem, 8vw, 6.5rem);
+    margin-left: clamp(1rem, 7vw, 5.5rem);
     color: var(--color-accent);
   }
 
   .hero-info {
-    margin: 0 0 0.45rem;
+    align-self: end;
+    margin: 0 0 clamp(0.4rem, 1vw, 0.8rem);
     padding: 0.9rem 0 0.1rem;
     border-top: 1px solid var(--color-edge);
+    max-width: 19rem;
     animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
   }
   .hero-role {
@@ -466,6 +469,9 @@ const structuredData = [
     align-items: center;
     gap: 1.5rem;
     flex-wrap: wrap;
+    width: min(100%, 72rem);
+    padding-top: clamp(1rem, 2vw, 1.35rem);
+    border-top: 1px solid color-mix(in srgb, var(--color-edge) 72%, transparent);
     animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
   }
   .cta {
@@ -483,14 +489,15 @@ const structuredData = [
       180deg,
       var(--color-accent-hover) 0%,
       var(--color-accent) 50%,
-      color-mix(in srgb, var(--color-accent) 80%, #000) 100%
+      color-mix(in srgb, var(--color-accent) 80%, var(--color-void)) 100%
     );
     text-decoration: none;
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.25);
-    border-bottom: 2px solid color-mix(in srgb, var(--color-accent) 45%, #000);
+    border-bottom: 2px solid
+      color-mix(in srgb, var(--color-accent) 45%, var(--color-void));
     box-shadow:
-      0 2px 0 color-mix(in srgb, var(--color-accent) 35%, #000),
+      0 2px 0 color-mix(in srgb, var(--color-accent) 35%, var(--color-void)),
       0 4px 8px rgba(0, 0, 0, 0.35),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
     transition:
@@ -502,12 +509,12 @@ const structuredData = [
   .cta:hover {
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--color-accent-hover) 85%, #fff) 0%,
+      color-mix(in srgb, var(--color-accent-hover) 85%, var(--color-primary)) 0%,
       var(--color-accent-hover) 50%,
       var(--color-accent) 100%
     );
     box-shadow:
-      0 3px 0 color-mix(in srgb, var(--color-accent) 35%, #000),
+      0 3px 0 color-mix(in srgb, var(--color-accent) 35%, var(--color-void)),
       0 6px 14px rgba(0, 0, 0, 0.4),
       0 0 30px color-mix(in srgb, var(--color-accent) 25%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -516,7 +523,7 @@ const structuredData = [
   .cta:active {
     transform: translateY(2px);
     box-shadow:
-      0 0 0 color-mix(in srgb, var(--color-accent) 35%, #000),
+      0 0 0 color-mix(in srgb, var(--color-accent) 35%, var(--color-void)),
       0 1px 4px rgba(0, 0, 0, 0.3),
       inset 0 2px 4px rgba(0, 0, 0, 0.2);
   }
@@ -900,7 +907,8 @@ const structuredData = [
     .hero-center {
       grid-template-columns: 1fr;
       align-items: start;
-      gap: 1.25rem;
+      gap: 1rem;
+      width: 100%;
       padding-top: 0.75rem;
     }
     .hero-line {
@@ -914,6 +922,7 @@ const structuredData = [
       margin: 0;
     }
     .hero-bottom {
+      width: 100%;
       align-items: flex-start;
       flex-direction: column;
       gap: 1rem;
