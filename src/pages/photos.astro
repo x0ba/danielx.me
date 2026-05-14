@@ -88,7 +88,16 @@ const photos = [
     <!-- Page heading -->
     <div class="photos-title-block">
       <h1 class="photos-page-title">Photos</h1>
-      <p class="photos-count">{photos.length} frames</p>
+      <p class="photos-blurb">
+        I've been mainly shooting on my iPhone 17 Pro lately. Here are some of the photos
+        I've taken. More on
+        <a
+          href="https://www.instagram.com/shooo.jpeg"
+          target="_blank"
+          rel="noreferrer"
+          class="photos-blurb-link"
+        >Instagram</a>.
+      </p>
     </div>
 
     <!-- Gallery -->
@@ -298,14 +307,47 @@ const photos = [
     line-height: 1.1;
   }
 
-  .photos-count {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--photo-amber);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin: 0.75rem 0 0;
-    opacity: 0.7;
+  .photos-blurb {
+    max-width: 36rem;
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    color: var(--photo-cream);
+    line-height: 1.6;
+    margin: 0.9rem 0 0;
+    opacity: 0.78;
+  }
+
+  .photos-blurb-link {
+    position: relative;
+    color: var(--photo-amber-bright);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--photo-amber);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.18em;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  .photos-blurb-link::after {
+    content: "↗";
+    display: inline-block;
+    margin-left: 0.18em;
+    font-size: 0.78em;
+    line-height: 1;
+    transform: translateY(-0.08em);
+    opacity: 0.85;
+  }
+
+  .photos-blurb-link:hover {
+    color: var(--photo-cream);
+    text-decoration-color: currentColor;
+  }
+
+  .photos-blurb-link:focus-visible {
+    outline: 2px solid var(--photo-amber);
+    outline-offset: 3px;
   }
 
   /* ── Gallery ────────────────────────────────────────────────── */

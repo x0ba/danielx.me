@@ -19,8 +19,8 @@ const { currentPath = "/", usePageColors = false } = Astro.props;
 
 const links = [
   { href: "/", label: "home" },
-  { href: "/photos", label: "photos" },
   { href: "/blog", label: "blog" },
+  { href: "/photos", label: "photos" },
 ];
 
 function isActive(href: string): boolean {
@@ -44,17 +44,15 @@ function isActive(href: string): boolean {
     </a>
 
     <div class="header-links">
-      {links
-        .filter((l) => !(currentPath === "/" && l.href === "/"))
-        .map((l) => (
-          <a
-            href={l.href}
-            class:list={["header-link", { "header-link--active": isActive(l.href) }]}
-            {...(isActive(l.href) ? { "aria-current": "page" } : {})}
-          >
-            {l.label}
-          </a>
-        ))}
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class:list={["header-link", { "header-link--active": isActive(l.href) }]}
+          {...(isActive(l.href) ? { "aria-current": "page" } : {})}
+        >
+          {l.label}
+        </a>
+      ))}
       <div class="header-divider" aria-hidden="true"></div>
       <ThemeSwitcher />
     </div>
